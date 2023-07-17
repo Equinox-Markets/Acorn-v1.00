@@ -1,3 +1,4 @@
+
 import { useWeb3React } from "@web3-react/core";
 import { Divider } from "antd";
 
@@ -43,7 +44,7 @@ const DisplayPane: React.FC = () => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.title}>Display Info</div>
+      <div style={styles.title}>List of Vaults Available</div>
       <div style={styles.content}>
         <Status isActivating={isActivating} isActive={isActive} />
         <Infos chainId={chainId} />

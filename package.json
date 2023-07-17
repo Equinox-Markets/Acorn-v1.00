@@ -28,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-jazzicon": "1.0.4",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.0.4",
     "swr": "2.2.0"
   },
   "devDependencies": {

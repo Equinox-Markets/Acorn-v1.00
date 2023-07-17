@@ -1,61 +1,60 @@
-import { useWeb3React, Web3ReactHooks } from "@web3-react/core";
+import { Web3ReactHooks, useWeb3React } from "@web3-react/core";
+import styled from 'styled-components';
 
 import { CHAINS } from "data/networks";
 import { useNativeBalance, useWindowWidthAndHeight } from "hooks";
-import { theme } from "styles/theme";
 import { getEllipsisTxt, parseBigNumberToFloat } from "utils/formatters";
 
-const styles = {
-  display: {
-    paddingBlock: "15px"
-  },
-  statusText: {
-    color: theme.colors.text,
-    fontWeight: 800
-  }
-} as const;
+const InfoDisplay = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  font-size: 0.8em;
+`;
 
-const Infos = ({ chainId }: { chainId: ReturnType<Web3ReactHooks["useChainId"]> }) => {
+const StatusText = styled.span`
+  color: ${(props) => props.theme.colors.text};
+  font-weight: 800;
+`;
+
+const InfoTitle = styled.span`
+  color: ${(props) => props.theme.colors.white};
+  font-weight: 700;
+  margin-right: 8px;
+`;
+
+interface InfosProps {
+  chainId: ReturnType<Web3ReactHooks["useChainId"]>
+}
+
+const Infos: React.FC<InfosProps> = ({ chainId }) => {
   const { account, provider } = useWeb3React();
   const balance = useNativeBalance(provider, account);
   const { isMobile } = useWindowWidthAndHeight();
 
   if (chainId === undefined) return null;
+
   const name = chainId ? CHAINS[chainId]?.name : undefined;
+  const displayAddress = isMobile && account ? getEllipsisTxt(account, 4) : account;
+  const displayBalance = balance ? `Ξ ${parseBigNumberToFloat(balance).toFixed(4)}` : 0;
 
   return (
-    <div style={styles.display}>
-      Address:
-      {!isMobile ? (
-        <span style={styles.statusText}>{account}</span>
-      ) : (
-        <span style={styles.statusText}>{account && getEllipsisTxt(account, 4)}</span>
-      )}
-      <br></br>
-      <br></br>
+    <InfoDisplay>
+      <div><InfoTitle>Address:</InfoTitle> <StatusText>{displayAddress}</StatusText></div>
       {name ? (
-        <>
-          Chain:{" "}
-          <span style={styles.statusText}>
-            {name} ({chainId})
-          </span>
-        </>
+        <div>
+          <InfoTitle>Chain:</InfoTitle> <StatusText>{name} ({chainId})</StatusText>
+        </div>
       ) : (
-        <>
-          Chain Id: <b>{chainId}</b>
-        </>
+        <div><InfoTitle>Chain Id:</InfoTitle> <StatusText>{chainId}</StatusText></div>
       )}
-      <br></br>
-      <br></br>
-      Balance:
-      <span style={styles.statusText}>
-        {balance
-          ? `
-          Ξ ${parseBigNumberToFloat(balance).toFixed(4)}`
-          : 0}
-      </span>
-    </div>
+      <div><InfoTitle>Balance:</InfoTitle> <StatusText>{displayBalance}</StatusText></div>
+    </InfoDisplay>
   );
 };
 
 export default Infos;
+
