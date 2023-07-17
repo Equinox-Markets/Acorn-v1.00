@@ -8,7 +8,7 @@ import { Infos, SignMessage, Status, TransferEth } from "./components";
 
 const styles = {
   container: {
-    background: theme.colors.background,
+    background: theme.colors.black,
     width: "80%",
     minWidth: "330px",
     maxWidth: "900px",
@@ -19,7 +19,7 @@ const styles = {
     boxShadow: "8px 8px 8px rgba(0, 0, 0, 0.4)"
   },
   title: {
-    color: theme.colors.black,
+    color: theme.colors.white,
     fontWeight: 600,
     fontSize: "30px",
     marginBottom: "10px"

@@ -12,7 +12,7 @@ const styles = {
     cursor: "pointer",
     paddingBlock: "20px",
     marginBottom: "12px",
-    background: theme.colors.background,
+    background: theme.colors.white,
     boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #fff",
     border: "none",
     borderRadius: "10px"
