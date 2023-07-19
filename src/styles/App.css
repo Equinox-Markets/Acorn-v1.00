@@ -53,7 +53,7 @@ body {
 }
 
 .ant-dropdown-menu {
-  background-color: #011F37 !important;
+  background-color: #ffffff !important;
   border-radius: 10px !important;
 }
 
@@ -61,7 +61,7 @@ body {
 .ant-dropdown-menu-submenu-title {
   height: 42px;
   gap: 5px;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
   font-size: 15px !important;
   font-weight: 500 !important;
 }
@@ -101,4 +101,9 @@ body {
 .my-modal .ant-modal-body,
 .my-modal .ant-modal-footer {
   background-color: transparent;
+}
+
+.ant-input::placeholder {
+  color: grey !important;
+  opacity: 1;
 }

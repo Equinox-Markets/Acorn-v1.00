@@ -115,45 +115,54 @@ const handleWithdraw = async () => {
 
       </Card>
 
-      {isModalVisible && (
-        <Card
-          style={{
-            backgroundColor: "#011F37",
-            color: "white",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "auto",
-            minHeight: "10vh",
-            marginTop: "20px"
-          }}
-        >
-          <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <h2>{vault.name}</h2>
-            <Button
-              onClick={handleModalToggle}
-              style={{
-                alignSelf: "flex-start",
-                background: "#011F37",
-                boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-                border: "none",
-                borderRadius: "10px",
-                color: "white" // to make the text white
-              }}
-            >
-              Close
-            </Button>
-          </div>
-          <p>Balance: {balance}</p>
+    {isModalVisible && (
+      <Card
+        style={{
+          backgroundColor: "transparent",
+          color: "white",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "auto",
+          minHeight: "10vh",
+          marginTop: "20px",
+          border: "transparent"
+        }}
+      >
+        <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h2 style={{ fontSize: "17px" }}>{vault.name}</h2>
+          <Button
+            onClick={handleModalToggle}
+            style={{
+              alignSelf: "flex-start",
+              background: "#011F37",
+              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
+              border: "none",
+              borderRadius: "10px",
+              color: "white"
+            }}
+          >
+            Close
+          </Button>
+        </div>
+        <p>Balance: {balance}</p>
 
-          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", marginBottom: 10 }}>
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", marginBottom: 10 }}>
           <Space style={{ flex: 1, flexDirection: isMobile ? "column" : "row", marginRight: 10 }}>
             <Input
               value={depositAmount}
               onChange={e => setDepositAmount(e.target.value)}
               placeholder={`Deposit amount (Max: ${ethers.utils.formatEther(nativeBalance || 0)})`}
-              style={{ borderColor: "white", color: "grey", marginBottom: isMobile ? 10 : 0 }}
+              style={{ 
+                backgroundColor: "#011F37", 
+                borderColor: "white", 
+                color: "white", 
+                marginBottom: isMobile ? 10 : 0, 
+                width: isMobile ? "100%" : "", 
+                boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
+                border: "1px solid #011F37"
+              }}
             />
             <Button
               onClick={handleDeposit}
@@ -171,12 +180,20 @@ const handleWithdraw = async () => {
 
           {!isMobile && <Divider type="vertical" />}
 
-          <Space style={{ flex: 1, flexDirection: isMobile ? "column" : "row", marginLeft: 10 }}>
+          <Space style={{ flex: 1, flexDirection: isMobile ? "column" : "row", marginRight: 8 }}>
             <Input
               value={withdrawAmount}
               onChange={e => setWithdrawAmount(e.target.value)}
               placeholder="Withdraw amount"
-              style={{ borderColor: "white", color: "grey", marginBottom: isMobile ? 10 : 0 }}
+              style={{ 
+                backgroundColor: "#011F37", 
+                borderColor: "white", 
+                color: "white", 
+                marginBottom: isMobile ? 10 : 0, 
+                width: isMobile ? "100%" : "", 
+                boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
+                border: "1px solid #011F37"
+              }}
             />
             <Button
               onClick={handleWithdraw}
@@ -192,9 +209,11 @@ const handleWithdraw = async () => {
             </Button>
           </Space>
         </div>
+      </Card>
+    )}
 
-        </Card>
-      )}
+
+
     </div>
   );
 };
