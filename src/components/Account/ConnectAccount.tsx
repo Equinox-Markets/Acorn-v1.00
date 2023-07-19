@@ -21,7 +21,7 @@ const styles = {
     alignItems: "center",
     width: "fit-content",
     borderRadius: "10px",
-    backgroundColor: theme.colors.black,
+    backgroundColor: "#011F37",
     cursor: "pointer"
   },
   button: {
@@ -33,7 +33,7 @@ const styles = {
     fontSize: "15px",
     margin: "20px 20px",
     border: "none",
-    background: theme.colors.black,
+    background: "#011F37",
     color: theme.colors.white
   },
   text: {

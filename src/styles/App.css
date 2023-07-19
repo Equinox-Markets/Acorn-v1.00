@@ -14,7 +14,7 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 
 .App {
@@ -22,13 +22,13 @@ body {
 }
 
 .App-link {
-  color: #61dafb;
+  color: #011F37;
 }
 
 /* ANTD OVERRIDE */
 
 .ant-btn-primary {
-  background-color: #4D8D41 !important;
+  background-color: #011F37 !important;
   border: none !important;
   box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.4);
   -webkit-transition: all 0.3s ease;
@@ -40,7 +40,7 @@ body {
 
 .ant-btn:hover {
   transform: scale(1.02) !important;
-  box-shadow: 0px 0px 8px 8px #254420;
+  box-shadow: 0px 0px 1px 1px #011F37;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -53,6 +53,7 @@ body {
 }
 
 .ant-dropdown-menu {
+  background-color: #011F37 !important;
   border-radius: 10px !important;
 }
 
@@ -60,7 +61,7 @@ body {
 .ant-dropdown-menu-submenu-title {
   height: 42px;
   gap: 5px;
-  color: black !important;
+  color: rgb(255, 255, 255) !important;
   font-size: 15px !important;
   font-weight: 500 !important;
 }
@@ -76,6 +77,12 @@ body {
   border-radius: 10px;
   min-width: 350px;
   margin-inline: auto;
+  background-color: #011F37;
+}
+.ant-modal-header,
+.ant-modal-body,
+.ant-modal-footer {
+    background-color: transparent;
 }
 
 .ant-modal-mask {
@@ -84,4 +91,14 @@ body {
 
 .ant-modal-wrap {
   z-index: 50 !important;
+}
+
+.my-modal .ant-modal-content {
+  background-color: transparent;
+}
+
+.my-modal .ant-modal-header,
+.my-modal .ant-modal-body,
+.my-modal .ant-modal-footer {
+  background-color: transparent;
 }

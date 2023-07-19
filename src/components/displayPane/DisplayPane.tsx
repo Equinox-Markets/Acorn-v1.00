@@ -1,15 +1,15 @@
-
 import { useWeb3React } from "@web3-react/core";
 import { Divider } from "antd";
 
 import { useWindowWidthAndHeight } from "hooks";
-import { theme } from "styles/theme";
 
-import { Infos, SignMessage, Status, TransferEth } from "./components";
+
+import { Status, VaultList } from "./components";
+
 
 const styles = {
   container: {
-    background: theme.colors.black,
+    background: "#000000)",
     width: "80%",
     minWidth: "330px",
     maxWidth: "900px",
@@ -17,21 +17,23 @@ const styles = {
     margin: "auto",
     padding: "30px 0",
     borderRadius: "10px",
-    boxShadow: "8px 8px 8px rgba(0, 0, 0, 0.4)"
+    boxShadow: "0px 12px 18px -6px rgba(0, 0, 0, 0.3)"
   },
   title: {
-    color: theme.colors.white,
+    color: "#ffffff",
     fontWeight: 600,
-    fontSize: "30px",
+    fontFamily: "'Roboto', sans-serif",
+    fontSize: "32px",
     marginBottom: "10px"
   },
   content: {
     width: "85%",
     margin: "auto",
-    fontSize: "17px"
+    fontSize: "17px",
+    color: "#ffffff"
   },
   action: {
-    display: "inline-flex",
+    display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
     gap: "20px"
@@ -39,23 +41,21 @@ const styles = {
 } as const;
 
 const DisplayPane: React.FC = () => {
-  const { chainId, isActivating, isActive } = useWeb3React();
+  const { isActivating, isActive } = useWeb3React();
   const { isMobile } = useWindowWidthAndHeight();
 
   return (
     <div style={styles.container}>
-      <div style={styles.title}>List of Vaults Available</div>
-      <div style={styles.content}>
+      <div style={styles.title}>Deposit into a Vault and Start Earning</div>
+      <div style={styles.content}> Each Vault is auto-compounding and utilizes specific strategies designed for maximum yield
         <Status isActivating={isActivating} isActive={isActive} />
-        <Infos chainId={chainId} />
 
         {isActive && (
           <>
             <Divider />
             <div style={styles.action}>
-              <SignMessage />
+              <VaultList />
               {!isMobile && <Divider type="vertical" style={{ fontSize: "120px !important" }} />}
-              <TransferEth />
             </div>
           </>
         )}

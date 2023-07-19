@@ -15,7 +15,8 @@ const styles = {
   item: {
     fontWeight: "500",
     fontFamily: "Roboto, sans-serif",
-    fontSize: "14px"
+    fontSize: "14px",
+    color: "white"
   },
   button: {
     display: "flex",
@@ -23,7 +24,8 @@ const styles = {
     height: "42px",
     minWidth: "145px",
     border: "0",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    backgroundColor: "#011F37"
   }
 };
 
@@ -46,11 +48,6 @@ const ChainSelector: FC = () => {
   const items: MenuProps["items"] = useMemo(
     () => [
       { label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "Ethereum_logo") },
-      { label: "Goerli Testnet", key: chainIds.goerli, icon: labelToShow(ethereum_Logo, "Ethereum_logo") },
-      { label: "Polygon", key: chainIds.polygon, icon: labelToShow(polygon_logo, "Polygon_logo") },
-      { label: "Mumbai", key: chainIds.mumbai, icon: labelToShow(polygon_logo, "Polygon_logo") },
-      { label: "BNB Chain", key: chainIds.bsc, icon: labelToShow(bsc_Logo, "BNB_logo") },
-      { label: "BNB Testnet", key: chainIds.bsctest, icon: labelToShow(bsc_Logo, "BNB_logo") }
     ],
     []
   );
@@ -91,11 +88,11 @@ const ChainSelector: FC = () => {
               <span style={{ marginRight: "10px" }}>{selected?.label}</span>
             </div>
           )}
-          <DownOutlined />
+          <DownOutlined style={{ color: "white" }} />
         </Button>
       </Dropdown>
     </div>
   );
-};
+}
 
 export default ChainSelector;
