@@ -7,7 +7,7 @@ const styles = {
     paddingBlock: "15px"
   },
   statusText: {
-    color: theme.colors.text,
+    color: theme.colors.white,
     fontWeight: 800
   }
 } as const;

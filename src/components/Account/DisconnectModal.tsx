@@ -46,6 +46,7 @@ const DisconnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalO
         </div>
       </Card>
       <Button
+        className="no-hover-shadow"
         size="large"
         type="primary"
         style={{

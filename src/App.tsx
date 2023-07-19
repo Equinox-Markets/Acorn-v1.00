@@ -2,7 +2,7 @@ import { Buffer } from "buffer";
 
 import { Layout } from "antd";
 
-import background from "assets/images/background.jpg";
+import background from "assets/images/background.png";
 import DisplayPane from "components/displayPane/DisplayPane";
 import { CustomHeader, MainContent, CustomFooter } from "layout";
 import "styles/App.css";

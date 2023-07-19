@@ -14,7 +14,7 @@ const styles = {
     marginBottom: "12px",
     background: theme.colors.white,
     boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #fff",
-    border: "none",
+    border: "none", // Here's the border color change
     borderRadius: "10px"
   },
   connectButtonText: {

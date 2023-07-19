@@ -5,3 +5,4 @@ export * from "./useSwitchChain";
 export * from "./useToken";
 export * from "./useWindowWidthAndHeight";
 export * from "./useWriteContract";
+export { default as useVault } from "./useVault";

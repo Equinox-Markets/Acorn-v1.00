@@ -111,11 +111,6 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
             Click here
           </a>
         </div>
-
-        <div style={{ margin: "auto", fontSize: "10px" }}>
-          Wallets are provided by External Providers and by selecting you agree to Terms of those Providers. Your access
-          to the wallet might be reliant on the External Provider being operational.
-        </div>
       </div>
     </Modal>
   );
