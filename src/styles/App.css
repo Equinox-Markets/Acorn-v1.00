@@ -53,7 +53,7 @@ body {
 }
 
 .ant-dropdown-menu {
-  background-color: #ffffff !important;
+  background-color: #011F37 !important;
   border-radius: 10px !important;
 }
 
@@ -61,10 +61,25 @@ body {
 .ant-dropdown-menu-submenu-title {
   height: 42px;
   gap: 5px;
-  color: rgb(0, 0, 0) !important;
+  color: rgb(255, 255, 255) !important;
   font-size: 15px !important;
   font-weight: 500 !important;
 }
+
+/* Add a hover effect for the menu items */
+.ant-dropdown-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important; /* adjust as needed */
+}
+
+
+.hoverShadowButton {
+  transition: box-shadow 0.3s ease;
+}
+
+.hoverShadowButton:hover {
+  box-shadow: 0 0 10px #011F37;
+}
+
 
 .ant-modal {
   display: flex;

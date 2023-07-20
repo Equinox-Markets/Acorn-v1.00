@@ -68,20 +68,24 @@ const vaults: VaultType[] = [
 ];
 
 const VaultList: FC = () => {
-  const { account, chainId } = useWeb3React(); // Changed from 'active' to 'account'
+  const { account, chainId } = useWeb3React();
 
-  // Only show the vaults if the user has connected their wallet
-  if (!account) { // Changed from 'active' to 'account'
+  if (!account) {
     return <div>Please connect your wallet</div>;
+  }
+
+  const filteredVaults = vaults.filter(vault => vault.chainId === chainId);
+
+  if (!filteredVaults.length) {
+    const networkName = vaults.find(vault => vault.chainId === chainId)?.networkName || 'this network';
+    return <h1 style={{ color: 'white' }}>No Vaults on {networkName} yet. Stay Tooned!</h1>;
   }
 
   return (
     <div>
-      {vaults
-        .filter(vault => vault.chainId === chainId)
-        .map(vault => (
-          <Vault key={vault.address} vault={vault} />
-        ))}
+      {filteredVaults.map(vault => (
+        <Vault key={vault.address} vault={vault} />
+      ))}
     </div>
   );
 };
