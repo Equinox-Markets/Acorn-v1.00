@@ -40,6 +40,21 @@ const vaults: VaultType[] = [
     depositTokenAbi: ARBGMXERC20ABI, // Set ABI here
 
   },
+  {
+    name: 'aGMX',
+    address: '0x...',
+    abi: [ /* ABI array here */ ],
+    chainId: 42161, // Arbitrum mainnet
+    logo: gmxLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 13.6,
+    strategy: "This Vault auto compounds the ETH rewards from staking GMX into more GMX and re-stakes it.",
+    description: 'Deposit GMX and Earn',
+    depositTokenAddress: '0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a', // add the deposit token address here
+    depositTokenAbi: ARBGMXERC20ABI, // Set ABI here
+
+  },
   // ... More vaults
 ];
 

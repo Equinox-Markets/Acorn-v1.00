@@ -112,7 +112,7 @@ useEffect(() => {
         const target = e.currentTarget;
         target.style.transform = 'scale(1)';
         const card = target.querySelector('.ant-card') as HTMLElement;
-        if (card) card.style.borderColor = '#011F37';
+        if (card) card.style.borderColor = '#064576';
       }}
     >
       <Card
@@ -120,7 +120,7 @@ useEffect(() => {
     backgroundColor: 'transparent',
     color: 'white',
     borderRadius: '12px',
-    border: '1px solid #011F37',
+    border: '2px solid #064576',
     transition: 'border-color .2s',
     maxWidth: "100%",
     width: '100%',
@@ -143,7 +143,7 @@ useEffect(() => {
       Strategy Info
     </Button>
   </div>
-  <Divider style={{ background: 'white', marginTop: '20px', marginBottom: '20px' }} />
+  <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
     <div>
       <h3>Vault Balance:</h3>
@@ -154,7 +154,7 @@ useEffect(() => {
       <h2>{vault.apr}%</h2>
     </div>
   </div>
-  <Divider style={{ background: 'white', marginTop: '20px', marginBottom: '20px' }} />
+  <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
   <div style={{ width: '48%' }}>
     <Input
@@ -269,10 +269,10 @@ useEffect(() => {
               border: "transparent"
             }}
           >
-            <Divider style={{ background: "white", marginTop: "10px", marginBottom: "10px" }} />
+            <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
             <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
             <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
-            <Divider style={{ background: "white", marginTop: "10px", marginBottom: "10px" }} />
+            <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
             {/* Other Modal Content */}
           </Card>
         </Modal>
