@@ -88,11 +88,26 @@ body {
   align-items: center;
 }
 
+.ant-modal-title {
+  background-color: #011F37;
+  color: white;
+}
+
+.custom-modal .ant-modal-title {
+  background-color: #011F37;
+  color: white;
+}
+
+.custom-modal .ant-modal-close-x {
+  color: white;
+}
+
+
 .ant-modal-content {
   border-radius: 10px;
   min-width: 350px;
   margin-inline: auto;
-  background-color: #011F37;
+  background-color: #011F37 !important;
 }
 .ant-modal-header,
 .ant-modal-body,
@@ -109,7 +124,7 @@ body {
 }
 
 .my-modal .ant-modal-content {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .my-modal .ant-modal-header,

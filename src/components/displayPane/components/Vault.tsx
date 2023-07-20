@@ -242,17 +242,23 @@ useEffect(() => {
 
       {isModalVisible && (
         <Modal
-          title={vault.name}
-          visible={isModalVisible}
-          onCancel={handleModalToggle}
-          footer={null}
-          centered
-          bodyStyle={{ backgroundColor: "transparent", color: "transparent" }}  // Add this line
-        >
+        title={
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src={vault.logo} alt={`${vault.name} Logo`} style={{ width: '24px', marginRight: '10px' }} />
+            {vault.name}
+          </div>
+        }
+        visible={isModalVisible}
+        onCancel={handleModalToggle}
+        footer={null}
+        centered
+        bodyStyle={{ backgroundColor: "transparent", color: "transparent" }}
+        wrapClassName="custom-modal"
+      >
           <Card
             style={{
-              backgroundColor: "white",  // Change this line
-              color: "black",  // Change this line
+              backgroundColor: "#011F37",  // Change this line
+              color: "white",  // Change this line
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -263,10 +269,10 @@ useEffect(() => {
               border: "transparent"
             }}
           >
-            <Divider style={{ background: "grey", marginTop: "10px", marginBottom: "10px" }} />
+            <Divider style={{ background: "white", marginTop: "10px", marginBottom: "10px" }} />
             <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
             <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
-            <Divider style={{ background: "grey", marginTop: "10px", marginBottom: "10px" }} />
+            <Divider style={{ background: "white", marginTop: "10px", marginBottom: "10px" }} />
             {/* Other Modal Content */}
           </Card>
         </Modal>
