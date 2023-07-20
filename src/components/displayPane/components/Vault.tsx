@@ -32,7 +32,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { account, provider } = useWeb3React();
-  const { balance } = useVault(vault.address, vault.abi);
+  const { vaultTokenBalance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
   const [userBalance, setUserBalance] = useState('0'); // new state variable for user's token balance
 
@@ -51,7 +51,7 @@ useEffect(() => {
         })
         .catch((error: Error) => console.error("Failed to fetch user's token balance:", error));
     }
-}, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi]);
+}, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi, vaultTokenBalance]);
 
 
   const contract = new ethers.Contract(vault.address, vault.abi, signer);
@@ -147,7 +147,7 @@ useEffect(() => {
   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
     <div>
       <h3>Vault Balance:</h3>
-      <h2>{ethers.utils.formatEther(balance)} {vault.name}</h2>
+      <h2>{ethers.utils.formatEther(vaultTokenBalance)} {vault.name}</h2>
     </div>
     <div>
       <h3>APR:</h3>
@@ -158,7 +158,7 @@ useEffect(() => {
   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
   <div style={{ width: '48%' }}>
     <Input
-      placeholder={`Amount to deposit (Balance: ${userBalance})`} 
+      placeholder={`Balance: ${userBalance}`}
       value={depositAmount}
       onChange={(e) => setDepositAmount(e.target.value)}
       style={{
@@ -180,6 +180,7 @@ useEffect(() => {
     >
       MAX
     </Button>
+
     <Button
       onClick={handleDeposit}
       style={{
@@ -196,27 +197,45 @@ useEffect(() => {
   </div>
 
     <div style={{ width: '48%' }}>
-      <Input placeholder="Amount to withdraw" value={withdrawAmount} onChange={(e) => setWithdrawAmount(e.target.value)}
-        style={{
-          color: 'white',  // Add this line
-          backgroundColor: '#011F37',  // Add this line
-          borderColor: '#011F37',  // Add this line
-        }}
-      />
-      <Button
-        onClick={handleWithdraw}
-        style={{
-          color: 'white',
-          backgroundColor: '#011F37',  // Add this line
-          border: '1px solid #011F37',  // Change this line
-          borderRadius: '12px',
-          marginTop: '10px',
-          width: '100%',
-        }}
-      >
-        Withdraw
-      </Button>
-    </div>
+    <Input
+      placeholder={`Vault balance: ${ethers.utils.formatEther(vaultTokenBalance)}`}
+      value={withdrawAmount}
+      onChange={(e) => setWithdrawAmount(e.target.value)}
+      style={{
+        color: 'white',
+        backgroundColor: '#011F37',
+        borderColor: '#011F37',
+      }}
+    />
+    <Button
+      onClick={() => setWithdrawAmount(ethers.utils.formatEther(vaultTokenBalance))}
+      // Here it sets the withdrawAmount to be the user's vaultTokenBalance
+      style={{
+        color: 'white',
+        backgroundColor: '#011F37',
+        border: '1px solid #011F37',
+        borderRadius: '12px',
+        marginTop: '10px',
+        width: '100%',
+      }}
+    >
+      MAX
+    </Button>
+    <Button
+      onClick={handleWithdraw}
+      style={{
+        color: 'white',
+        backgroundColor: '#011F37',
+        border: '1px solid #011F37',
+        borderRadius: '12px',
+        marginTop: '10px',
+        width: '100%',
+      }}
+    >
+      Withdraw
+    </Button>
+  </div>
+
     </div>
    </Card>
 

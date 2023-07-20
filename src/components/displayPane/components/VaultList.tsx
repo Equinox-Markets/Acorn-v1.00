@@ -26,7 +26,7 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
-    name: 'GMX',
+    name: 'aGMX',
     address: '0x...',
     abi: [ /* ABI array here */ ],
     chainId: 42161, // Arbitrum mainnet
