@@ -2,12 +2,12 @@ import { FC } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 
-import ethLogo from 'assets/images/ethereum_Logo.png';
+//import ethLogo from 'assets/images/ethereum_Logo.png';
 import arbLogo from 'assets/images/arbitrum_logo.png';
 import gmxLogo from 'assets/images/gmx_logo.png';
+import ARBGMXERC20ABI from 'data/abi/ARBGMXERC20.json';
 
 import Vault from './Vault';
-
 
 type VaultType = {
   name: string;
@@ -19,20 +19,12 @@ type VaultType = {
   networkName: string;  // Add networkName
   networkLogo: string;  // Add networkLogo
   apr: number;
+  depositTokenAddress: string; // Add this line
+  strategy: string;
+  depositTokenAbi: any[]; // Add this line
 };
 
 const vaults: VaultType[] = [
-  {
-    name: 'GMX Staking',
-    address: '0x...',
-    abi: [ /* ABI array here */ ],
-    chainId: 1, // Ethereum mainnet
-    logo: ethLogo, // add logo path
-    networkName: 'ETH',
-    networkLogo: ethLogo,
-    apr: 125,
-    description: 'This Vault stakes GMX and then sells the ETH rewards back into GMX and stakes it.'
-  },
   {
     name: 'GMX',
     address: '0x...',
@@ -42,29 +34,11 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 13.6,
-    description: 'This Vault stakes GMX and then sells the ETH rewards back into GMX and stakes it.'
-  },
-  {
-    name: 'GMX Staking',
-    address: '0x...',
-    abi: [ /* ABI array here */ ],
-    chainId: 1, // Ethereum mainnet
-    logo: ethLogo, // add logo path
-    networkName: 'FTM',
-    networkLogo: ethLogo,
-    apr: 587,
-    description: 'This Vault stakes GMX and then sells the ETH rewards back into GMX and stakes it.'
-  },
-  {
-    name: 'GMX Staking',
-    address: '0x...',
-    abi: [ /* ABI array here */ ],
-    chainId: 1, // Ethereum mainnet
-    logo: ethLogo, // add logo path
-    networkName: 'AVAX',
-    networkLogo: ethLogo,
-    apr: 254,
-    description: 'This Vault stakes GMX and then sells the ETH rewards back into GMX and stakes it.'
+    strategy: "This Vault auto compounds the ETH rewards from staking GMX into more GMX and re-stakes it.",
+    description: 'Deposit GMX and Earn',
+    depositTokenAddress: '0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a', // add the deposit token address here
+    depositTokenAbi: ARBGMXERC20ABI, // Set ABI here
+
   },
   // ... More vaults
 ];

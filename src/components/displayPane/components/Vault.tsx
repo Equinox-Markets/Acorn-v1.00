@@ -1,9 +1,9 @@
 //import { Vault as VaultType } from 'path/to/your/vault/type';
 
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
-import { Button, Card, Divider, Input } from 'antd';
+import { Button, Card, Divider, Input, Modal } from 'antd';
 import { ethers } from 'ethers';
 import { useMediaQuery } from 'react-responsive';
 
@@ -20,6 +20,10 @@ type VaultProps = {
     networkName: string;
     networkLogo: string;
     apr: number;
+    strategy: string;
+    depositTokenAddress: string;
+    depositTokenAbi: any[];
+
   };
 };
 
@@ -30,15 +34,41 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const { account, provider } = useWeb3React();
   const { balance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
+  const [userBalance, setUserBalance] = useState('0'); // new state variable for user's token balance
 
   if (!provider || !account) return null;
 
-  const signer = provider.getSigner(account);
+const signer = provider.getSigner(account);
+
+useEffect(() => {
+    if (account && vault.depositTokenAddress && signer) {
+      const tokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
+
+      tokenContract.balanceOf(account)
+        .then((balance: ethers.BigNumber) => {
+          const formattedBalance = ethers.utils.formatEther(balance);
+          setUserBalance(formattedBalance);
+        })
+        .catch((error: Error) => console.error("Failed to fetch user's token balance:", error));
+    }
+}, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi]);
+
+
   const contract = new ethers.Contract(vault.address, vault.abi, signer);
 
   const handleDeposit = async () => {
     try {
       const weiAmount = ethers.utils.parseEther(depositAmount);
+
+      // First, get the deposit token contract
+      const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
+
+
+      // Approve the vault to spend the user's tokens
+      const approveResponse = await depositTokenContract.approve(vault.address, weiAmount);
+      await approveResponse.wait();
+
+      // Then deposit to the vault
       const transactionResponse = await contract.deposit(weiAmount);
       const transactionResult = await transactionResponse.wait();
       console.log(transactionResult);
@@ -68,6 +98,8 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         width: "100%",
         marginBottom: "30px",
         marginTop: "15px",
+        display: 'flex',
+        justifyContent: 'center',
         transition: 'transform .2s, border-color .2s',
       }}
       onMouseOver={(e) => {
@@ -84,150 +116,142 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       }}
     >
       <Card
-        hoverable
+  style={{
+    backgroundColor: 'transparent',
+    color: 'white',
+    borderRadius: '12px',
+    border: '1px solid #011F37',
+    transition: 'border-color .2s',
+    maxWidth: "100%",
+    width: '100%',
+  }}
+>
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '30px' : '60px'} />
+      <h2 style={{ marginLeft: '20px' }}>{vault.name}</h2>
+    </div>
+    <Button
+      onClick={handleModalToggle}
+      style={{
+        color: 'white',
+        backgroundColor: '#011F37',  // Add this line
+        border: '1px solid #011F37',
+        borderRadius: '12px',
+      }}
+    >
+      Strategy Info
+    </Button>
+  </div>
+  <Divider style={{ background: 'white', marginTop: '20px', marginBottom: '20px' }} />
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div>
+      <h3>Vault Balance:</h3>
+      <h2>{ethers.utils.formatEther(balance)} {vault.name}</h2>
+    </div>
+    <div>
+      <h3>APR:</h3>
+      <h2>{vault.apr}%</h2>
+    </div>
+  </div>
+  <Divider style={{ background: 'white', marginTop: '20px', marginBottom: '20px' }} />
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+  <div style={{ width: '48%' }}>
+    <Input
+      placeholder={`Amount to deposit (Balance: ${userBalance})`} 
+      value={depositAmount}
+      onChange={(e) => setDepositAmount(e.target.value)}
+      style={{
+        color: 'white',  // Add this line
+        backgroundColor: '#011F37',  // Add this line
+        borderColor: '#011F37',  // Add this line
+      }}
+    />
+    <Button
+      onClick={() => setDepositAmount(userBalance)}
+      style={{
+        color: 'white',
+        backgroundColor: '#011F37',
+        border: '1px solid #011F37',
+        borderRadius: '12px',
+        marginTop: '10px',
+        width: '100%',  // Add this line
+      }}
+    >
+      MAX
+    </Button>
+    <Button
+      onClick={handleDeposit}
+      style={{
+        color: 'white',
+        backgroundColor: '#011F37',  // Add this line
+        border: '1px solid #011F37',  // Change this line
+        borderRadius: '12px',
+        marginTop: '10px',
+        width: '100%',
+      }}
+    >
+      Deposit
+    </Button>
+  </div>
+
+    <div style={{ width: '48%' }}>
+      <Input placeholder="Amount to withdraw" value={withdrawAmount} onChange={(e) => setWithdrawAmount(e.target.value)}
         style={{
-          backgroundColor: "#011F37",
-          borderColor: "#011F37",
-          color: "white",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
+          color: 'white',  // Add this line
+          backgroundColor: '#011F37',  // Add this line
+          borderColor: '#011F37',  // Add this line
         }}
-        onClick={handleModalToggle}
-      >
-        <div>
-          <img src={vault.logo} alt="vault logo" width={40} style={{ verticalAlign: 'middle', position: 'relative', top: '-4px' }} />
-          <h2 style={{ fontSize: '24px', display: 'inline-block', marginLeft: '10px' }}>{vault.name}</h2>
-          <p style={{ fontSize: '17px', marginTop: '-3px' }}>{vault.description}</p>
-        </div>
-
-        <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%"}}>
-          <div style={{display: "flex", alignItems: "center"}}>
-            <img src={vault.networkLogo} alt="network logo" width={28} style={{ verticalAlign: 'middle', position: 'relative', top: '-0px' }} />
-            <h2 style={{ fontSize: '17px', display: 'inline-block', marginLeft: '10px' }}>{vault.networkName}</h2>
-          </div>
-          <h2 style={{ fontSize: '17px', display: 'inline-block', marginRight: '10px' }}>{vault.apr}% APR</h2>
-        </div>
-
-      </Card>
-
-    {isModalVisible && (
-      <Card
+      />
+      <Button
+        onClick={handleWithdraw}
         style={{
-          backgroundColor: "transparent",
-          color: "white",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "auto",
-          minHeight: "10vh",
-          marginTop: "20px",
-          border: "transparent"
+          color: 'white',
+          backgroundColor: '#011F37',  // Add this line
+          border: '1px solid #011F37',  // Change this line
+          borderRadius: '12px',
+          marginTop: '10px',
+          width: '100%',
         }}
       >
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
+        Withdraw
+      </Button>
+    </div>
+    </div>
+   </Card>
+
+
+      {isModalVisible && (
+        <Modal
+          title={vault.name}
+          visible={isModalVisible}
+          onCancel={handleModalToggle}
+          footer={null}
+          centered
+          bodyStyle={{ backgroundColor: "transparent", color: "transparent" }}  // Add this line
         >
-          <div
+          <Card
             style={{
+              backgroundColor: "white",  // Change this line
+              color: "black",  // Change this line
               display: "flex",
-              alignItems: "center"
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "auto",
+              minHeight: "10vh",
+              marginTop: "20px",
+              border: "transparent"
             }}
           >
-            <img src={vault.logo} alt={`${vault.name} logo`} width={28} style={{ marginRight: '10px' }} />
-            <h2 style={{ fontSize: "17px" }}>{vault.name}</h2>
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", width: "100%" }}>
-          <Input
-            value={depositAmount}
-            onChange={e => setDepositAmount(e.target.value)}
-            placeholder="Deposit amount"
-            style={{
-              flex: 1,
-              marginRight: 8,
-              backgroundColor: "#011F37",
-              borderColor: "white",
-              color: "white",
-              marginBottom: isMobile ? 10 : 0,
-              width: isMobile ? "100%" : "",
-              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-              border: "1px solid #011F37"
-            }}
-          />
-          <Button
-            onClick={handleDeposit}
-            style={{
-              background: "#011F37",
-              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-              border: "none",
-              borderRadius: "10px",
-              color: "white"
-            }}
-          >
-            Deposit
-          </Button>
-        </div>
-
-        <Divider style={{ background: "white", marginTop: "10px", marginBottom: "10px" }} />
-
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            <h2 style={{ fontSize: "17px" }}>Vault Balance: {balance}</h2>
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", width: "100%" }}>
-          <Input
-            value={withdrawAmount}
-            onChange={e => setWithdrawAmount(e.target.value)}
-            placeholder="Withdraw amount"
-            style={{
-              flex: 1,
-              marginRight: 5,
-              backgroundColor: "#011F37",
-              borderColor: "white",
-              color: "white",
-              marginBottom: isMobile ? 10 : 0,
-              width: isMobile ? "100%" : "",
-              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-              border: "1px solid #011F37"
-            }}
-          />
-          <Button
-            onClick={handleWithdraw}
-            style={{
-              background: "#011F37",
-              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-              border: "none",
-              borderRadius: "10px",
-              color: "white"
-            }}
-          >
-            Withdraw
-          </Button>
-        </div>
-      </Card>
-    )}
+            <Divider style={{ background: "grey", marginTop: "10px", marginBottom: "10px" }} />
+            <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
+            <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
+            <Divider style={{ background: "grey", marginTop: "10px", marginBottom: "10px" }} />
+            {/* Other Modal Content */}
+          </Card>
+        </Modal>
+      )}
     </div>
   );
 };
