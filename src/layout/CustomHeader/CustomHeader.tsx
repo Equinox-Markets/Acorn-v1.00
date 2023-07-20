@@ -50,7 +50,7 @@ export const Logo = () => {
 
   return (
     <div style={{ paddingTop: isMobile ? "30px" : "45px" }}>
-      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "80px" : "120px"} />
+      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "120px" : "180px"} />
     </div>
   );
 };

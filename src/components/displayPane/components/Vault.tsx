@@ -3,11 +3,11 @@
 import { FC, useState } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
-import { Button, Card, Divider, Input, Space } from 'antd';
+import { Button, Card, Divider, Input } from 'antd';
 import { ethers } from 'ethers';
 import { useMediaQuery } from 'react-responsive';
 
-import { useVault, useNativeBalance } from 'hooks';
+import { useVault } from 'hooks';
 
 type VaultProps = {
   vault: {
@@ -29,38 +29,34 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { account, provider } = useWeb3React();
   const { balance } = useVault(vault.address, vault.abi);
-  const nativeBalance = useNativeBalance(provider, account);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
-
 
   if (!provider || !account) return null;
 
-const signer = provider.getSigner(account);
-const contract = new ethers.Contract(vault.address, vault.abi, signer);
+  const signer = provider.getSigner(account);
+  const contract = new ethers.Contract(vault.address, vault.abi, signer);
 
-const handleDeposit = async () => {
-  try {
-    const weiAmount = ethers.utils.parseEther(depositAmount);
-    const transactionResponse = await contract.deposit(weiAmount);
-    const transactionResult = await transactionResponse.wait();
-    console.log(transactionResult);
-  } catch (error) {
-    console.error('Deposit failed', error);
-    // show an error message to the user
-  }
-};
+  const handleDeposit = async () => {
+    try {
+      const weiAmount = ethers.utils.parseEther(depositAmount);
+      const transactionResponse = await contract.deposit(weiAmount);
+      const transactionResult = await transactionResponse.wait();
+      console.log(transactionResult);
+    } catch (error) {
+      console.error('Deposit failed', error);
+    }
+  };
 
-const handleWithdraw = async () => {
-  try {
-    const weiAmount = ethers.utils.parseEther(withdrawAmount);
-    const transactionResponse = await contract.deposit(weiAmount);
-    const transactionResult = await transactionResponse.wait();
-    console.log(transactionResult);
-  } catch (error) {
-    console.error('Withdraw failed', error);
-    // show an error message to the user
-  }
-};
+  const handleWithdraw = async () => {
+    try {
+      const weiAmount = ethers.utils.parseEther(withdrawAmount);
+      const transactionResponse = await contract.withdraw(weiAmount);
+      const transactionResult = await transactionResponse.wait();
+      console.log(transactionResult);
+    } catch (error) {
+      console.error('Withdraw failed', error);
+    }
+  };
 
   const handleModalToggle = () => {
     setIsModalVisible(!isModalVisible);
@@ -100,7 +96,7 @@ const handleWithdraw = async () => {
         onClick={handleModalToggle}
       >
         <div>
-          <img src={vault.logo} alt="vault logo" width={34} style={{ verticalAlign: 'middle', position: 'relative', top: '-4px' }} />
+          <img src={vault.logo} alt="vault logo" width={40} style={{ verticalAlign: 'middle', position: 'relative', top: '-4px' }} />
           <h2 style={{ fontSize: '24px', display: 'inline-block', marginLeft: '10px' }}>{vault.name}</h2>
           <p style={{ fontSize: '17px', marginTop: '-3px' }}>{vault.description}</p>
         </div>
@@ -130,12 +126,45 @@ const handleWithdraw = async () => {
           border: "transparent"
         }}
       >
-        <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h2 style={{ fontSize: "17px" }}>{vault.name}</h2>
-          <Button
-            onClick={handleModalToggle}
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <div
             style={{
-              alignSelf: "flex-start",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <img src={vault.logo} alt={`${vault.name} logo`} width={28} style={{ marginRight: '10px' }} />
+            <h2 style={{ fontSize: "17px" }}>{vault.name}</h2>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", width: "100%" }}>
+          <Input
+            value={depositAmount}
+            onChange={e => setDepositAmount(e.target.value)}
+            placeholder="Deposit amount"
+            style={{
+              flex: 1,
+              marginRight: 8,
+              backgroundColor: "#011F37",
+              borderColor: "white",
+              color: "white",
+              marginBottom: isMobile ? 10 : 0,
+              width: isMobile ? "100%" : "",
+              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
+              border: "1px solid #011F37"
+            }}
+          />
+          <Button
+            onClick={handleDeposit}
+            style={{
               background: "#011F37",
               boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
               border: "none",
@@ -143,77 +172,62 @@ const handleWithdraw = async () => {
               color: "white"
             }}
           >
-            Close
+            Deposit
           </Button>
         </div>
-        <p>Balance: {balance}</p>
 
-        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", marginBottom: 10 }}>
-          <Space style={{ flex: 1, flexDirection: isMobile ? "column" : "row", marginRight: 10 }}>
-            <Input
-              value={depositAmount}
-              onChange={e => setDepositAmount(e.target.value)}
-              placeholder={`Deposit amount (Max: ${ethers.utils.formatEther(nativeBalance || 0)})`}
-              style={{ 
-                backgroundColor: "#011F37", 
-                borderColor: "white", 
-                color: "white", 
-                marginBottom: isMobile ? 10 : 0, 
-                width: isMobile ? "100%" : "", 
-                boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-                border: "1px solid #011F37"
-              }}
-            />
-            <Button
-              onClick={handleDeposit}
-              style={{
-                background: "#011F37",
-                boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-                border: "none",
-                borderRadius: "10px",
-                color: "white"
-              }}
-            >
-              Deposit
-            </Button>
-          </Space>
+        <Divider style={{ background: "white", marginTop: "10px", marginBottom: "10px" }} />
 
-          {!isMobile && <Divider type="vertical" />}
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <h2 style={{ fontSize: "17px" }}>Vault Balance: {balance}</h2>
+          </div>
+        </div>
 
-          <Space style={{ flex: 1, flexDirection: isMobile ? "column" : "row", marginRight: 8 }}>
-            <Input
-              value={withdrawAmount}
-              onChange={e => setWithdrawAmount(e.target.value)}
-              placeholder="Withdraw amount"
-              style={{ 
-                backgroundColor: "#011F37", 
-                borderColor: "white", 
-                color: "white", 
-                marginBottom: isMobile ? 10 : 0, 
-                width: isMobile ? "100%" : "", 
-                boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-                border: "1px solid #011F37"
-              }}
-            />
-            <Button
-              onClick={handleWithdraw}
-              style={{
-                background: "#011F37",
-                boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
-                border: "none",
-                borderRadius: "10px",
-                color: "white"
-              }}
-            >
-              Withdraw
-            </Button>
-          </Space>
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", width: "100%" }}>
+          <Input
+            value={withdrawAmount}
+            onChange={e => setWithdrawAmount(e.target.value)}
+            placeholder="Withdraw amount"
+            style={{
+              flex: 1,
+              marginRight: 5,
+              backgroundColor: "#011F37",
+              borderColor: "white",
+              color: "white",
+              marginBottom: isMobile ? 10 : 0,
+              width: isMobile ? "100%" : "",
+              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
+              border: "1px solid #011F37"
+            }}
+          />
+          <Button
+            onClick={handleWithdraw}
+            style={{
+              background: "#011F37",
+              boxShadow: "0 4px 4px rgba(0,0,0,.25),0 0 5px rgba(0,0,0,.25),inset 0 0 10px #011F37",
+              border: "none",
+              borderRadius: "10px",
+              color: "white"
+            }}
+          >
+            Withdraw
+          </Button>
         </div>
       </Card>
     )}
-
-
-
     </div>
   );
 };

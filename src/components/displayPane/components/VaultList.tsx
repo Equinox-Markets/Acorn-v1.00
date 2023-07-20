@@ -3,6 +3,8 @@ import { FC } from 'react';
 import { useWeb3React } from '@web3-react/core';
 
 import ethLogo from 'assets/images/ethereum_Logo.png';
+import arbLogo from 'assets/images/arbitrum_logo.png';
+import gmxLogo from 'assets/images/gmx_logo.png';
 
 import Vault from './Vault';
 
@@ -32,13 +34,13 @@ const vaults: VaultType[] = [
     description: 'This Vault stakes GMX and then sells the ETH rewards back into GMX and stakes it.'
   },
   {
-    name: 'GMX Staking',
+    name: 'GMX',
     address: '0x...',
     abi: [ /* ABI array here */ ],
-    chainId: 1, // Ethereum mainnet
-    logo: ethLogo, // add logo path
+    chainId: 42161, // Arbitrum mainnet
+    logo: gmxLogo, // add logo path
     networkName: 'ARB',
-    networkLogo: ethLogo,
+    networkLogo: arbLogo,
     apr: 13.6,
     description: 'This Vault stakes GMX and then sells the ETH rewards back into GMX and stakes it.'
   },
