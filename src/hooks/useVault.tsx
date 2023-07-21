@@ -12,7 +12,7 @@ const useVault = (vaultAddress: string, vaultAbi: any[]) => {
 
     const fetchBalance = async () => {
       const vaultContract = new Contract(vaultAddress, vaultAbi, provider.getSigner());
-      const vaultTokenBalance = await vaultContract.getUserBalance(account); // Replace getUserBalance with the actual function in your smart contract
+      const vaultTokenBalance = await vaultContract.balanceOf(account); // Replace getUserBalance with the actual function in your smart contract
       setBalance(vaultTokenBalance);
     };
 

@@ -9,11 +9,12 @@ import { useMediaQuery } from 'react-responsive';
 
 import { useVault } from 'hooks';
 
+
 type VaultProps = {
   vault: {
     name: string;
     address: string;
-    abi: any[];
+    abi: any[]
     chainId: number;
     logo: string;
     description: string;
@@ -22,7 +23,7 @@ type VaultProps = {
     apr: number;
     strategy: string;
     depositTokenAddress: string;
-    depositTokenAbi: any[];
+    depositTokenAbi: any[]
 
   };
 };
@@ -56,27 +57,31 @@ useEffect(() => {
 
   const contract = new ethers.Contract(vault.address, vault.abi, signer);
 
-  const handleDeposit = async () => {
+  const deposit = async () => {
     try {
       const weiAmount = ethers.utils.parseEther(depositAmount);
-
-      // First, get the deposit token contract
       const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
-
-
-      // Approve the vault to spend the user's tokens
+  
+      console.log('Approving...');
       const approveResponse = await depositTokenContract.approve(vault.address, weiAmount);
-      await approveResponse.wait();
-
-      // Then deposit to the vault
+      const approveReceipt = await approveResponse.wait();
+      console.log('Approve Receipt:', approveReceipt);
+  
+      console.log('Depositing...');
       const transactionResponse = await contract.deposit(weiAmount);
       const transactionResult = await transactionResponse.wait();
-      console.log(transactionResult);
+      console.log('Deposit Transaction Result:', transactionResult);
+  
     } catch (error) {
       console.error('Deposit failed', error);
+      Modal.error({
+        title: 'Transaction Failed',
+        content: `The deposit transaction failed with the following error: ${(error as Error).message}`,
+      });
     }
   };
-
+  
+  
   const handleWithdraw = async () => {
     try {
       const weiAmount = ethers.utils.parseEther(withdrawAmount);
@@ -85,8 +90,14 @@ useEffect(() => {
       console.log(transactionResult);
     } catch (error) {
       console.error('Withdraw failed', error);
+      Modal.error({
+        title: 'Transaction Failed',
+        content: `The withdraw transaction failed with the following error: ${(error as Error).message}`,
+      });
     }
   };
+  
+
 
   const handleModalToggle = () => {
     setIsModalVisible(!isModalVisible);
@@ -128,7 +139,7 @@ useEffect(() => {
 >
   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '30px' : '60px'} />
+      <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '45px' : '60px'} />
       <h2 style={{ marginLeft: '20px' }}>{vault.name}</h2>
     </div>
     <Button
@@ -182,7 +193,7 @@ useEffect(() => {
     </Button>
 
     <Button
-      onClick={handleDeposit}
+      onClick={deposit}
       style={{
         color: 'white',
         backgroundColor: '#011F37',  // Add this line

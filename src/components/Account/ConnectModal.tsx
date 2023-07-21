@@ -19,8 +19,15 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     fontWeight: "700",
-    fontSize: "20px"
-  }
+    fontSize: "20px",
+    color: "white",
+  },
+  helpText: {
+    margin: "auto",
+    fontSize: "15px",
+    marginBottom: "15px",
+    color: "white",
+  },
 } as const;
 
 interface ConnectModalProps {
@@ -100,8 +107,10 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
           onClick={() => activateConnector("Coinbase Wallet")}
           loading={isCBActivating}
         />
+
         <Divider />
-        <div style={{ margin: "auto", fontSize: "15px", marginBottom: "15px" }}>
+
+        <div style={styles.helpText}>
           Need help installing a wallet?{" "}
           <a
             href="https://metamask.zendesk.com/hc/en-us/articles/360015489471-How-to-Install-MetaMask-Manually"
@@ -117,3 +126,4 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
 };
 
 export default ConnectModal;
+

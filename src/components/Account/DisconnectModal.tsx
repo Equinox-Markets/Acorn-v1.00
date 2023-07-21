@@ -24,38 +24,34 @@ const DisconnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalO
         width: "350px",
         padding: "15px",
         fontSize: "17px",
-        fontWeight: "500"
+        fontWeight: "500",
+        color: "white" // Change text color to white
       }}
     >
       Account
       <Card
         style={{
           marginTop: "10px",
-          borderRadius: "10px"
+          borderRadius: "10px",
+          backgroundColor: "#011F37", // Change card background color to #011F37
+          border: "1px solid #064576" // Change card border color to #064576
         }}
-        bodyStyle={{ padding: "15px" }}
+        bodyStyle={{ padding: "15px", color: "white" }} // Change card body text color to white
       >
-        <Address avatar="left" size={6} copyable style={{ fontSize: "20px" }} />
+        <Address avatar="left" size={6} copyable style={{ fontSize: "20px", color: "white" }} />
         <div style={{ marginTop: "10px", padding: "0 10px" }}>
           {chainId !== undefined && (
-            <a href={`${getExplorer(chainId)}/address/${account}`} target="_blank" rel="noreferrer">
+            <a href={`${getExplorer(chainId)}/address/${account}`} target="_blank" rel="noreferrer" style={{ color: "white" }}> {/* Change link text color to white */}
               <SelectOutlined style={{ marginRight: "5px" }} />
               View on Explorer
             </a>
           )}
         </div>
       </Card>
-      <Button
-        className="no-hover-shadow"
+            <Button
+        className="hover-shadow-button no-hover-shadow"
         size="large"
         type="primary"
-        style={{
-          width: "100%",
-          marginTop: "10px",
-          borderRadius: "10px",
-          fontSize: "16px",
-          fontWeight: "500"
-        }}
         onClick={() => disconnect()}
       >
         Disconnect Wallet
@@ -65,3 +61,4 @@ const DisconnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalO
 };
 
 export default DisconnectModal;
+

@@ -72,12 +72,19 @@ body {
 }
 
 
-.hoverShadowButton {
+.hover-shadow-button {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background: #011F37;
   transition: box-shadow 0.3s ease;
 }
 
-.hoverShadowButton:hover {
-  box-shadow: 0 0 10px #011F37;
+.hover-shadow-button:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -102,6 +109,9 @@ body {
   color: white;
 }
 
+.ant-modal-close-x {
+  color: rgb(255, 255, 255) !important;
+}
 
 .ant-modal-content {
   border-radius: 10px;
@@ -137,3 +147,4 @@ body {
   color: grey !important;
   opacity: 1;
 }
+
