@@ -1,3 +1,5 @@
+//import { Vault as VaultType } from 'path/to/your/vault/type';
+
 import { FC, useState, useEffect } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
@@ -26,7 +28,6 @@ type VaultProps = {
   };
 };
 
-
 const Vault: FC<VaultProps> = ({ vault }) => {
   const [depositAmount, setDepositAmount] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
@@ -35,15 +36,12 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const { vaultTokenBalance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
   const [userBalance, setUserBalance] = useState('0'); // new state variable for user's token balance
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-
 
   if (!provider || !account) return null;
 
-  const signer = provider.getSigner(account);
+const signer = provider.getSigner(account);
 
-  useEffect(() => {
+useEffect(() => {
     if (account && vault.depositTokenAddress && signer) {
       const tokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
 
@@ -54,7 +52,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         })
         .catch((error: Error) => console.error("Failed to fetch user's token balance:", error));
     }
-  }, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi, vaultTokenBalance]);
+}, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi, vaultTokenBalance]);
 
 
   const contract = new ethers.Contract(vault.address, vault.abi, signer);
@@ -63,24 +61,27 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     try {
       const weiAmount = ethers.utils.parseEther(depositAmount);
       const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
-
+  
       console.log('Approving...');
       const approveResponse = await depositTokenContract.approve(vault.address, weiAmount);
       const approveReceipt = await approveResponse.wait();
       console.log('Approve Receipt:', approveReceipt);
-
+  
       console.log('Depositing...');
       const transactionResponse = await contract.deposit(weiAmount);
       const transactionResult = await transactionResponse.wait();
       console.log('Deposit Transaction Result:', transactionResult);
-
+  
     } catch (error) {
       console.error('Deposit failed', error);
-      setErrorMessage(`The deposit transaction failed with the following error: ${(error as Error).message}`);
+      Modal.error({
+        title: 'Transaction Failed',
+        content: `The deposit transaction failed with the following error: ${(error as Error).message}`,
+      });
     }
   };
-
-
+  
+  
   const handleWithdraw = async () => {
     try {
       const weiAmount = ethers.utils.parseEther(withdrawAmount);
@@ -89,14 +90,18 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       console.log(transactionResult);
     } catch (error) {
       console.error('Withdraw failed', error);
-      setErrorMessage(`The withdraw transaction failed with the following error: ${(error as Error).message}`);
+      Modal.error({
+        title: 'Transaction Failed',
+        content: `The withdraw transaction failed with the following error: ${(error as Error).message}`,
+      });
     }
   };
+  
+
 
   const handleModalToggle = () => {
     setIsModalVisible(!isModalVisible);
   };
-
 
   return (
     <div
@@ -121,34 +126,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         if (card) card.style.borderColor = '#064576';
       }}
     >
-      {errorMessage && (
-        <Modal
-          title="Transaction Failed"
-          visible={errorMessage ? true : false}
-          onCancel={() => setErrorMessage(null)}
-          footer={null}
-          centered
-          bodyStyle={{ backgroundColor: "transparent", color: "white" }}
-          wrapClassName="custom-modal"
-        >
-          <Card
-            style={{
-              backgroundColor: "#011F37",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "auto",
-              minHeight: "10vh",
-              marginTop: "20px",
-              border: "transparent"
-            }}
-          >
-            <p>{errorMessage}</p>
-          </Card>
-        </Modal>
-      )}
       <Card
   style={{
     backgroundColor: 'transparent',
@@ -181,7 +158,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div>
       <h3>Vault Balance:</h3>
-      <h2>{vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatEther(vaultTokenBalance)).toFixed(2)}</h2>
+      <h2>{vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatEther(vaultTokenBalance)).toFixed(2)} {vault.name}</h2>
     </div>
     <div>
       <h3>APR:</h3>

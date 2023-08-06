@@ -9,6 +9,7 @@ import glpLogo from 'assets/images/glp_logo.png';
 import aArbGLP from 'data/abi/aArbGLP.json';
 import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
 //import ARBGMXERC20ABI from 'data/abi/ARBGMXERC20.json';
+//import BeefyVaultABI from 'data/abi/BeefyVaultV7.json';
 
 import Vault from './Vault';
 
@@ -30,20 +31,21 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
-    name: 'aGLP',
+    name: 'axlUSDC-​FTM vLP',
     address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
     abi: aArbGLP,
-    chainId: 42161, // Arbitrum mainnet
+    chainId: 250, // Arbitrum mainnet
     logo: glpLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 66.4,
-    strategy: "This Vault auto compounds the ETH rewards from staking GLP into more GLP.",
+    strategy: "The vault deposits the user's axlUSDC-FTM vLP in a Equalizer farm, earning the platform's governance token. Earned token is swapped for axlUSDC and FTM in order to acquire more of the same LP token. To complete the compounding cycle, the new axlUSDC-FTM vLP is added to the farm, ready to go for the next earning event. The transaction cost required to do all this is socialized among the vault's users.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
 
   },
+
   // ... More vaults
 ];
 
