@@ -48,7 +48,7 @@ Simple and minimalist Vault dApp providing autocompounding vaults. Deposit and s
 ### Once your config is ready, create a new repo, open your favorite code editor, and clone the repo with the following cmd:
 
 ```bash
-git clone https://github.com/Pedrojok01/Web3-Boilerplate.git .
+git clone https://github.com/Equinox-Markets/Equinox-Vaults.git .
 ```
 
 ### Install all package dependancies by running:
