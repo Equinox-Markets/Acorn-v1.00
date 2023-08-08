@@ -1,5 +1,5 @@
 <div align="center">
-<h1><strong> Web3 Boilerplate </strong></h1>
+<h1><strong> Equinox Vaults </strong></h1>
 
 [![Stargazers](https://img.shields.io/github/stars/Pedrojok01/Web3-Boilerplate)](https://github.com/Pedrojok01/Web3-Boilerplate/stargazers)
 [![Forks](https://img.shields.io/github/forks/Pedrojok01/Web3-Boilerplate)](https://github.com/Pedrojok01/Web3-Boilerplate/issues)
