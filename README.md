@@ -1,13 +1,6 @@
 <div align="center">
 <h1><strong> Equinox Vaults </strong></h1>
 
-[![Stargazers](https://img.shields.io/github/stars/Pedrojok01/Web3-Boilerplate)](https://github.com/Pedrojok01/Web3-Boilerplate/stargazers)
-[![Forks](https://img.shields.io/github/forks/Pedrojok01/Web3-Boilerplate)](https://github.com/Pedrojok01/Web3-Boilerplate/issues)
-[![Issues](https://img.shields.io/github/issues/Pedrojok01/Web3-Boilerplate)](https://github.com/Pedrojok01/Web3-Boilerplate/issues)
-[![MIT License](https://img.shields.io/github/license/Pedrojok01/Web3-Boilerplate)](https://github.com/Pedrojok01/Web3-Boilerplate/blob/main/License)
-[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black)](https://www.linkedin.com/in/pierre-e/)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3c3b76de-6191-4ab2-b2c6-a5d824f6fe2f/deploy-status)](https://app.netlify.com/sites/web3-boilerplate/deploys)
-
 <br></br>
 
 
@@ -30,9 +23,9 @@
 
 ## Description
 
-Simple and minimalist Web3 boilerplate to boost your Dapp development. Don't waste time setting up CRA, Typescript, react-script v5 polyfill, and connecting metamask and other wallets any longer. Instead, get this web3-boilerplate and start coding right away with the latest stack available out there!
+Simple and minimalist Vault dApp providing autocompounding vaults. Deposit and start earning yield!
 
-Try it yourself: [https://web3-boilerplate.netlify.app/](https://web3-boilerplate.netlify.app/)
+
 
 ## Built With
 
@@ -76,7 +69,7 @@ REACT_APP_INFURA_KEY = "your API key here";
 REACT_APP_WALLETCONNECT_PROJECT_ID = "Project id needed for WalletConnect v2";
 ```
 
-### start the web3-boilerplate:
+### start the dApp:
 
 ```bash
 yarn start
