@@ -6,9 +6,7 @@
 
 
 </div>
-## Description
 
-Simple and minimalist Vault dApp providing autocompounding vaults. Deposit and start earning yield!
 
 
 
