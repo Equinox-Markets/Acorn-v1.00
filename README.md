@@ -53,20 +53,6 @@ REACT_APP_WALLETCONNECT_PROJECT_ID = "Project id needed for WalletConnect v2";
 yarn start
 ```
 
-## Features:
-
-- [x] Web3 Wallet (Metamask / Wallet connect / Coinbase)
-- [x] Chain selector
-- [x] Wallet balance
-- [x] Sign Messages & Transfer Native
-- [ ] Hook to query user's Token Balances
-- [ ] Hook to query user's NFTs
-
-<br></br>
-
-# Enjoy!!!
-
-### ⭐️ ... and don't forget to leave a star if you like it! ⭐️
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
