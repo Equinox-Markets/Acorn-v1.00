@@ -6,21 +6,6 @@
 
 
 </div>
-
-## Update:
-
-2023-07:
-
-- Upgrade all packages dependencies;
-- Add support for Wallet-Connect v2;
-- Clean code & folders structure;
-- Improve code readability.
-
-## Disclaimer
-
-1. This is a work in progress...
-2. No Typescript expert and no React expert either, so any contribution/improvement pull-request is welcomed!
-
 ## Description
 
 Simple and minimalist Vault dApp providing autocompounding vaults. Deposit and start earning yield!
