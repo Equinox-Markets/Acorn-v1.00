@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 
@@ -18,7 +18,6 @@ import aArbGLP from 'data/abi/aArbGLP.json';
 import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
 import axlUSDCERC20 from 'data/abi/axlUSDCERC20.json';
 import faxlUSDCERC20 from 'data/abi/faxlUSDCERC20.json';
-//import  useNetworkChange from 'hooks/useNetworkChange';
 //import NewArbGLP from 'data/abi/NewArbGLP.json';
 //import ARBGMXERC20ABI from 'data/abi/ARBGMXERC20.json';
 //import BeefyVaultABI from 'data/abi/BeefyVaultV7.json';
@@ -168,12 +167,7 @@ const vaults: VaultType[] = [
 
 const VaultList: FC = () => {
   const { account, chainId } = useWeb3React();
-  const [reloadKey, setReloadKey] = useState(0); // Add a state variable to control re-render
 
-  useEffect(() => {
-    // Increment the reloadKey to force a re-render when chainId changes
-    setReloadKey(reloadKey + 1);
-  }, [chainId, reloadKey]);
 
   if (!account) {
     return <h1 style={{ color: 'white' }}>Please connect your wallet</h1>;
@@ -187,7 +181,7 @@ const VaultList: FC = () => {
   }
 
   return (
-    <div key={reloadKey}> {/* Use the reloadKey to force a re-render */}
+    <div>
       {filteredVaults.map(vault => (
         <Vault key={vault.address} vault={vault} />
       ))}
