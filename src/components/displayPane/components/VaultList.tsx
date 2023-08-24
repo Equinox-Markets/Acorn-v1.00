@@ -31,7 +31,7 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
-    name: 'axlUSDC-​FTM vLP',
+    name: 'axlUSDC',
     address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
     abi: aArbGLP,
     chainId: 250, // Arbitrum mainnet
@@ -39,6 +39,36 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 66.4,
+    strategy: "The vault deposits the user's axlUSDC-FTM vLP in a Equalizer farm, earning the platform's governance token. Earned token is swapped for axlUSDC and FTM in order to acquire more of the same LP token. To complete the compounding cycle, the new axlUSDC-FTM vLP is added to the farm, ready to go for the next earning event. The transaction cost required to do all this is socialized among the vault's users.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+
+  },
+  {
+    name: 'GLP',
+    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
+    abi: aArbGLP,
+    chainId: 42161, // Arbitrum mainnet
+    logo: glpLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 66.4,
+    strategy: "The vault deposits the user's axlUSDC-FTM vLP in a Equalizer farm, earning the platform's governance token. Earned token is swapped for axlUSDC and FTM in order to acquire more of the same LP token. To complete the compounding cycle, the new axlUSDC-FTM vLP is added to the farm, ready to go for the next earning event. The transaction cost required to do all this is socialized among the vault's users.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+
+  },
+  {
+    name: 'USDC',
+    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
+    abi: aArbGLP,
+    chainId: 42161, // Arbitrum mainnet
+    logo: glpLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 37.2,
     strategy: "The vault deposits the user's axlUSDC-FTM vLP in a Equalizer farm, earning the platform's governance token. Earned token is swapped for axlUSDC and FTM in order to acquire more of the same LP token. To complete the compounding cycle, the new axlUSDC-FTM vLP is added to the farm, ready to go for the next earning event. The transaction cost required to do all this is socialized among the vault's users.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
@@ -53,7 +83,7 @@ const VaultList: FC = () => {
   const { account, chainId } = useWeb3React();
 
   if (!account) {
-    return <div>Please connect your wallet</div>;
+    return <h1 style={{ color: 'white' }}>Please connect your wallet</h1>;
   }
 
   const filteredVaults = vaults.filter(vault => vault.chainId === chainId);
@@ -73,4 +103,5 @@ const VaultList: FC = () => {
 };
 
 export default VaultList;
+
 
