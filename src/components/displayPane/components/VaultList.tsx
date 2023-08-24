@@ -1,9 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 
 //import ethLogo from 'assets/images/ethereum_Logo.png';
-
 
 import arbLogo from 'assets/images/arbitrum_logo.png';
 import AXLUSDC from 'assets/images/AXLUSDC.png';
@@ -12,10 +11,14 @@ import DAILODE from 'assets/images/DAI_LODE.svg';
 import ftmLogo from 'assets/images/fantom_logo.png';
 import USDCLODE from 'assets/images/USDC_LODE.svg';
 import USDTLODE from 'assets/images/USDT_LODE.svg';
+//import WFTM from 'assets/images/WFTM.png';
 import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
 import aArbGLP from 'data/abi/aArbGLP.json';
 import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
+import axlUSDCERC20 from 'data/abi/axlUSDCERC20.json';
+import faxlUSDCERC20 from 'data/abi/faxlUSDCERC20.json';
+//import  useNetworkChange from 'hooks/useNetworkChange';
 //import NewArbGLP from 'data/abi/NewArbGLP.json';
 //import ARBGMXERC20ABI from 'data/abi/ARBGMXERC20.json';
 //import BeefyVaultABI from 'data/abi/BeefyVaultV7.json';
@@ -101,19 +104,34 @@ const vaults: VaultType[] = [
   },
   {
     name: 'axlUSDC Vault',
-    address: '',
-    abi: aArbGLP,
-    chainId: 250, // Arbitrum mainnet
+    address: '0x28F53DD931BC60FB5a5813b02A8EaCECCC91A5c8',
+    abi: faxlUSDCERC20,
+    chainId: 250, // Fantom mainnet
     logo: AXLUSDC, // add logo path
     networkName: 'FTM',
     networkLogo: ftmLogo,
     apr: 38.91,
     strategy: "This vault generates yield by participating in Equalizer Exchange.",
     description: 'Deposit GLP and Earn',
-    depositTokenAddress: '', // add the deposit token address here
-    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    depositTokenAddress: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', // add the deposit token address here
+    depositTokenAbi: axlUSDCERC20, // Set ABI here
 
   },
+  /*{
+    name: 'WFTM Vault',
+    address: '',
+    abi: aArbGLP,
+    chainId: 250, // Fantom mainnet
+    logo: WFTM, // add logo path
+    networkName: 'FTM',
+    networkLogo: ftmLogo,
+    apr: 38.91,
+    strategy: "This vault generates yield by participating in Equalizer Exchange.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+
+  },*/
   /*{
     name: 'GLP',
     address: '0xA8813661e29922Dc66Cd03aDfbc33B0D5Fd4d3C2',
@@ -150,6 +168,12 @@ const vaults: VaultType[] = [
 
 const VaultList: FC = () => {
   const { account, chainId } = useWeb3React();
+  const [reloadKey, setReloadKey] = useState(0); // Add a state variable to control re-render
+
+  useEffect(() => {
+    // Increment the reloadKey to force a re-render when chainId changes
+    setReloadKey(reloadKey + 1);
+  }, [chainId, reloadKey]);
 
   if (!account) {
     return <h1 style={{ color: 'white' }}>Please connect your wallet</h1>;
@@ -163,7 +187,7 @@ const VaultList: FC = () => {
   }
 
   return (
-    <div>
+    <div key={reloadKey}> {/* Use the reloadKey to force a re-render */}
       {filteredVaults.map(vault => (
         <Vault key={vault.address} vault={vault} />
       ))}

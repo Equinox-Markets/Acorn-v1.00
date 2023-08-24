@@ -54,10 +54,8 @@ const DisplayPane: React.FC = () => {
       <div style={styles.action}>
               {!isMobile && <Divider type="vertical" style={{ fontSize: "120px !important" }} />}
             </div>
-
         {isActive && (
           <>
-
           </>
         )}
       </div>
