@@ -31,19 +31,18 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const [depositAmount, setDepositAmount] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [depositSuccessMessage, setDepositSuccessMessage] = useState<string | null>(null); // New state
-  const [withdrawSuccessMessage, setWithdrawSuccessMessage] = useState<string | null>(null); // New state
+  const [depositSuccessMessage, setDepositSuccessMessage] = useState<string | null>(null);
+  const [withdrawSuccessMessage, setWithdrawSuccessMessage] = useState<string | null>(null);
   const { account, provider } = useWeb3React();
   const { vaultTokenBalance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
-  const [userBalance, setUserBalance] = useState('0'); // new state variable for user's token balance
+  const [userBalance, setUserBalance] = useState('0');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-
 
   if (!provider || !account) return null;
 
-  const signer = provider.getSigner(account);
+  const signer = provider.getSigner(account)
+  const contract = new ethers.Contract(vault.address, vault.abi, signer);
 
   useEffect(() => {
     if (account && vault.depositTokenAddress && signer) {
@@ -58,31 +57,65 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     }
   }, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi, vaultTokenBalance]);
 
+  useEffect(() => {
+    if (!signer || !vault.depositTokenAddress) return;
 
-  const contract = new ethers.Contract(vault.address, vault.abi, signer);
+    const checkAllowance = async () => {
+      // Check if required values are defined
+      if (!signer || !vault.depositTokenAddress || !vault.depositTokenAbi || !account || !vault.address || !depositAmount) {
+        console.error("Missing required parameters for checkAllowance");
+        return;
+      }
 
-  const deposit = async () => {
-    setDepositSuccessMessage(null);
-    try {
-      const weiAmount = ethers.utils.parseEther(depositAmount);
+      // Check if depositAmount is a valid number or not an empty string
+      if (isNaN(parseFloat(depositAmount)) || depositAmount.trim() === "") {
+        console.error("Invalid depositAmount value");
+        return;
+      }
+
+      // Create a new contract instance
       const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
 
+      // Fetch the allowance
+      const allowance = await depositTokenContract.allowance(account, vault.address);
+      const weiAmount = ethers.utils.parseEther(depositAmount);
+
+      if (allowance.gte(weiAmount)) {
+        setHasApproval(true); // Make sure setHasApproval is defined in your code
+      }
+    };
+
+    checkAllowance();
+  }, [signer, vault.depositTokenAddress, vault.depositTokenAbi, account, vault.address, depositAmount]);
+
+  const [hasApproval, setHasApproval] = useState(false);
+
+const deposit = async () => {
+  setDepositSuccessMessage(null);
+  try {
+    const weiAmount = ethers.utils.parseEther(depositAmount);
+    const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
+
+    if (!hasApproval) {
       console.log('Approving...');
-      const approveResponse = await depositTokenContract.approve(vault.address, weiAmount);
+      const maxApprovalAmount = ethers.constants.MaxUint256; // Approving the maximum possible amount
+      const approveResponse = await depositTokenContract.approve(vault.address, maxApprovalAmount);
       const approveReceipt = await approveResponse.wait();
       console.log('Approve Receipt:', approveReceipt);
-
-      console.log('Depositing...');
-      const transactionResponse = await contract.deposit(weiAmount);
-      const transactionResult = await transactionResponse.wait();
-      console.log('Deposit Transaction Result:', transactionResult);
-      setDepositSuccessMessage('Deposit was successful!'); // Success message
-
-    } catch (error) {
-      console.error('Deposit failed', error);
-      setErrorMessage(`The deposit transaction failed with the following error: ${(error as Error).message}`);
+      setHasApproval(true); // Mark the approval as done
     }
-  };
+
+    console.log('Depositing...');
+    const transactionResponse = await contract.deposit(weiAmount);
+    const transactionResult = await transactionResponse.wait();
+    console.log('Deposit Transaction Result:', transactionResult);
+    setDepositSuccessMessage('Deposit was successful!');
+
+  } catch (error) {
+    console.error('Deposit failed', error);
+    setErrorMessage(`The deposit transaction failed with the following error: ${(error as Error).message}`);
+  }
+};
 
 
   const handleWithdraw = async () => {
@@ -92,7 +125,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       const transactionResponse = await contract.withdraw(weiAmount);
       const transactionResult = await transactionResponse.wait();
       console.log(transactionResult);
-      setWithdrawSuccessMessage('Withdrawal was successful!'); // Success message
+      setWithdrawSuccessMessage('Withdrawal was successful!');
     } catch (error) {
       console.error('Withdraw failed', error);
       setErrorMessage(`The withdraw transaction failed with the following error: ${(error as Error).message}`);
@@ -127,7 +160,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         if (card) card.style.borderColor = '#064576';
       }}
     >
-      {depositSuccessMessage && (
+       {depositSuccessMessage && (
         <Modal
           title="Transaction Successful"
           visible={!!depositSuccessMessage}
@@ -151,7 +184,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
               border: "transparent"
             }}
           >
-            <p>{depositSuccessMessage}</p>
+            <p style={{ fontSize: "20px" }}>{depositSuccessMessage}</p>
           </Card>
         </Modal>
       )}
@@ -179,7 +212,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
               border: "transparent"
             }}
           >
-            <p>{withdrawSuccessMessage}</p>
+            <p style={{ fontSize: "20px" }}>{withdrawSuccessMessage}</p>
           </Card>
         </Modal>
       )}
@@ -231,7 +264,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       onClick={handleModalToggle}
       style={{
         color: 'white',
-        backgroundColor: '#011F37',  // Add this line
+        backgroundColor: '#011F37',
         border: '1px solid #011F37',
         borderRadius: '12px',
       }}
@@ -258,9 +291,9 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       value={depositAmount}
       onChange={(e) => setDepositAmount(e.target.value)}
       style={{
-        color: 'white',  // Add this line
-        backgroundColor: '#011F37',  // Add this line
-        borderColor: '#011F37',  // Add this line
+        color: 'white',
+        backgroundColor: '#011F37',
+        borderColor: '#011F37',
       }}
     />
     <Button
@@ -271,7 +304,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         border: '1px solid #011F37',
         borderRadius: '12px',
         marginTop: '10px',
-        width: '100%',  // Add this line
+        width: '100%',
       }}
     >
       MAX
@@ -281,8 +314,8 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       onClick={deposit}
       style={{
         color: 'white',
-        backgroundColor: '#011F37',  // Add this line
-        border: '1px solid #011F37',  // Change this line
+        backgroundColor: '#011F37',
+        border: '1px solid #011F37',
         borderRadius: '12px',
         marginTop: '10px',
         width: '100%',
@@ -353,8 +386,8 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       >
           <Card
             style={{
-              backgroundColor: "#011F37",  // Change this line
-              color: "white",  // Change this line
+              backgroundColor: "#011F37",
+              color: "white",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -369,7 +402,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
             <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
             <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
             <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
-            {/* Other Modal Content */}
           </Card>
         </Modal>
       )}
