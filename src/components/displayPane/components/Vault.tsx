@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 import { Button, Card, Divider, Input, Modal } from 'antd';
@@ -6,7 +6,8 @@ import { ethers } from 'ethers';
 import { useMediaQuery } from 'react-responsive';
 
 import { useVault } from 'hooks';
-
+import  useApproval from 'hooks/useApproval';
+import { useVaultInteraction } from 'hooks/useVaultInteraction';
 
 type VaultProps = {
   vault: {
@@ -26,69 +27,35 @@ type VaultProps = {
   };
 };
 
-
 const Vault: FC<VaultProps> = ({ vault }) => {
   const [depositAmount, setDepositAmount] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [depositSuccessMessage, setDepositSuccessMessage] = useState<string | null>(null);
   const [withdrawSuccessMessage, setWithdrawSuccessMessage] = useState<string | null>(null);
-  const { account, provider } = useWeb3React();
+  const { account: accountFromWeb3, provider: providerFromWeb3 } = useWeb3React();
+  const provider = providerFromWeb3 || null;
+  const account = accountFromWeb3 || null;
   const { vaultTokenBalance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
-  const [userBalance, setUserBalance] = useState('0');
+  const { userBalance } = useVaultInteraction(vault);
+  const { hasApproval, markApprovalDone } = useApproval({
+    provider,
+    account,
+    vault: {
+      address: vault.address,
+      depositTokenAddress: vault.depositTokenAddress,
+      depositTokenAbi: vault.depositTokenAbi
+    },
+    depositAmount,
+  });
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   if (!provider || !account) return null;
 
   const signer = provider.getSigner(account)
   const contract = new ethers.Contract(vault.address, vault.abi, signer);
-
-  useEffect(() => {
-    if (account && vault.depositTokenAddress && signer) {
-      const tokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
-
-      tokenContract.balanceOf(account)
-        .then((balance: ethers.BigNumber) => {
-          const formattedBalance = ethers.utils.formatEther(balance);
-          setUserBalance(formattedBalance);
-        })
-        .catch((error: Error) => console.error("Failed to fetch user's token balance:", error));
-    }
-  }, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi, vaultTokenBalance]);
-
-  useEffect(() => {
-    if (!signer || !vault.depositTokenAddress) return;
-
-    const checkAllowance = async () => {
-      // Check if required values are defined
-      if (!signer || !vault.depositTokenAddress || !vault.depositTokenAbi || !account || !vault.address || !depositAmount) {
-        console.error("Missing required parameters for checkAllowance");
-        return;
-      }
-
-      // Check if depositAmount is a valid number or not an empty string
-      if (isNaN(parseFloat(depositAmount)) || depositAmount.trim() === "") {
-        console.error("Invalid depositAmount value");
-        return;
-      }
-
-      // Create a new contract instance
-      const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
-
-      // Fetch the allowance
-      const allowance = await depositTokenContract.allowance(account, vault.address);
-      const weiAmount = ethers.utils.parseEther(depositAmount);
-
-      if (allowance.gte(weiAmount)) {
-        setHasApproval(true); // Make sure setHasApproval is defined in your code
-      }
-    };
-
-    checkAllowance();
-  }, [signer, vault.depositTokenAddress, vault.depositTokenAbi, account, vault.address, depositAmount]);
-
-  const [hasApproval, setHasApproval] = useState(false);
 
 const deposit = async () => {
   setDepositSuccessMessage(null);
@@ -102,7 +69,8 @@ const deposit = async () => {
       const approveResponse = await depositTokenContract.approve(vault.address, maxApprovalAmount);
       const approveReceipt = await approveResponse.wait();
       console.log('Approve Receipt:', approveReceipt);
-      setHasApproval(true); // Mark the approval as done
+      markApprovalDone(); // Mark the approval as done
+
     }
 
     console.log('Depositing...');
@@ -116,7 +84,6 @@ const deposit = async () => {
     setErrorMessage(`The deposit transaction failed with the following error: ${(error as Error).message}`);
   }
 };
-
 
   const handleWithdraw = async () => {
     setWithdrawSuccessMessage(null);
