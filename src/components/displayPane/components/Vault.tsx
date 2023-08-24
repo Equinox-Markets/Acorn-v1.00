@@ -334,8 +334,6 @@ const deposit = async () => {
 
     </div>
    </Card>
-
-
       {isModalVisible && (
         <Modal
         title={
