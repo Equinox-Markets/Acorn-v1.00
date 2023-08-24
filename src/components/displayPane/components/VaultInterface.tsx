@@ -31,8 +31,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const [depositAmount, setDepositAmount] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [depositSuccessMessage, setDepositSuccessMessage] = useState<string | null>(null); // New state
-  const [withdrawSuccessMessage, setWithdrawSuccessMessage] = useState<string | null>(null); // New state
   const { account, provider } = useWeb3React();
   const { vaultTokenBalance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
@@ -62,7 +60,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const contract = new ethers.Contract(vault.address, vault.abi, signer);
 
   const deposit = async () => {
-    setDepositSuccessMessage(null);
     try {
       const weiAmount = ethers.utils.parseEther(depositAmount);
       const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
@@ -76,7 +73,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       const transactionResponse = await contract.deposit(weiAmount);
       const transactionResult = await transactionResponse.wait();
       console.log('Deposit Transaction Result:', transactionResult);
-      setDepositSuccessMessage('Deposit was successful!'); // Success message
 
     } catch (error) {
       console.error('Deposit failed', error);
@@ -86,13 +82,11 @@ const Vault: FC<VaultProps> = ({ vault }) => {
 
 
   const handleWithdraw = async () => {
-    setWithdrawSuccessMessage(null);
     try {
       const weiAmount = ethers.utils.parseEther(withdrawAmount);
       const transactionResponse = await contract.withdraw(weiAmount);
       const transactionResult = await transactionResponse.wait();
       console.log(transactionResult);
-      setWithdrawSuccessMessage('Withdrawal was successful!'); // Success message
     } catch (error) {
       console.error('Withdraw failed', error);
       setErrorMessage(`The withdraw transaction failed with the following error: ${(error as Error).message}`);
@@ -127,62 +121,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         if (card) card.style.borderColor = '#064576';
       }}
     >
-      {depositSuccessMessage && (
-        <Modal
-          title="Transaction Successful"
-          visible={!!depositSuccessMessage}
-          onCancel={() => setDepositSuccessMessage(null)}
-          footer={null}
-          centered
-          bodyStyle={{ backgroundColor: "transparent", color: "white" }}
-          wrapClassName="custom-modal"
-        >
-          <Card
-            style={{
-              backgroundColor: "#011F37",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "auto",
-              minHeight: "10vh",
-              marginTop: "20px",
-              border: "transparent"
-            }}
-          >
-            <p>{depositSuccessMessage}</p>
-          </Card>
-        </Modal>
-      )}
-      {withdrawSuccessMessage && (
-        <Modal
-          title="Transaction Successful"
-          visible={!!withdrawSuccessMessage}
-          onCancel={() => setWithdrawSuccessMessage(null)}
-          footer={null}
-          centered
-          bodyStyle={{ backgroundColor: "transparent", color: "white" }}
-          wrapClassName="custom-modal"
-        >
-          <Card
-            style={{
-              backgroundColor: "#011F37",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "auto",
-              minHeight: "10vh",
-              marginTop: "20px",
-              border: "transparent"
-            }}
-          >
-            <p>{withdrawSuccessMessage}</p>
-          </Card>
-        </Modal>
-      )}
       {errorMessage && (
         <Modal
           title="Transaction Failed"
