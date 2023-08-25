@@ -6,3 +6,5 @@ export * from "./useToken";
 export * from "./useWindowWidthAndHeight";
 export * from "./useWriteContract";
 export { default as useVault } from "./useVault";
+export { default as useDecimals } from "./useDecimals";
+export { default as useDepositDecimals } from "./useDepositDecimals";
