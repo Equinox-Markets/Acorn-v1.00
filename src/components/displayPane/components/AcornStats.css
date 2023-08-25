@@ -1,0 +1,45 @@
+.acorn-stats-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .stat-card {
+    flex: 1;
+    background-color: transparent !important;
+    border: 2px solid #064576;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box;
+  }
+  
+  .stat-title,
+  .stat-value {
+    margin: 0 10px;
+    color: #ffffff;
+  }
+  
+  .stat-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Media query for screens smaller than 768 pixels */
+  @media (max-width: 767px) {
+    .stat-card {
+      width: 100%; /* Set a specific width for smaller screens */
+      height: 100px; /* Set a specific height for smaller screens */
+      margin: 5px auto; /* Center the cards */
+    }
+  
+    .acorn-stats-container {
+      flex-direction: column; /* Stack the cards vertically on small screens */
+    }
+  }
+  
+
+

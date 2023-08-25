@@ -6,13 +6,14 @@ import { useWindowWidthAndHeight } from "hooks";
 
 import { VaultList } from "./components";
 import AcornCard from "./components/AcornCard";
+import AcornStats from "./components/AcornStats";
 
 const styles = {
   container: {
     background: "#000000)",
-    width: "80%",
+    width: "100%",
     minWidth: "330px",
-    maxWidth: "900px",
+    maxWidth: "1200px",
     textAlign: "center",
     margin: "auto",
     padding: "30px 0",
@@ -52,13 +53,17 @@ const DisplayPane: React.FC = () => {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-      <AcornCard />
-      <VaultList />
+        {!isActive && (
+          <>
+            <AcornCard />
+            <AcornStats />
+          </>
+        )}
+        <VaultList />
 
         {isActive && (
           <>
             <Divider />
-
             <div style={styles.action}>
 
               {!isMobile && <Divider type="vertical" style={{ fontSize: "120px !important" }} />}

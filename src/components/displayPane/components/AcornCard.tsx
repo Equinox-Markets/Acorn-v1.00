@@ -1,5 +1,6 @@
 import React from 'react';
 
+// eslint-disable-next-line import/order
 import { Card } from 'antd';
 
 import './AcornCard.css'; // Import your CSS file to style this component
