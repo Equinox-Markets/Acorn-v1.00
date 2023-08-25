@@ -130,15 +130,17 @@ const vaults: VaultType[] = [
 const VaultList: FC = () => {
   const { account, chainId } = useWeb3React();
 
+  const marginStyle = { color: 'white', marginTop: '40px', marginBottom: '100px' };
+
   if (!account) {
-    return <h1 style={{ color: 'white' }}>Please connect your wallet</h1>;
+    return <h1 style={marginStyle}>Please connect your wallet</h1>;
   }
 
   const filteredVaults = vaults.filter(vault => vault.chainId === chainId);
 
   if (!filteredVaults.length) {
     const networkName = vaults.find(vault => vault.chainId === chainId)?.networkName || 'this network';
-    return <h1 style={{ color: 'white' }}>No Vaults on {networkName} yet. Stay Tooned!</h1>;
+    return <h1 style={marginStyle}>No Vaults on {networkName} yet. Stay Tooned!</h1>;
   }
 
   return (
@@ -151,4 +153,5 @@ const VaultList: FC = () => {
 };
 
 export default VaultList;
+
 

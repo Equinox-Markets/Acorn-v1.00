@@ -9,7 +9,7 @@ import web3Boilerplate_logo from 'assets/images/Acorn.png';
 const AcornCard: React.FC = () => {
   return (
     <Card className="acorn-card" bordered={false}>
-      <h1 className="welcome-text">Welcome to Acorn</h1>
+      <h1 className="welcome-text">Welcome to Acorn Finance</h1>
       <p className="slogan-text">
         Enjoy <u>increased yields</u> with Acorn's dynamic vaults. Our low-risk, high-reward strategies are constantly updated to reflect the ever-changing DeFi landscape.
       </p>
