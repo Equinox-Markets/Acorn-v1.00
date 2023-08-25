@@ -5,7 +5,7 @@ import { useWeb3React } from "@web3-react/core";
 import { Dropdown, Button } from "antd";
 import type { MenuProps } from "antd";
 
-import Arbitrum_Logo from "assets/images/arbitrum_logo.png";
+import Arbitrum_Logo from "assets/images/arbitrum_logo.svg";
 import Avalanche_Logo from "assets/images/avalanche_logo.png";
 import ethereum_Logo from "assets/images/ethereum_Logo.png";
 import Fantom_Logo from "assets/images/fantom_logo.png";
@@ -48,10 +48,10 @@ const ChainSelector: FC = () => {
 
   const items: MenuProps["items"] = useMemo(
     () => [
-      { label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "ethereum_logo") },
+      //{ label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "ethereum_logo") },
       { label: "Arbitrum", key: chainIds.arbitrum, icon: labelToShow(Arbitrum_Logo, "Arbitrum_logo") },
-      { label: "Fantom", key: chainIds.fantom, icon: labelToShow(Fantom_Logo, "Fantom_logo") },
-      { label: "Avalanche", key: chainIds.avalanche, icon: labelToShow(Avalanche_Logo, "Avalanche_logo") },
+      //{ label: "Fantom", key: chainIds.fantom, icon: labelToShow(Fantom_Logo, "Fantom_logo") },
+      //{ label: "Avalanche", key: chainIds.avalanche, icon: labelToShow(Avalanche_Logo, "Avalanche_logo") },
     ],
     []
   );

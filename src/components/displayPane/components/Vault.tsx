@@ -22,6 +22,8 @@ type VaultProps = {
     strategy: string;
     depositTokenAddress: string;
     depositTokenAbi: any[]
+    textAboveTitle: string; // New property
+    textBelowDescription: string; // New property
 
   };
 };
@@ -303,10 +305,14 @@ const Vault: FC<VaultProps> = ({ vault }) => {
               border: "transparent"
             }}
           >
+            <p style={{ fontSize: "15px" }}>{vault.textAboveTitle}</p> {/* Text above the title */}
             <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
             <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
             <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
             <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: "15px" }}>
+              <p>{vault.textBelowDescription}</p> {/* Text below the description */}
+            </div>
             {/* Other Modal Content */}
           </Card>
         </Modal>

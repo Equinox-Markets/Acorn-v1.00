@@ -6,9 +6,12 @@ import { useWeb3React } from '@web3-react/core';
 import arbLogo from 'assets/images/arbitrum_logo.png';
 import glpLogo from 'assets/images/glp_logo.png';
 //import gmxLogo from 'assets/images/gmx_logo.png';
-//import aArbGLP from 'data/abi/aArbGLP.json';
-import axlUSDC from 'data/abi/AXLUSDC.json';
-import faxlUSDC from 'data/abi/fAXLUSDC.json';
+import USDCLODE from 'assets/images/USDC_LODE.svg';
+import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
+import aArbGLP from 'data/abi/aArbGLP.json';
+import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
+//import axlUSDC from 'data/abi/AXLUSDC.json';
+//import faxlUSDC from 'data/abi/fAXLUSDC.json';
 //import ARBGMXERC20ABI from 'data/abi/ARBGMXERC20.json';
 //import BeefyVaultABI from 'data/abi/BeefyVaultV7.json';
 
@@ -28,22 +31,96 @@ type VaultType = {
   depositTokenAddress: string; // Add this line
   strategy: string;
   depositTokenAbi: any[] // Add this line
+  textAboveTitle: string; // New property
+    textBelowDescription: string; // New property
 };
 
 const vaults: VaultType[] = [
   {
-    name: 'axlUSDC',
-    address: '0x24ccd5f17E29dcD63aC08f27D81F5d0b025f80de',
-    abi: faxlUSDC,
-    chainId: 250, // Arbitrum mainnet
+    name: 'wstETH Vault',
+    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
+    abi: aArbGLP,
+    chainId: 42161, // Arbitrum mainnet
+    logo: WSTETHLODE, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 38.91,
+    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out wstETH, opens a borrow position in wstETH, then deposits the wstETH in a (Redacted) farm. It then claims the reward tokens from both platforms and converts the tokens into more wstETH.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    textAboveTitle: "", // New property
+    textBelowDescription: "Note: Deposit and withdraw fees are 0.1%", // New property
+
+  },
+  {
+    name: 'USDC Vault',
+    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
+    abi: aArbGLP,
+    chainId: 42161, // Arbitrum mainnet
+    logo: USDCLODE, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 37.22,
+    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out USDC, opens a borrow position in USDC, then deposits the USDC in a stablecoin farm. It then claims the reward tokens from both platforms and converts the tokens into more USDC.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    textAboveTitle: "Note: There is a UI bug that is not displaying balances correctly. We are working on a solution. In the meantime, the vault is fully functional and working as expected.", // New property
+    textBelowDescription: "Note: Deposit and withdraw fees are 0.1%", // New property
+
+  },
+  {
+    name: 'WETH Vault',
+    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
+    abi: aArbGLP,
+    chainId: 42161, // Arbitrum mainnet
     logo: glpLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 66.4,
-    strategy: "The vault deposits the user's axlUSDC-FTM vLP in a Equalizer farm, earning the platform's governance token. Earned token is swapped for axlUSDC and FTM in order to acquire more of the same LP token. To complete the compounding cycle, the new axlUSDC-FTM vLP is added to the farm, ready to go for the next earning event. The transaction cost required to do all this is socialized among the vault's users.",
+    apr: 36.87,
+    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out USDT, opens a borrow position in USDT, then deposits the USDT in a stablecoin farm. It then claims the reward tokens from both platforms and converts the tokens into more USDT.",
     description: 'Deposit GLP and Earn',
-    depositTokenAddress: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', // add the deposit token address here
-    depositTokenAbi: axlUSDC, // Set ABI here
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    textAboveTitle: "", // New property
+    textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
+
+
+  },
+  {
+    name: 'WBTC Vault',
+    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
+    abi: aArbGLP,
+    chainId: 42161, // Arbitrum mainnet
+    logo: glpLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 36.87,
+    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out USDT, opens a borrow position in USDT, then deposits the USDT in a stablecoin farm. It then claims the reward tokens from both platforms and converts the tokens into more USDT.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    textAboveTitle: "", // New property
+    textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
+
+
+  },
+  {
+    name: 'GLP Vault',
+    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
+    abi: aArbGLP,
+    chainId: 42161, // Arbitrum mainnet
+    logo: glpLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 36.87,
+    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out USDT, opens a borrow position in USDT, then deposits the USDT in a stablecoin farm. It then claims the reward tokens from both platforms and converts the tokens into more USDT.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    textAboveTitle: "", // New property
+    textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
 
   },
 
@@ -54,7 +131,7 @@ const VaultList: FC = () => {
   const { account, chainId } = useWeb3React();
 
   if (!account) {
-    return <div>Please connect your wallet</div>;
+    return <h1 style={{ color: 'white' }}>Please connect your wallet</h1>;
   }
 
   const filteredVaults = vaults.filter(vault => vault.chainId === chainId);
