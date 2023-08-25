@@ -4,18 +4,18 @@ import { useWeb3React } from '@web3-react/core';
 
 //import ethLogo from 'assets/images/ethereum_Logo.png';
 
-import arbLogo from 'assets/images/arbitrum_logo.png';
+//import arbLogo from 'assets/images/arbitrum_logo.png';
 import AXLUSDC from 'assets/images/AXLUSDC.png';
 //import glpLogo from 'assets/images/glp_logo.png';
-import DAILODE from 'assets/images/DAI_LODE.svg';
+//import DAILODE from 'assets/images/DAI_LODE.svg';
 import ftmLogo from 'assets/images/fantom_logo.png';
-import USDCLODE from 'assets/images/USDC_LODE.svg';
-import USDTLODE from 'assets/images/USDT_LODE.svg';
+//import USDCLODE from 'assets/images/USDC_LODE.svg';
+//import USDTLODE from 'assets/images/USDT_LODE.svg';
 //import WFTM from 'assets/images/WFTM.png';
-import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
+//import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
-import aArbGLP from 'data/abi/aArbGLP.json';
-import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
+//import aArbGLP from 'data/abi/aArbGLP.json';
+//import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
 import axlUSDCERC20 from 'data/abi/axlUSDCERC20.json';
 import faxlUSDCERC20 from 'data/abi/faxlUSDCERC20.json';
 //import NewArbGLP from 'data/abi/NewArbGLP.json';
@@ -38,10 +38,13 @@ type VaultType = {
   depositTokenAddress: string; // Add this line
   strategy: string;
   depositTokenAbi: any[] // Add this line
+  depositTokenDecimals: number;
+  vaultTokenDecimals: number;
+
 };
 
 const vaults: VaultType[] = [
-  {
+  /*{
     name: 'USDC Vault',
     address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
     abi: aArbGLP,
@@ -54,6 +57,8 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    depositTokenDecimals: 18,
+    vaultTokenDecimals: 18,
 
   },
   {
@@ -69,6 +74,8 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    depositTokenDecimals: 18,
+    vaultTokenDecimals: 18,
 
   },
   {
@@ -84,6 +91,8 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    depositTokenDecimals: 18,
+    vaultTokenDecimals: 18,
 
   },
   {
@@ -99,11 +108,13 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
+    depositTokenDecimals: 18,
+    vaultTokenDecimals: 18,
 
-  },
+  },*/
   {
     name: 'axlUSDC Vault',
-    address: '0x28F53DD931BC60FB5a5813b02A8EaCECCC91A5c8',
+    address: '0x24ccd5f17E29dcD63aC08f27D81F5d0b025f80de',
     abi: faxlUSDCERC20,
     chainId: 250, // Fantom mainnet
     logo: AXLUSDC, // add logo path
@@ -114,6 +125,9 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', // add the deposit token address here
     depositTokenAbi: axlUSDCERC20, // Set ABI here
+    depositTokenDecimals: 6,
+    vaultTokenDecimals: 6,
+
 
   },
   /*{

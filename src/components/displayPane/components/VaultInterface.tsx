@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+/*import { FC, useState, useEffect } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 import { Button, Card, Divider, Input, Modal } from 'antd';
@@ -307,7 +307,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
             <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
             <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
             <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
-            {/* Other Modal Content */}
           </Card>
         </Modal>
       )}
@@ -315,4 +314,4 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   );
 };
 
-export default Vault;
+export default Vault;*/

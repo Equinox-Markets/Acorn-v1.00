@@ -1,4 +1,4 @@
-//import { Vault as VaultType } from 'path/to/your/vault/type';
+/*//import { Vault as VaultType } from 'path/to/your/vault/type';
 
 import { FC, useState, useEffect } from 'react';
 
@@ -284,7 +284,6 @@ useEffect(() => {
             <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
             <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
             <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
-            {/* Other Modal Content */}
           </Card>
         </Modal>
       )}
@@ -292,4 +291,4 @@ useEffect(() => {
   );
 };
 
-export default Vault;
+export default Vault;*/
