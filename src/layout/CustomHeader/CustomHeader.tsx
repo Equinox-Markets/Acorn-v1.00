@@ -1,5 +1,4 @@
-import { FC } from "react";
-
+import { FC, CSSProperties } from "react";
 import { Layout } from "antd";
 
 import web3Boilerplate_logo from "assets/images/web3Boilerplate_logo.svg";
@@ -18,24 +17,34 @@ const styles = {
     width: "100%",
     backgroundColor: "transparent",
     padding: "0px 20px",
-    paddingTop: "15px",
     zIndex: 1
-  },
-  headerRight: {
-    display: "flex",
-    gap: "10px",
-    alignItems: "center",
-    paddingRight: "10px",
-    fontSize: "15px",
-    fontWeight: "600"
   }
 } as const;
 
 const CustomHeader: FC = () => {
+  const { isMobile } = useWindowWidthAndHeight();
+
+  const headerRightStyle: CSSProperties = {
+    display: "flex",
+    gap: "10px",
+    alignItems: "center",
+    paddingRight: isMobile ? "10px" : "90px",  // Conditionally set right padding
+    paddingLeft: isMobile ? "0px" : "90px",  // Conditionally set left padding
+    fontSize: "15px",
+    fontWeight: 600,
+    marginTop: isMobile ? "10px" : "30px", // Set margin conditionally
+  };
+
+  const logoStyle: CSSProperties = {
+    paddingTop: isMobile ? "30px" : "45px",
+    paddingLeft: isMobile ? "0px" : "90px",  // Conditionally set left margin
+    paddingRight: isMobile ? "0px" : "90px",  // Conditionally set right margin
+  };
+
   return (
-    <Header style={styles.header}>
-      <Logo />
-      <div style={styles.headerRight}>
+    <Header style={{ ...styles.header, paddingTop: isMobile ? "10px" : "30px" }}>
+      <Logo style={logoStyle} />
+      <div style={headerRightStyle}>
         <ChainSelector />
         <ConnectAccount />
       </div>
@@ -45,12 +54,14 @@ const CustomHeader: FC = () => {
 
 export default CustomHeader;
 
-export const Logo = () => {
+export const Logo: React.FC<{ style: CSSProperties }> = ({ style }) => {
   const { isMobile } = useWindowWidthAndHeight();
 
   return (
-    <div style={{ paddingTop: isMobile ? "30px" : "45px" }}>
+    <div style={style}>
       <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "140px" : "190px"} />
     </div>
   );
 };
+
+
