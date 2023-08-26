@@ -68,7 +68,7 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
-    textAboveTitle: "Note: There is a UI bug that is not displaying balances correctly. We are working on a solution. In the meantime, the vault is fully functional and working as expected.", // New property
+    textAboveTitle: "", // New property
     textBelowDescription: "Note: Deposit and withdraw fees are 0.1%", // New property
 
   },
