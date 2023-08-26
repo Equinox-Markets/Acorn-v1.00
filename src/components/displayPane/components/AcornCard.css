@@ -1,0 +1,45 @@
+.acorn-card {
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    border: 2px solid #064576;
+    color: white;
+    text-align: center;
+  }
+
+  .welcome-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .slogan-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .airdrop-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .acorn-logo {
+    width: 80px;
+    transform: rotate(-10deg);
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform-origin: center;
+  }
+
+  .airdrop-text {
+    text-align: left;
+    margin-left: 40px;
+  }
+
+  .airdrop-text u, .slogan-text u {
+    text-decoration: underline;
+    text-decoration-color: #ffffff;
+  }

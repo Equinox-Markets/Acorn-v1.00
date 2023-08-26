@@ -22,6 +22,24 @@ const BSC: AddEthereumChainParameter["nativeCurrency"] = {
   decimals: 18
 };
 
+//const ARB: AddEthereumChainParameter["nativeCurrency"] = {
+ // name: "Arbitrum Ether",
+  //symbol: "AETH",
+  //decimals: 18
+//};
+
+const FTM: AddEthereumChainParameter["nativeCurrency"] = {
+  name: "Fantom",
+  symbol: "FTM",
+  decimals: 18
+};
+
+const AVAX: AddEthereumChainParameter["nativeCurrency"] = {
+  name: "Avalanche",
+  symbol: "AVAX",
+  decimals: 18
+};
+
 interface BasicChainInformation {
   chainId: string;
   urls: string[];
@@ -82,6 +100,42 @@ export const CHAINS: {
     nativeCurrency: ETH,
     blockExplorerUrls: ["https://etherscan.io"]
   },
+      // Arbitrum
+    42161: {
+      chainId: "42161",
+      urls: [
+        "https://arbitrum-mainnet.infura.io/v3/" + infuraKey,
+        "https://arb1.arbitrum.io/rpc",
+      ].filter((url) => url !== ""),
+      name: "Arbitrum",
+      nativeCurrency: ETH,
+      blockExplorerUrls: ["https://arbiscan.io/"]
+    },
+
+    // Fantom
+    250: {
+      chainId: "250",
+      urls: [
+        "https://rpcapi.fantom.network",
+        "https://fantomscan.io/rpc",
+      ].filter((url) => url !== ""),
+      name: "Fantom",
+      nativeCurrency: FTM,
+      blockExplorerUrls: ["https://ftmscan.com/"]
+    },
+
+    // Avalanche
+    43114: {
+      chainId: "43114",
+      urls: [
+        "https://api.avax.network/ext/bc/C/rpc",
+        "https://api.avax-test.network/ext/bc/C/rpc",
+      ].filter((url) => url !== ""),
+      name: "Avalanche",
+      nativeCurrency: AVAX,
+      blockExplorerUrls: ["https://cchain.explorer.avax.network/"]
+    },
+
   5: {
     chainId: "5",
     urls: [

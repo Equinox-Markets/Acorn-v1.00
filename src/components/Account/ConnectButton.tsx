@@ -40,3 +40,4 @@ const ConnectButton: FC<ConnectButtonProps> = ({ label, image, onClick, loading 
 };
 
 export default ConnectButton;
+

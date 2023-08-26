@@ -37,7 +37,7 @@ const styles = {
     justifyContent: "center",  // Centers the items horizontally
     bottom: "0",
     width: "100%",
-    backgroundColor: "#001729",
+    backgroundColor: "#000509",
     padding: "10px 20px",
     paddingBottom: "15px",  // Adds some padding at the bottom
     zIndex: 1
@@ -45,7 +45,7 @@ const styles = {
 } as const;
 
 const iconStyles = {
-  fontSize: '1.2em',
+  fontSize: '1.4em',
   margin: '0 10px'
 }
 

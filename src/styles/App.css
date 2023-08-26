@@ -53,7 +53,7 @@ body {
 }
 
 .ant-dropdown-menu {
-  background-color: #ffffff !important;
+  background-color: #011F37 !important;
   border-radius: 10px !important;
 }
 
@@ -61,9 +61,38 @@ body {
 .ant-dropdown-menu-submenu-title {
   height: 42px;
   gap: 5px;
-  color: rgb(0, 0, 0) !important;
+  color: rgb(255, 255, 255) !important;
   font-size: 15px !important;
   font-weight: 500 !important;
+}
+
+/* Add a hover effect for the menu items */
+.ant-dropdown-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important; /* adjust as needed */
+}
+
+
+.hover-shadow-button {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background: #011F37;
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-shadow-button:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.error-modal .ant-modal-content {
+  background-color: #ffffff;
+}
+
+.error-modal .ant-modal-content .ant-modal-body {
+  color: white;
 }
 
 .ant-modal {
@@ -73,11 +102,29 @@ body {
   align-items: center;
 }
 
+.ant-modal-title {
+  background-color: #011F37;
+  color: white;
+}
+
+.custom-modal .ant-modal-title {
+  background-color: #011F37;
+  color: white;
+}
+
+.custom-modal .ant-modal-close-x {
+  color: white;
+}
+
+.ant-modal-close-x {
+  color: rgb(255, 255, 255) !important;
+}
+
 .ant-modal-content {
   border-radius: 10px;
   min-width: 350px;
   margin-inline: auto;
-  background-color: #011F37;
+  background-color: #011F37 !important;
 }
 .ant-modal-header,
 .ant-modal-body,
@@ -94,7 +141,7 @@ body {
 }
 
 .my-modal .ant-modal-content {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .my-modal .ant-modal-header,
@@ -107,3 +154,4 @@ body {
   color: grey !important;
   opacity: 1;
 }
+

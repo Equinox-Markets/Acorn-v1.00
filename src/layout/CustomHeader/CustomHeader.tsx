@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { Layout } from "antd";
 
-import web3Boilerplate_logo from "assets/images/web3Boilerplate_logo.png";
+import web3Boilerplate_logo from "assets/images/web3Boilerplate_logo.svg";
 import ConnectAccount from "components/Account/ConnectAccount";
 import ChainSelector from "components/ChainSelector";
 import { useWindowWidthAndHeight } from "hooks";
@@ -50,7 +50,7 @@ export const Logo = () => {
 
   return (
     <div style={{ paddingTop: isMobile ? "30px" : "45px" }}>
-      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "80px" : "120px"} />
+      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "140px" : "190px"} />
     </div>
   );
 };
