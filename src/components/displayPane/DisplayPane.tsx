@@ -12,7 +12,7 @@ const styles = {
     background: "#000000)",
     width: "100%",
     minWidth: "330px",
-    maxWidth: "1200px",
+    maxWidth: "1000px",
     textAlign: "center",
     margin: "auto",
     padding: "30px 0",
@@ -46,7 +46,7 @@ const styles = {
 } as const;
 
 const DisplayPane: React.FC = () => {
-  const { isActive } = useWeb3React();
+  const { isActive, chainId } = useWeb3React();
   const { isMobile } = useWindowWidthAndHeight();
 
   return (
@@ -58,13 +58,12 @@ const DisplayPane: React.FC = () => {
             <AcornStats />
           </>
         )}
-        <VaultList />
+        <VaultList key={chainId} /> {/* Adding key prop to re-render VaultList on network change */}
 
         {isActive && (
           <>
             <Divider />
             <div style={styles.action}>
-
               {!isMobile && <Divider type="vertical" style={{ fontSize: "120px !important" }} />}
             </div>
           </>
@@ -73,5 +72,6 @@ const DisplayPane: React.FC = () => {
     </div>
   );
 };
+
 
 export default DisplayPane;

@@ -83,7 +83,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const deposit = async () => {
     setDepositSuccessMessage(null);
     try {
-      const weiAmount = ethers.utils.parseEther(depositAmount);
+      const weiAmount = ethers.utils.parseUnits(depositAmount, decimals);
       const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
 
       if (!hasApproval) {
@@ -112,7 +112,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const handleWithdraw = async () => {
     setWithdrawSuccessMessage(null);
     try {
-      const weiAmount = ethers.utils.parseEther(withdrawAmount);
+      const weiAmount = ethers.utils.parseUnits(withdrawAmount, decimals);
       const transactionResponse = await contract.withdraw(weiAmount);
       const transactionResult = await transactionResponse.wait();
       console.log(transactionResult);
