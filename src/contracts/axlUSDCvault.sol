@@ -116,8 +116,3 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
   event FeeReceiverUpdated(address newFeeReceiver);
   event Distribution(address indexed owner, uint256 amount);
 }
-
-
-
-
-

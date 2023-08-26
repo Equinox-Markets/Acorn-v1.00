@@ -58,7 +58,7 @@ const DisplayPane: React.FC = () => {
             <AcornStats />
           </>
         )}
-        <VaultList key={chainId} /> {/* Adding key prop to re-render VaultList on network change */}
+        <VaultList key={chainId} />
 
         {isActive && (
           <>

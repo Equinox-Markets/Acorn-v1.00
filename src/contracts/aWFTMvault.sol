@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable {
+contract WFTMVault is ERC20("aWFTM", "aWFTM"), ReentrancyGuard, Ownable {
   using SafeERC20 for IERC20;
   using EnumerableSet for EnumerableSet.AddressSet;
   using SafeMath for uint256;
@@ -107,7 +107,7 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
   }
 
   function decimals() public view virtual override returns (uint8) {
-    return 6; // Replace with the correct number of decimals for the underlying token
+    return 18; // Replace with the correct number of decimals for the underlying token
 }
 
   event Deposit(address indexed user, uint256 amount);
@@ -116,8 +116,3 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
   event FeeReceiverUpdated(address newFeeReceiver);
   event Distribution(address indexed owner, uint256 amount);
 }
-
-
-
-
-
