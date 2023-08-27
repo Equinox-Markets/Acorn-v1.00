@@ -36,10 +36,22 @@
     width: 80px;
     transform: rotate(-10deg);
     position: absolute;
-    left: -40px;
+    left: -20px;
     top: 50%;
     transform-origin: center;
   }
+
+    /* Media query for screens smaller than 768 pixels */
+    @media (max-width: 768px) {
+      .acorn-logo {
+        width: 80px;
+        transform: rotate(-10deg);
+        position: absolute;
+        left: -40px;
+        top: 50%;
+        transform-origin: center;
+      }
+    }
 
   .airdrop-text {
     text-align: left;

@@ -18,7 +18,7 @@ const AcornCard: React.FC = () => {
         <div className="airdrop-text">
           <h2>Be an Early Depositor!</h2>
           <p className="slogan-text">
-          <u>Deposit now</u> and be rewarded with Acorn Tokens in our fair launch based on your deposit!
+          Deposit now and be rewarded with Acorn Tokens in our fair launch based on your deposit!
           </p>
         </div>
       </div>
