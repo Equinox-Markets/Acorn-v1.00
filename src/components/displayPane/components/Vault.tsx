@@ -85,6 +85,10 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     try {
       const weiAmount = ethers.utils.parseUnits(depositAmount, decimals);
       const depositTokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
+      if (weiAmount.isZero()) {
+        setErrorMessage("The deposit amount cannot be zero.");
+        return;
+      }
 
       if (!hasApproval) {
         console.log('Approving...');
@@ -113,6 +117,10 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     setWithdrawSuccessMessage(null);
     try {
       const weiAmount = ethers.utils.parseUnits(withdrawAmount, decimals);
+      if (weiAmount.isZero()) {
+        setErrorMessage("The withdraw amount cannot be zero.");
+        return;
+      }
       const transactionResponse = await contract.withdraw(weiAmount);
       const transactionResult = await transactionResponse.wait();
       console.log(transactionResult);
@@ -262,7 +270,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
               border: "transparent"
             }}
           >
-            <p>{errorMessage}</p>
+            <p style={{ fontSize: "20px" }}>{errorMessage}</p>
           </Card>
         </Modal>
       )}
