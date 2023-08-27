@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { useWeb3React } from "@web3-react/core";
 import { Button } from "antd";
 import { metaMask } from "connectors/metaMask";
 import { walletConnect } from "connectors/walletConnect";
-import { chainIds } from 'data/chainIds';
-import { useSwitchChain } from "hooks";
+//import { chainIds } from 'data/chainIds';
+//import { useSwitchChain } from "hooks";
 import { theme } from "styles/theme";
 import { getEllipsisTxt } from "utils/formatters";
 
@@ -51,28 +51,14 @@ const styles = {
 } as const;
 
 
-const ConnectAccount: React.FC<{ chain?: number }> = ({ chain = chainIds.arbitrum }) => {
-  const { chainId, account, isActive } = useWeb3React();
+interface WantedChain {
+  chain?: number;
+}
+
+const ConnectAccount: React.FC<WantedChain> = () => {
+  const { account } = useWeb3React();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
-  const switchChain = useSwitchChain();
-
-// Switch to Arbitrum if not connected to it and first time connecting
-useEffect(() => {
-  const isFirstTimeConnecting = localStorage.getItem('firstTimeConnecting') === null;
-
-  if (isFirstTimeConnecting) {
-    localStorage.setItem('firstTimeConnecting', 'false'); // set the flag as 'false' for future visits
-    if (isActive && chainId !== chain) {
-      switchChain(Number(chain)).catch((error) => {
-        console.error(`Failed to switch chains: ${error}`);
-      });
-    }
-  }
-}, [isActive, chainId, chain, switchChain]);
-
-
-
 
   const disconnect = useCallback(async () => {
     const connector = metaMask || walletConnect;

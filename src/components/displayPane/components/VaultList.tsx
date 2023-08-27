@@ -207,7 +207,7 @@ const VaultList: FC = () => {
 
   if (!filteredVaults.length) {
     const networkName = vaults.find(vault => vault.chainId === chainId)?.networkName || 'this network';
-    return <h1 style={marginStyle}>No Vaults on {networkName} yet. Stay Tooned!</h1>;
+    return <h1 style={marginStyle}>No vaults on {networkName} yet! Switch to Arbitrum or Fantom!</h1>;
   }
 
   return (
