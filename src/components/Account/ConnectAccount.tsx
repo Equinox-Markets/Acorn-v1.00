@@ -57,14 +57,22 @@ const ConnectAccount: React.FC<{ chain?: number }> = ({ chain = chainIds.arbitru
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const switchChain = useSwitchChain();
 
-  // Switch to Arbitrum if not connected to it
-  useEffect(() => {
+// Switch to Arbitrum if not connected to it and first time connecting
+useEffect(() => {
+  const isFirstTimeConnecting = localStorage.getItem('firstTimeConnecting') === null;
+
+  if (isFirstTimeConnecting) {
+    localStorage.setItem('firstTimeConnecting', 'false'); // set the flag as 'false' for future visits
     if (isActive && chainId !== chain) {
       switchChain(Number(chain)).catch((error) => {
         console.error(`Failed to switch chains: ${error}`);
       });
     }
-  }, [isActive, chainId, chain, switchChain]);
+  }
+}, [isActive, chainId, chain, switchChain]);
+
+
+
 
   const disconnect = useCallback(async () => {
     const connector = metaMask || walletConnect;
