@@ -131,7 +131,7 @@ const vaults: VaultType[] = [
   },
   {
     name: 'wFTM Vault',
-    address: '0x22fDEDAe3b331f7f9404233996D45b43d939A485',
+    address: '0x19851B2f6da1ac664F4437bdc527e42C50636d44',
     abi: WFTMvault,
     chainId: 250, // Fantom mainnet
     logo: wFTM, // add logo path
@@ -147,7 +147,7 @@ const vaults: VaultType[] = [
   },
   {
     name: 'axlUSDC Vault',
-    address: '0x07E47A4bD927D83C5bB07D374e1861677565440C',
+    address: '0xf1023eD4fEEE0fE4C66470446048e2db42769aC2',
     abi: axlUSDCvault,
     chainId: 250, // Fantom mainnet
     logo: AXLUSDC, // add logo path
@@ -163,7 +163,7 @@ const vaults: VaultType[] = [
   },
   {
     name: 'lzUSDT Vault',
-    address: '0x6d0681aB650133c2Dc5F6CcA21Cc186892295B04',
+    address: '0xAFBa6d26A7601A9477BD0cEC188CCff8aD674B43',
     abi: lzUSDTvault,
     chainId: 250, // Fantom mainnet
     logo: lzUSDT, // add logo path
