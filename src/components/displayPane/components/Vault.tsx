@@ -174,19 +174,27 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   };
 
 
-  const handleModalToggle = () => {
-    setIsModalVisible(!isModalVisible);
-    setShowStrategyInfo(!showStrategyInfo);
+  const handleModalOpen = () => {
+    setIsModalVisible(true);
+    setShowStrategyInfo(true);
   };
 
-  const toggleActions = () => {
-    setShowActions(!showActions); // Toggle the state
+  const handleModalClose = (e: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    setIsModalVisible(false);
+    setShowStrategyInfo(false);
+  };
+
+  const handleCardClick = () => {
+    setShowActions(!showActions);
   };
 
 
   return (
   <div
-    onClick={toggleActions}
+    onClick={handleCardClick}
     style={{
       width: "100%",
       marginBottom: "30px",
@@ -212,7 +220,10 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <Modal
         title="Transaction Successful"
         visible={!!depositSuccessMessage}
-        onCancel={() => setDepositSuccessMessage(null)}
+        onCancel={() => {
+          setDepositSuccessMessage(null);
+          handleCardClick();
+        }}
         footer={null}
         centered
         bodyStyle={{ backgroundColor: "transparent", color: "white" }}
@@ -240,7 +251,10 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <Modal
         title="Transaction Successful"
         visible={!!withdrawSuccessMessage}
-        onCancel={() => setWithdrawSuccessMessage(null)}
+        onCancel={() => {
+          setWithdrawSuccessMessage(null);
+          handleCardClick();
+        }}
         footer={null}
         centered
         bodyStyle={{ backgroundColor: "transparent", color: "white" }}
@@ -268,7 +282,10 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <Modal
         title="Transaction Failed"
         visible={errorMessage ? true : false}
-        onCancel={() => setErrorMessage(null)}
+        onCancel={() => {
+          setErrorMessage(null);
+          handleCardClick();
+        }}
         footer={null}
         centered
         bodyStyle={{ backgroundColor: "transparent", color: "white" }}
@@ -311,7 +328,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <Button
         onClick={(e) => {
           e.stopPropagation();
-          handleModalToggle();
+          handleModalOpen();
         }}
         style={{
           color: 'white',
@@ -444,7 +461,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         </div>
       }
       visible={isModalVisible}
-      onCancel={handleModalToggle}
+      onCancel={(e) => handleModalClose(e)}
       footer={null}
       centered
       bodyStyle={{ backgroundColor: "transparent", color: "transparent" }}
