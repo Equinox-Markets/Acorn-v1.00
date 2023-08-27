@@ -147,7 +147,7 @@ const vaults: VaultType[] = [
   },
   {
     name: 'axlUSDC Vault',
-    address: '0x6211792C4Fd3F1814F489BDFeAd70C0F3F7D41C3',
+    address: '0x07E47A4bD927D83C5bB07D374e1861677565440C',
     abi: axlUSDCvault,
     chainId: 250, // Fantom mainnet
     logo: AXLUSDC, // add logo path
