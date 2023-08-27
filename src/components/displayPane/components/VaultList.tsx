@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 //import ethLogo from 'assets/images/ethereum_Logo.png';
-import arbLogo from 'assets/images/arbitrum_logo.png';
+import arbLogo from 'assets/images/arbitrum_logo.svg';
 import AXLUSDC from 'assets/images/AXLUSDC.png';
 import ftmLogo from 'assets/images/fantom_logo.png';
 import wFTM from 'assets/images/FTM.svg';
