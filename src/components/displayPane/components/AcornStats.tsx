@@ -12,19 +12,19 @@ const AcornStats: React.FC = () => {
       <div className="card-wrapper">
         <Card className="stat-card" bodyStyle={cardStyle} bordered={false}>
           <h2 className="stat-title">Total Value Locked</h2>
-          <p className="stat-value">$1,234,567</p>
+          <p className="stat-value">$57,392</p>
         </Card>
       </div>
       <div className="card-wrapper">
         <Card className="stat-card" bodyStyle={cardStyle} bordered={false}>
           <h2 className="stat-title">Vaults Operated</h2>
-          <p className="stat-value">123</p>
+          <p className="stat-value">3</p>
         </Card>
       </div>
       <div className="card-wrapper">
         <Card className="stat-card" bodyStyle={cardStyle} bordered={false}>
           <h2 className="stat-title">Treasury Value</h2>
-          <p className="stat-value">$456,789</p>
+          <p className="stat-value">$28,696</p>
         </Card>
       </div>
     </div>
