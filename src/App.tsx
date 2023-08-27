@@ -1,11 +1,13 @@
 import { Buffer } from "buffer";
 
 import { Layout } from "antd";
-
 import background from "assets/images/background.png";
+import backgroundImage from "assets/images/background_image.png";
 import DisplayPane from "components/displayPane/DisplayPane";
 import { CustomHeader, MainContent, CustomFooter } from "layout";
 import "styles/App.css";
+// eslint-disable-next-line import/order
+import { useWeb3React } from "@web3-react/core";
 
 const styles = {
   layout: {
@@ -22,9 +24,17 @@ const styles = {
 
 function App() {
   if (!window.Buffer) window.Buffer = Buffer;
+  const { isActive } = useWeb3React();
+
+  const backgroundStyle = isActive ? {} : {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
+  };
 
   return (
-    <Layout style={styles.layout}>
+    <Layout style={{ ...styles.layout, ...backgroundStyle }}>
       <CustomHeader />
 
       <MainContent>

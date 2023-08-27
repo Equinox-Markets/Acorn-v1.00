@@ -343,8 +343,8 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-        <h3>Vault Balance:</h3>
-        <h2>{vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
+        <h3>Deposited:</h3>
+        <h2>${vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
       </div>
       <div>
         <h3>APR:</h3>

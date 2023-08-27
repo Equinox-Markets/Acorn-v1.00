@@ -9,13 +9,13 @@ import AcornStats from "./components/AcornStats";
 
 const styles = {
   container: {
-    background: "#000000)",
+    background: "#000509)",
     width: "100%",
     minWidth: "330px",
     maxWidth: "1000px",
     textAlign: "center",
     margin: "auto",
-    padding: "30px 0",
+    padding: "0px 0",
     borderRadius: "10px",
     boxShadow: "0px 12px 18px -6px rgba(0, 0, 0, 0.3)"
   },
@@ -33,7 +33,7 @@ const styles = {
     color: "#ffffff"
   },
   action: {
-    background: "#000000)",
+    background: "#000509)",
     width: "100%",
     minWidth: "330px",
     maxWidth: "900px",

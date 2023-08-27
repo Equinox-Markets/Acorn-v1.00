@@ -12,6 +12,7 @@ import lzUSDT from 'assets/images/lzUSDT.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
 import USDCLODE from 'assets/images/USDC_LODE.svg';
 import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
+import ConnectAccount from "components/Account/ConnectAccountButton";
 import aArbGLP from 'data/abi/aArbGLP.json';
 import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
 import axlUSDC from 'data/abi/tokens/axlUSDC.json';
@@ -142,7 +143,7 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // add the deposit token address here
     depositTokenAbi: WFTM, // Set ABI here
-    textAboveTitle: "", // New property
+    textAboveTitle: "TVL: $17,217", // New property
     textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
   },
   {
@@ -158,7 +159,7 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', // add the deposit token address here
     depositTokenAbi: axlUSDC, // Set ABI here
-    textAboveTitle: "", // New property
+    textAboveTitle: "TVL: $25,826", // New property
     textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
   },
   {
@@ -174,7 +175,7 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0xcc1b99dDAc1a33c201a742A1851662E87BC7f22C', // add the deposit token address here
     depositTokenAbi: LZUSDT, // Set ABI here
-    textAboveTitle: "", // New property
+    textAboveTitle: "$14,348", // New property
     textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
   },
 
@@ -199,10 +200,17 @@ const VaultList: FC = () => {
     }
   }, [chainId]);
 
-  const marginStyle = { color: 'white', marginTop: '40px', marginBottom: '100px' };
+  const marginStyle = { color: 'white', marginTop: '10px', marginBottom: '100px' };
+  const connectAccountButtonStyle = { fontSize: '24px', padding: '10px 20px' }; // Adjust as needed
 
   if (!account) {
-    return <h1 style={marginStyle}>Please connect your wallet</h1>;
+    return (
+      <div style={marginStyle}>
+        <div style={connectAccountButtonStyle}>
+          <ConnectAccount />
+        </div>
+      </div>
+    );
   }
 
   if (!filteredVaults.length) {

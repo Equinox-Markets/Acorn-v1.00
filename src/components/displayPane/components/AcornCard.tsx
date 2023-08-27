@@ -4,7 +4,7 @@ import React from 'react';
 import { Card } from 'antd';
 
 import './AcornCard.css'; // Import your CSS file to style this component
-import web3Boilerplate_logo from 'assets/images/Acorn.png';
+import web3Boilerplate_logo from 'assets/images/Acorn_Token.svg';
 
 const AcornCard: React.FC = () => {
   return (
