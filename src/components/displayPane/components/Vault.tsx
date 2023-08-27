@@ -126,16 +126,33 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   };
 
   const refreshBalances = async () => {
-    if (account && vault.depositTokenAddress && signer) {
-      const tokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, signer);
-      const balance = await tokenContract.balanceOf(account);
-      const formattedBalance = ethers.utils.formatUnits(balance, decimals);
-      setUserBalance(formattedBalance);
-      const vaultContract = new ethers.Contract(vault.address, vault.abi, signer);
-      const vaultTokenBalanceRaw = await vaultContract.balanceOf(account);
-      updateVaultTokenBalance(ethers.utils.formatUnits(vaultTokenBalanceRaw, decimals));
-    }
+    // Fetch decimals for deposit token
+    const tokenContract = new ethers.Contract(vault.depositTokenAddress, vault.depositTokenAbi, provider);
+    const depositTokenDecimals = await tokenContract.decimals();
+
+    // Fetch user balance for deposit token
+    const balance = await tokenContract.balanceOf(account);
+
+    // Format user balance using fetched decimals for deposit token
+    const formattedBalance = ethers.utils.formatUnits(balance, depositTokenDecimals);
+
+    // Update user balance state
+    setUserBalance(formattedBalance);
+
+    // Fetch vault contract
+    const vaultContract = new ethers.Contract(vault.address, vault.abi, provider);
+
+    // Fetch decimals for vault
+    const vaultDecimals = await vaultContract.decimals();
+
+    // Fetch and format vault balance
+    const vaultBalance = await vaultContract.balanceOf(account);
+    const formattedVaultBalance = ethers.utils.formatUnits(vaultBalance, vaultDecimals);
+
+    // Update vault balance state
+    updateVaultTokenBalance(formattedVaultBalance);
   };
+
 
   const handleModalToggle = () => {
     setIsModalVisible(!isModalVisible);

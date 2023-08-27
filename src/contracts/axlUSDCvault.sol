@@ -22,9 +22,6 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
 
   EnumerableSet.AddressSet private holders;
 
-  uint256 public totalYield; // Track the total yield distributed
-  mapping(address => uint256) public lastDistributedYield; // Last distributed yield per holder
-
   constructor(IERC20 _stakedGlp, address payable _feeReceiver) {
     require(_feeReceiver != address(0), "Fee receiver cannot be zero address");
     stakedGlp = _stakedGlp;
@@ -36,6 +33,7 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
     require(glpAmount > 0, "Amount must be greater than 0");
     uint256 fee = glpAmount.mul(depositFee).div(1000);
     uint256 amountAfterFee = glpAmount.sub(fee);
+
     stakedGlp.safeTransferFrom(msg.sender, address(this), glpAmount);
     stakedGlp.safeTransfer(feeReceiver, fee);
 
@@ -43,6 +41,7 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
     holders.add(msg.sender);
     emit Deposit(msg.sender, glpAmount);
   }
+
   //Allow the treasury to deposit tokens into the vault for liquidity
   function depositOwner(uint256 glpAmount) external onlyOwner {
     require(glpAmount > 0, "Amount must be greater than 0");
@@ -53,17 +52,16 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
   //Allow holders to withdraw thier tokens and yield
   function withdraw(uint256 aGlpAmount) public nonReentrant {
     require(balanceOf(msg.sender) >= aGlpAmount, "Not enough aGLP balance");
-    uint256 holderYield = (totalYield.sub(lastDistributedYield[msg.sender]))
-                                .mul(balanceOf(msg.sender))
-                                .div(totalSupply());
-    lastDistributedYield[msg.sender] = totalYield;
+
     uint256 glpToReturn = aGlpAmount
-                                .mul(stakedGlp.balanceOf(address(this)).sub(totalYield))
+                                .mul(stakedGlp.balanceOf(address(this)))
                                 .div(totalSupply());
     uint256 fee = glpToReturn.mul(withdrawFee).div(1000);
-    uint256 amountAfterFee = glpToReturn.sub(fee).add(holderYield);
+    uint256 amountAfterFee = glpToReturn.sub(fee);
+
     _burn(msg.sender, aGlpAmount);
     require(stakedGlp.balanceOf(address(this)) >= amountAfterFee, "Not enough GLP in contract");
+    
     stakedGlp.transfer(msg.sender, amountAfterFee);
     stakedGlp.transfer(feeReceiver, fee);
 
@@ -74,7 +72,7 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
     emit Withdraw(msg.sender, aGlpAmount);
   }
 
-  // Allow the treasury to withdraw tokens for yield strategies
+   // Allow the treasury to withdraw tokens for yield strategies
   function withdrawOwner(uint256 percentage) external onlyOwner {
     require(percentage > 0 && percentage <= 50, "Percentage must be between 1 and 50");
     uint256 amountToWithdraw = stakedGlp.balanceOf(address(this)).mul(percentage).div(100);
@@ -84,11 +82,24 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
   //Distribute yield to holders
   function distributeAGLP(uint256 glpAmount) external onlyOwner {
     require(glpAmount > 0, "Amount must be greater than 0");
+
+    // Transfer the glpAmount from the Treasury to the contract
     stakedGlp.safeTransferFrom(msg.sender, address(this), glpAmount);
-    totalYield = totalYield.add(glpAmount);
+
+    uint256 totalCurrentSupply = totalSupply();
+    for (uint256 i = 0; i < holders.length(); i++) {
+        address holder = holders.at(i);
+        uint256 holderBalance = balanceOf(holder);
+        
+        // Calculate the new aGLP tokens for the holder
+        uint256 newAGLP = glpAmount.mul(holderBalance).div(totalCurrentSupply);
+        
+        // Mint new aGLP tokens for the holder
+        _mint(holder, newAGLP);
+    }
     emit Distribution(msg.sender, glpAmount);
   }
-
+  
   //Treasury management fee
   function setFeeReceiver(address payable _feeReceiver) external onlyOwner {
     require(_feeReceiver != address(0), "Fee receiver cannot be zero address");
@@ -96,19 +107,19 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
     emit FeeReceiverUpdated(_feeReceiver);
   }
 
-    // Allow the owner to set the deposit fee
+  // Allow the Treasury to set the deposit fee
   function setDepositFee(uint256 _depositFee) external onlyOwner {
     depositFee = _depositFee;
   }
 
-  // Allow the owner to set the withdrawal fee
+  // Allow the Treasury to set the withdrawal fee
   function setWithdrawFee(uint256 _withdrawFee) external onlyOwner {
     withdrawFee = _withdrawFee;
   }
 
   function decimals() public view virtual override returns (uint8) {
     return 6; // Replace with the correct number of decimals for the underlying token
-}
+  }
 
   event Deposit(address indexed user, uint256 amount);
   event OwnerDeposit(address indexed owner, uint256 amount);
@@ -116,8 +127,4 @@ contract axlUSDCVault is ERC20("aaxlUSDC", "aaxlUSDC"), ReentrancyGuard, Ownable
   event FeeReceiverUpdated(address newFeeReceiver);
   event Distribution(address indexed owner, uint256 amount);
 }
-
-
-
-
 

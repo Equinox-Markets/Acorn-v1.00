@@ -17,8 +17,8 @@ const AcornCard: React.FC = () => {
         <img src={web3Boilerplate_logo} alt="Acorn Logo" className="acorn-logo" />
         <div className="airdrop-text">
           <h2>Be an Early Depositor!</h2>
-          <p>
-            <u>Deposit now</u> and be rewarded with Acorn Tokens in our fair launch based on your deposit. Invest in the best yield strategies and <strong>earn more!</strong>
+          <p className="slogan-text">
+          <u>Deposit now</u> and be rewarded with Acorn Tokens in our fair launch based on your deposit. Invest in the best yield strategies and <strong>earn more!</strong>
           </p>
         </div>
       </div>
