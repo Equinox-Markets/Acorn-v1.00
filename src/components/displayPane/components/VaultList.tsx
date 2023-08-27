@@ -138,7 +138,7 @@ const vaults: VaultType[] = [
     networkName: 'FTM',
     networkLogo: ftmLogo,
     apr: 38.91,
-    strategy: "This vault generates yield by participating in Equalizer Exchange.",
+    strategy: "This is an auto-compounding vault integrated with Equalizer Exchange.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // add the deposit token address here
     depositTokenAbi: WFTM, // Set ABI here
@@ -154,7 +154,7 @@ const vaults: VaultType[] = [
     networkName: 'FTM',
     networkLogo: ftmLogo,
     apr: 38.91,
-    strategy: "This vault generates yield by participating in Equalizer Exchange.",
+    strategy: "This is an auto-compounding vault integrated with Equalizer Exchange.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', // add the deposit token address here
     depositTokenAbi: axlUSDC, // Set ABI here
@@ -170,7 +170,7 @@ const vaults: VaultType[] = [
     networkName: 'FTM',
     networkLogo: ftmLogo,
     apr: 38.91,
-    strategy: "This vault generates yield by participating in Equalizer Exchange.",
+    strategy: "This is an auto-compounding vault integrated with Equalizer Exchange.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0xcc1b99dDAc1a33c201a742A1851662E87BC7f22C', // add the deposit token address here
     depositTokenAbi: LZUSDT, // Set ABI here
