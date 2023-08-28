@@ -218,7 +218,11 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   >
     {depositSuccessMessage && (
       <Modal
-        title="Transaction Successful"
+        title={
+          <div style={{ display: 'flex', alignItems: 'center', backgroundColor: "#000509" }}>
+            {"Transaction Successful"}
+          </div>
+        }
         visible={!!depositSuccessMessage}
         onCancel={() => {
           setDepositSuccessMessage(null);
@@ -231,7 +235,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       >
         <Card
           style={{
-            backgroundColor: "#011F37",
+            backgroundColor: "#000509",
             color: "white",
             display: "flex",
             flexDirection: "column",
@@ -249,7 +253,11 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     )}
     {withdrawSuccessMessage && (
       <Modal
-        title="Transaction Successful"
+        title={
+          <div style={{ display: 'flex', alignItems: 'center', backgroundColor: "#000509" }}>
+            {"Transaction Successful"}
+          </div>
+        }
         visible={!!withdrawSuccessMessage}
         onCancel={() => {
           setWithdrawSuccessMessage(null);
@@ -262,7 +270,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       >
         <Card
           style={{
-            backgroundColor: "#011F37",
+            backgroundColor: "#000509",
             color: "white",
             display: "flex",
             flexDirection: "column",
@@ -280,7 +288,11 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     )}
     {errorMessage && (
       <Modal
-        title="Transaction Failed"
+      title={
+        <div style={{ display: 'flex', alignItems: 'center', backgroundColor: "#000509" }}>
+          {"Transaction failed"}
+        </div>
+      }
         visible={errorMessage ? true : false}
         onCancel={() => {
           setErrorMessage(null);
@@ -293,7 +305,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       >
         <Card
           style={{
-            backgroundColor: "#011F37",
+            backgroundColor: "#000509",
             color: "white",
             display: "flex",
             flexDirection: "column",
@@ -344,7 +356,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
         <h3>Deposited:</h3>
-        <h2>${vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
+        <h2>{vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
       </div>
       <div>
         <h3>APR:</h3>

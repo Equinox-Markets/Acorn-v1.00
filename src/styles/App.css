@@ -123,7 +123,27 @@ body {
 }
 
 .ant-modal-close-x {
+  position: relative; /* To position the pseudo-element relative to this element */
   color: rgb(255, 255, 255) !important;
+  font-size: 32px !important;
+  border-radius: 50%;
+}
+
+.ant-modal-close-x::before {
+  content: '';
+  position: absolute;
+  top: -6px;  /* Adjust these as needed */
+  left: -10px; /* Adjust these as needed */
+  right: -10px; /* Adjust these as needed */
+  bottom: -6px; /* Adjust these as needed */
+  border-radius: 50%;
+  z-index: -1; /* Put it behind the text or icon */
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.ant-modal-close-x:hover::before {
+  box-shadow: 0px 4px 15px rgba(8, 95, 160, 0.5);
+  background-color: #064576;
 }
 
 .ant-modal-content {
