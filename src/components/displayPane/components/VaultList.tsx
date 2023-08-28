@@ -186,17 +186,24 @@ const vaults: VaultType[] = [
 
 const VaultList: FC = () => {
   const { account, chainId } = useWeb3React();
-
   const [filteredVaults, setFilteredVaults] = useState<VaultType[]>([]);
+  const [showNoVaultMessage, setShowNoVaultMessage] = useState(false); // New state
 
   // List of chainIds you want to filter
   const allowedChainIds = [250, 42161];
 
   useEffect(() => {
+    setShowNoVaultMessage(false); // Reset message state
+
     if (chainId && allowedChainIds.includes(chainId)) {
       setFilteredVaults(vaults.filter(vault => vault.chainId === chainId));
     } else {
       setFilteredVaults([]); // Empty the list if the chainId is not allowed
+
+      // Delay showing the message
+      setTimeout(() => {
+        setShowNoVaultMessage(true);
+      }, 500); // 1-second delay
     }
   }, [chainId]);
 
@@ -213,16 +220,16 @@ const VaultList: FC = () => {
     );
   }
 
-  if (!filteredVaults.length) {
+  if (!filteredVaults.length && showNoVaultMessage) {  // Adjusted this line
     const networkName = vaults.find(vault => vault.chainId === chainId)?.networkName || 'this network';
     return <h1 style={marginStyle}>No vaults on {networkName} yet! Switch to Arbitrum or Fantom!</h1>;
   }
 
   return (
     <div>
-    {filteredVaults.map(vault => (
-        <Vault key={`${vault.address}-${vault.chainId}`} vault={vault} />
-    ))}
+      {filteredVaults.map(vault => (
+          <Vault key={`${vault.address}-${vault.chainId}`} vault={vault} />
+      ))}
     </div>
   );
 };
