@@ -455,7 +455,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     {isModalVisible && (
       <Modal
       title={
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', backgroundColor: "#000509", }}>
           <img src={vault.logo} alt={`${vault.name} Logo`} style={{ width: '24px', marginRight: '10px' }} />
           {vault.name}
         </div>
@@ -469,8 +469,9 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     >
         <Card
           style={{
-            backgroundColor: "#011F37",  // Change this line
+            backgroundColor: "#000509",  // Change this line
             color: "white",  // Change this line
+            border: "0px solid #064576",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -478,7 +479,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
             width: "auto",
             minHeight: "10vh",
             marginTop: "20px",
-            border: "transparent"
           }}
         >
           <p style={{ fontSize: "15px" }}>{vault.textAboveTitle}</p>

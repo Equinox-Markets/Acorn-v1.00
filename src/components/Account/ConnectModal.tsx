@@ -74,6 +74,7 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
     <Modal
       open={isModalOpen}
       footer={null}
+      wrapClassName="custom-modal"
       onCancel={() => setIsModalOpen(false)}
       bodyStyle={{
         width: "300px",

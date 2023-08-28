@@ -100,6 +100,7 @@ body {
   width: 70vw;
   justify-content: center;
   align-items: center;
+
 }
 
 .ant-modal-title {
@@ -116,6 +117,11 @@ body {
   color: white;
 }
 
+.custom-modal .ant-modal-content {
+  background-color: #000509 !important;
+  border: 2px solid #064576
+}
+
 .ant-modal-close-x {
   color: rgb(255, 255, 255) !important;
 }
@@ -124,7 +130,7 @@ body {
   border-radius: 10px;
   min-width: 350px;
   margin-inline: auto;
-  background-color: #011F37 !important;
+  background-color: #000509 !important;
 }
 .ant-modal-header,
 .ant-modal-body,
