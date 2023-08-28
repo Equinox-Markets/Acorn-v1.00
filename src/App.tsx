@@ -9,7 +9,8 @@ import "styles/App.css";
 // eslint-disable-next-line import/order
 import { useWeb3React } from "@web3-react/core";
 import loadingSpinner from "assets/images/acorn_spinner.gif"; // Your loading spinner
-import { useEffect, useState } from "react";
+import { useState, useLayoutEffect } from "react";
+
 
 const styles = {
   layout: {
@@ -33,6 +34,9 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  initialLoadingScreen: {
+    background: '#000509', // or a color similar to the final state or an initial loading image
   }
 } as const;
 
@@ -42,7 +46,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [spinnerSrc, setSpinnerSrc] = useState(loadingSpinner); // New state to hold src
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsLoading(true);
 
     // Manipulate src to force reload and restart animation
