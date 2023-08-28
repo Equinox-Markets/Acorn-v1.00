@@ -122,6 +122,22 @@ body {
   border: 2px solid #064576
 }
 
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  .custom-modal.responsive-modal .ant-modal {
+    width: 75vw!important;  /* Adjust as needed */
+  }
+}
+
+/* For screens between 768px and 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .custom-modal.responsive-modal .ant-modal {
+    width: 80vw!important;  /* Adjust as needed */
+  }
+}
+
+
+
 .ant-modal-close-x {
   position: relative; /* To position the pseudo-element relative to this element */
   color: rgb(255, 255, 255) !important;

@@ -231,7 +231,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         footer={null}
         centered
         bodyStyle={{ backgroundColor: "transparent", color: "white" }}
-        wrapClassName="custom-modal"
+        wrapClassName="custom-modal responsive-modal"
       >
         <Card
           style={{
@@ -266,7 +266,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         footer={null}
         centered
         bodyStyle={{ backgroundColor: "transparent", color: "white" }}
-        wrapClassName="custom-modal"
+        wrapClassName="custom-modal responsive-modal"
       >
         <Card
           style={{
@@ -301,7 +301,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         footer={null}
         centered
         bodyStyle={{ backgroundColor: "transparent", color: "white" }}
-        wrapClassName="custom-modal"
+        wrapClassName="custom-modal responsive-modal"
       >
         <Card
           style={{
@@ -477,7 +477,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       footer={null}
       centered
       bodyStyle={{ backgroundColor: "transparent", color: "transparent" }}
-      wrapClassName="custom-modal"
+      wrapClassName="custom-modal responsive-modal"
     >
         <Card
           style={{
