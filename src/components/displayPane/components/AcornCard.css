@@ -1,16 +1,26 @@
 .acorn-card {
     width: 100%;
-    padding: 20px;
-    background: transparent;
-    border: 2px solid #064576;
+    padding: 0px;
+    background: #000509;
+    border: 0px solid #064576;
     color: white;
     text-align: center;
+    margin-top: 0px;
   }
 
   .welcome-text {
-    font-size: 24px;
+    font-size: 52px;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-top: 0px;
+  }
+
+  /* Media query for screens smaller than 768 pixels */
+  @media (max-width: 768px) {
+    .welcome-text {
+      font-size: 28px;  /* Adjust as needed */
+      margin-top: 0px;
+    }
   }
 
   .slogan-text {
@@ -29,10 +39,23 @@
     width: 80px;
     transform: rotate(-10deg);
     position: absolute;
-    left: -40px;
+    left: -30px;
     top: 50%;
     transform-origin: center;
+    animation: rotate 10s infinite linear;
   }
+
+    /* Media query for screens smaller than 768 pixels */
+    @media (max-width: 768px) {
+      .acorn-logo {
+        width: 80px;
+        transform: rotate(-10deg);
+        position: absolute;
+        left: -40px;
+        top: 50%;
+        transform-origin: center;
+      }
+    }
 
   .airdrop-text {
     text-align: left;

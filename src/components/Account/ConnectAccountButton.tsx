@@ -26,16 +26,16 @@ const styles = {
     cursor: "pointer"
   },
   button: {
-    height: "40px",
-    padding: "0 20px",
+    height: "60px", // Increased height
+    padding: "0 30px", // Increased padding
     textAlign: "center",
     fontWeight: "600",
     letterSpacing: "0.2px",
-    fontSize: "15px",
+    fontSize: "20px", // Increased font size
     margin: "20px 20px",
     border: "none",
     background: "#011F37",
-    color: theme.colors.white
+    color: theme.colors.white,
   },
   text: {
     color: theme.colors.white
@@ -55,7 +55,7 @@ interface WantedChain {
   chain?: number;
 }
 
-const ConnectAccount: React.FC<WantedChain> = () => {
+const ConnectAccountButton: React.FC<WantedChain> = () => {
   const { account } = useWeb3React();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
@@ -103,4 +103,4 @@ const ConnectAccount: React.FC<WantedChain> = () => {
   );
 };
 
-export default ConnectAccount;
+export default ConnectAccountButton;

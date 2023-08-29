@@ -12,7 +12,7 @@ const styles = {
     height: "36px",
     display: "flex",
     gap: "5px",
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "transparent",
     borderRadius: "10px",
     alignItems: "center"
   }

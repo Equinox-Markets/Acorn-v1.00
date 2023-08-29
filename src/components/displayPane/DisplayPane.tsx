@@ -6,17 +6,19 @@ import { useWindowWidthAndHeight } from "hooks";
 import { VaultList } from "./components";
 import AcornCard from "./components/AcornCard";
 import AcornStats from "./components/AcornStats";
+import AcornInfo from "./components/AcornInfo";
 
 const styles = {
   container: {
-    background: "#000000)",
+    background: "##000509)",
     width: "100%",
     minWidth: "330px",
     maxWidth: "1000px",
-    textAlign: "center",
     margin: "auto",
-    padding: "30px 0",
+    textAlign: "center",
+    padding: "0px 0",
     borderRadius: "10px",
+    marginTop: "0px",
     boxShadow: "0px 12px 18px -6px rgba(0, 0, 0, 0.3)"
   },
   title: {
@@ -27,13 +29,20 @@ const styles = {
     marginBottom: "10px"
   },
   content: {
-    width: "85%",
+    width: "87%",
     margin: "auto",
     fontSize: "17px",
+    marginTop: "0px",
+    color: "#ffffff"
+  },
+  vaultcontent: {
+    width: "95%",
+    margin: "auto",
+    fontSize: "18px",
     color: "#ffffff"
   },
   action: {
-    background: "#000000)",
+    background: "##000509)",
     width: "100%",
     minWidth: "330px",
     maxWidth: "900px",
@@ -54,12 +63,14 @@ const DisplayPane: React.FC = () => {
       <div style={styles.content}>
         {!isActive && (
           <>
-            <AcornCard />
+            <AcornInfo />
             <AcornStats />
           </>
         )}
+        <div style={styles.vaultcontent}>
+        {isActive && <AcornCard />}
         <VaultList key={chainId} />
-
+        </div>
         {isActive && (
           <>
             <Divider />

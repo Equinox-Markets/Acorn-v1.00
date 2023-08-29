@@ -19,13 +19,14 @@ const DisconnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalO
     <Modal
       open={isModalOpen}
       footer={null}
+      wrapClassName="custom-modal"
       onCancel={() => setIsModalOpen(false)}
       bodyStyle={{
         width: "350px",
-        padding: "15px",
+        padding: "10px",
         fontSize: "17px",
         fontWeight: "500",
-        color: "white" // Change text color to white
+        color: "white",
       }}
     >
       Account
@@ -34,7 +35,7 @@ const DisconnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalO
           marginTop: "10px",
           borderRadius: "10px",
           backgroundColor: "#011F37", // Change card background color to #011F37
-          border: "1px solid #064576" // Change card border color to #064576
+          border: "0px solid #064576" // Change card border color to #064576
         }}
         bodyStyle={{ padding: "15px", color: "white" }} // Change card body text color to white
       >
