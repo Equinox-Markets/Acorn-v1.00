@@ -207,7 +207,7 @@ const VaultList: FC = () => {
     }
   }, [chainId]);
 
-  const marginStyle = { color: 'white', marginTop: '10px', marginBottom: '100px' };
+  const marginStyle = { color: 'white', marginTop: '10px', marginBottom: '75px' };
   const connectAccountButtonStyle = { fontSize: '24px', padding: '10px 20px' }; // Adjust as needed
 
   if (!account) {

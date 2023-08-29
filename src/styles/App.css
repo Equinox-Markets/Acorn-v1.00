@@ -136,6 +136,32 @@ body {
   }
 }
 
+/* Default size for larger screens */
+.vault-name {
+  font-size: 2em; /* Or whatever size it currently is */
+}
+
+/* Smaller size for smaller screens */
+@media (max-width: 768px) {
+  .vault-name {
+    font-size: 1.2em; /* Adjust as needed */
+  }
+}
+
+/* For Buttons */
+@media only screen and (max-width: 768px) {
+  .small-button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .smaller-h2 {
+      font-size: 1.2em;
+  }
+}
+
 
 
 .ant-modal-close-x {

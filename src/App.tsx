@@ -2,7 +2,7 @@ import { Buffer } from "buffer";
 
 import { Layout } from "antd";
 import background from "assets/images/background.png";
-import backgroundImage from "assets/images/background_image.png";
+import backgroundImage from "assets/images/background_image1.png";
 import DisplayPane from "components/displayPane/DisplayPane";
 import { CustomHeader, MainContent, CustomFooter } from "layout";
 import "styles/App.css";
@@ -17,9 +17,11 @@ const styles = {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: "repeat-y",  // Repeat vertically
+    backgroundAttachment: "fixed",  // Should fix it on the page
     width: "100vw",
     height: "100vh",
+    minHeight: "100vh", // But at least fill the viewport
     overflow: "auto",
     fontFamily: "Sora, sans-serif"
   },
@@ -61,7 +63,8 @@ function App() {
     backgroundImage: `url(${backgroundImage})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'repeat-y', // Repeat vertically
+  backgroundAttachment: 'fixed' // Fixed background
   };
 
   return (

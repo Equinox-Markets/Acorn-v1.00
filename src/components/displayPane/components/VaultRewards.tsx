@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
-import { Button, Card, Divider, Input, Modal } from 'antd';
+import { Button, Card, Divider, Input, Modal, Tooltip } from 'antd';
 import { ethers } from 'ethers';
 import { useVault } from 'hooks';
 import { useDecimals } from 'hooks';
@@ -29,7 +29,7 @@ type VaultProps = {
 };
 
 
-const testVault: FC<VaultProps> = ({ vault }) => {
+const Vault: FC<VaultProps> = ({ vault }) => {
   const [depositAmount, setDepositAmount] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -142,6 +142,17 @@ const testVault: FC<VaultProps> = ({ vault }) => {
     } catch (error) {
       console.error('Withdraw failed', error);
       setErrorMessage(`The withdraw transaction failed with the following error: ${(error as Error).message}`);
+    }
+  };
+
+  const claimRewards = async () => {
+    try {
+      console.log('Claiming rewards...');
+      const transactionResponse = await contract.claimRewards();  // Replace 'claimRewards' with the actual method name in your smart contract
+      const transactionResult = await transactionResponse.wait();
+      console.log('Claim Rewards Transaction Result:', transactionResult);
+    } catch (error) {
+      console.error('Claiming rewards failed', error);
     }
   };
 
@@ -334,33 +345,55 @@ const testVault: FC<VaultProps> = ({ vault }) => {
       >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '45px' : '60px'} />
-        <h2 style={{ marginLeft: '20px' }}>{vault.name}</h2>
+        <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '35px' : '65px'} />
+        <h2 className="vault-name" style={{ marginLeft: '10px' }}>{vault.name}</h2>
       </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
       <Button
+      className="small-button"
         onClick={(e) => {
           e.stopPropagation();
-          handleModalOpen();
+          claimRewards();
         }}
         style={{
           color: 'white',
           backgroundColor: '#011F37',
           border: '1px solid #011F37',
           borderRadius: '12px',
+          marginRight: '10px',
+          marginLeft: '5px',
         }}
       >
-        Strategy Info
+        Claim Rewards
       </Button>
+        <Button
+        className="small-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleModalOpen();
+          }}
+          style={{
+            color: 'white',
+            backgroundColor: '#011F37',
+            border: '1px solid #011F37',
+            borderRadius: '12px',
+          }}
+        >
+          Strategy Info
+        </Button>
+      </div>
       </div>
       <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-        <h3>Deposited:</h3>
-        <h2>{vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
+        <h2 className="smaller-h2" style={{ textAlign: 'left' }}>Rewards: {vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
+        <h2 className="smaller-h2"style={{ textAlign: 'left' }}>Balance: {vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
       </div>
       <div>
-        <h3>APR:</h3>
-        <h2>{vault.apr}%</h2>
+      <h3 className="smaller-h2"> APR:</h3>
+      <Tooltip title={<div>Vault APR: {vault.apr}%<br/>Reward APR: 11.73%</div>}>
+      <h2 className="smaller-h2" style={{ textDecoration: 'underline' }}>{vault.apr}%</h2>
+      </Tooltip>
       </div>
       </div>
       <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
@@ -508,4 +541,4 @@ const testVault: FC<VaultProps> = ({ vault }) => {
   );
 };
 
-export default testVault;
+export default Vault;

@@ -1,0 +1,127 @@
+/* General styling to make the landing page look sleek and futuristic */
+.acorn-card-info {
+  background-color: #000509;
+  color: #FFFFFF;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 0px;
+}
+
+.welcome-text-info {
+  font-size: 52px;
+  text-align: center;
+  margin-top: 0px;
+
+}
+
+  /* Media query for screens smaller than 768 pixels */
+  @media (max-width: 768px) {
+    .welcome-text-info {
+      font-size: 50px;  /* Adjust as needed */
+    }
+  }
+
+.slogan-text-info {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: shimmer 5s infinite;
+}
+
+@media (max-width: 768px) {
+  .slogan-text-info {
+    font-size: 24px;  /* Adjust as needed */
+  }
+}
+
+/* Animation and visual effects */
+
+/* Glowing Text */
+@keyframes glow-animation {
+  0% {
+    text-shadow: 0 0 5px #095d9e, 0 0 10px #064576, 0 0 15px #064576, 0 0 20px #064576, 0 0 25px #064576, 0 0 30px #064576, 0 0 35px #064576;
+  }
+  100% {
+    text-shadow: 0 0 10px #095d9e, 0 0 20px #064576, 0 0 30px #064576, 0 0 40px #064576, 0 0 50px #064576, 0 0 60px #064576, 0 0 70px #064576;
+  }
+}
+
+/* Shimmering Text */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
+.slogan-text-info {
+  background: linear-gradient(to right, #333 25%, #888 50%, #333 75%);
+  -webkit-background-clip: text;
+  background-size: 200% 100%;
+  color: #ffffff;
+
+}
+
+
+.features-info {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+
+  .features-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-size: 18px;
+  }
+}
+
+.feature-container-info {
+  width: 200px;
+  animation: feature-fade-in 0s ease-in-out;
+}
+
+@media (max-width: 768px) {
+
+  .feature-container-info {
+    flex-basis: calc(50% - 20px);  /* 2 feature-container-info elements will be side by side */
+  }
+}
+
+/* Fade-In Animation */
+@keyframes feature-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.acorn-logo-info {
+  width: 100px;
+  height: auto;
+  animation: rotate 10s infinite linear;
+}
+
+/* Rotate Effect */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.early-depositor-title-info {
+  animation: glow-animation 2s infinite alternate;
+}
+
