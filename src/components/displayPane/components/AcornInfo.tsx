@@ -28,8 +28,8 @@ const AcornInfo: React.FC = () => {
   </div>
 
   <div className="feature-container-info pop">
-    <h2 className="feature-title">Cross-Chain</h2>
-    <p className="feature-text">Cross-chain governance and scalability.</p>
+    <h2 className="feature-title">Governance</h2>
+    <p className="feature-text">Cross-chain governance and liquidity.</p>
   </div>
 </div>
 

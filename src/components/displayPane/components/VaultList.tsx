@@ -4,23 +4,23 @@ import { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 //import ethLogo from 'assets/images/ethereum_Logo.png';
 import arbLogo from 'assets/images/arbitrum_logo.svg';
-import AXLUSDC from 'assets/images/AXLUSDC.png';
-import ftmLogo from 'assets/images/fantom_logo.png';
-import wFTM from 'assets/images/FTM.svg';
+//import AXLUSDC from 'assets/images/AXLUSDC.png';
+//import ftmLogo from 'assets/images/fantom_logo.png';
+//import wFTM from 'assets/images/FTM.svg';
 import glpLogo from 'assets/images/glp_logo.png';
-import lzUSDT from 'assets/images/lzUSDT.svg';
+//import lzUSDT from 'assets/images/lzUSDT.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
 import USDCLODE from 'assets/images/USDC_LODE.svg';
 import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
 import ConnectAccount from "components/Account/ConnectAccountButton";
 import aArbGLP from 'data/abi/aArbGLP.json';
 import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
-import axlUSDC from 'data/abi/tokens/axlUSDC.json';
-import LZUSDT from 'data/abi/tokens/lzUSDT.json';
-import WFTM from 'data/abi/tokens/WFTM.json';
-import axlUSDCvault from 'data/abi/vaults/axlUSDCvault.json';
-import lzUSDTvault from 'data/abi/vaults/lzUSDTvault.json';
-import WFTMvault from 'data/abi/vaults/WFTMvault.json';
+//import axlUSDC from 'data/abi/tokens/axlUSDC.json';
+//import LZUSDT from 'data/abi/tokens/lzUSDT.json';
+//import WFTM from 'data/abi/tokens/WFTM.json';
+//import axlUSDCvault from 'data/abi/vaults/axlUSDCvault.json';
+//import lzUSDTvault from 'data/abi/vaults/lzUSDTvault.json';
+//import WFTMvault from 'data/abi/vaults/WFTMvault.json';
 
 import Vault from './Vault';
 
@@ -130,7 +130,7 @@ const vaults: VaultType[] = [
     textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
 
   },
-  {
+  /*{
     name: 'wFTM Vault',
     address: '0x19851B2f6da1ac664F4437bdc527e42C50636d44',
     abi: WFTMvault,
@@ -177,7 +177,7 @@ const vaults: VaultType[] = [
     depositTokenAbi: LZUSDT, // Set ABI here
     textAboveTitle: "$14,348", // New property
     textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
-  },
+  },*/
 
   // ... More vaults
 ];
@@ -190,7 +190,7 @@ const VaultList: FC = () => {
   const [showNoVaultMessage, setShowNoVaultMessage] = useState(false); // New state
 
   // List of chainIds you want to filter
-  const allowedChainIds = [250, 42161];
+  const allowedChainIds = [42161];
 
   useEffect(() => {
     setShowNoVaultMessage(false); // Reset message state
@@ -222,7 +222,7 @@ const VaultList: FC = () => {
 
   if (!filteredVaults.length && showNoVaultMessage) {  // Adjusted this line
     const networkName = vaults.find(vault => vault.chainId === chainId)?.networkName || 'this network';
-    return <h1 style={marginStyle}>No vaults on {networkName} yet! Switch to Arbitrum or Fantom!</h1>;
+    return <h1 style={marginStyle}>No vaults on {networkName} yet! Coming Soon!</h1>;
   }
 
   return (

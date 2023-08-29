@@ -5,9 +5,9 @@ import { Dropdown, Button } from "antd";
 import type { MenuProps } from "antd";
 
 import Arbitrum_Logo from "assets/images/arbitrum_logo.svg";
-// import Avalanche_Logo from "assets/images/avalanche_logo.png";
-// import ethereum_Logo from "assets/images/ethereum_Logo.png";
-import Fantom_Logo from "assets/images/fantom_logo.svg";
+//import Avalanche_Logo from "assets/images/avalanche_logo.png";
+//import ethereum_Logo from "assets/images/ethereum_Logo.png";
+//import Fantom_Logo from "assets/images/fantom_logo.svg";
 import { chainIds } from "data/chainIds";
 import { useSwitchChain, useWindowWidthAndHeight } from "hooks";
 
@@ -50,7 +50,7 @@ const ChainSelector: FC = () => {
     () => [
       //{ label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "ethereum_logo") },
       { label: "Arbitrum", key: chainIds.arbitrum, icon: labelToShow(Arbitrum_Logo, "Arbitrum_logo") },
-      { label: "Fantom", key: chainIds.fantom, icon: labelToShow(Fantom_Logo, "Fantom_logo") },
+      //{ label: "Fantom", key: chainIds.fantom, icon: labelToShow(Fantom_Logo, "Fantom_logo") },
       //{ label: "Avalanche", key: chainIds.avalanche, icon: labelToShow(Avalanche_Logo, "Avalanche_logo") },
     ],
     []
@@ -67,8 +67,8 @@ const ChainSelector: FC = () => {
     // }
     if (chainId === 42161 || chainId === 421611) {
       selectedLabel = labelToShow(Arbitrum_Logo, "Arbitrum_logo");
-    } else if (chainId === 250 || chainId === 0xfa2) {
-      selectedLabel = labelToShow(Fantom_Logo, "Fantom_logo");
+    //} else if (chainId === 250 || chainId === 0xfa2) {
+    //  selectedLabel = labelToShow(Fantom_Logo, "Fantom_logo");
     }
     // else if (chainId === 43114 || chainId === 43113) {
     //   selectedLabel = labelToShow(Avalanche_Logo, "Avalanche_logo");
