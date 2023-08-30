@@ -10,17 +10,17 @@ import arbLogo from 'assets/images/arbitrum_logo.svg';
 import glpLogo from 'assets/images/glp_logo.png';
 //import lzUSDT from 'assets/images/lzUSDT.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
-import USDCLODE from 'assets/images/USDC_LODE.svg';
-import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
+//import USDCLODE from 'assets/images/USDC_LODE.svg';
+//import WSTETHLODE from 'assets/images/WSTETH_LODE.svg';
 import ConnectAccount from "components/Account/ConnectAccountButton";
-import aArbGLP from 'data/abi/aArbGLP.json';
-import ARBGLPERC20ABI from 'data/abi/ARBGLPERC20.json';
 //import axlUSDC from 'data/abi/tokens/axlUSDC.json';
 //import LZUSDT from 'data/abi/tokens/lzUSDT.json';
 //import WFTM from 'data/abi/tokens/WFTM.json';
 //import axlUSDCvault from 'data/abi/vaults/axlUSDCvault.json';
 //import lzUSDTvault from 'data/abi/vaults/lzUSDTvault.json';
 //import WFTMvault from 'data/abi/vaults/WFTMvault.json';
+import GLP from 'data/abi/tokens/GLP.json';
+import aGLP from 'data/abi/vaults/aGLP.json';
 
 import Vault from './Vault';
 
@@ -44,6 +44,23 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
+    name: 'GLP Vault',
+    address: '0xef224301008B6d39F2b9e86e826c16309b611f09',
+    abi: aGLP,
+    chainId: 42161, // Arbitrum mainnet
+    logo: glpLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 37.22,
+    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out USDC, opens a borrow position in USDC, then deposits the USDC in a stablecoin farm. It then claims the reward tokens from both platforms and converts the tokens into more USDC.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
+    depositTokenAbi: GLP, // Set ABI here
+    textAboveTitle: "", // New property
+    textBelowDescription: "Note: Withdraw fees are 0.1%", // New property
+
+  },
+  /*{
     name: 'wstETH Vault',
     address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
     abi: aArbGLP,
@@ -53,23 +70,6 @@ const vaults: VaultType[] = [
     networkLogo: arbLogo,
     apr: 38.91,
     strategy: "This vault generates yield by participating in Lodestar Finance, it lends out wstETH, opens a borrow position in wstETH, then deposits the wstETH in a (Redacted) farm. It then claims the reward tokens from both platforms and converts the tokens into more wstETH.",
-    description: 'Deposit GLP and Earn',
-    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
-    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
-    textAboveTitle: "", // New property
-    textBelowDescription: "Note: Deposit and withdraw fees are 0.1%", // New property
-
-  },
-  {
-    name: 'USDC Vault',
-    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
-    abi: aArbGLP,
-    chainId: 42161, // Arbitrum mainnet
-    logo: USDCLODE, // add logo path
-    networkName: 'ARB',
-    networkLogo: arbLogo,
-    apr: 37.22,
-    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out USDC, opens a borrow position in USDC, then deposits the USDC in a stablecoin farm. It then claims the reward tokens from both platforms and converts the tokens into more USDC.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
@@ -129,7 +129,7 @@ const vaults: VaultType[] = [
     textAboveTitle: "", // New property
     textBelowDescription: "Note: Deposit and withdraw fees are 0.1%",
 
-  },
+  },*/
   /*{
     name: 'wFTM Vault',
     address: '0x19851B2f6da1ac664F4437bdc527e42C50636d44',
