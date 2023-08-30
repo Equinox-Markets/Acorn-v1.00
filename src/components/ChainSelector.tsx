@@ -68,7 +68,7 @@ const ChainSelector: FC = () => {
     if (chainId === 42161 || chainId === 421611) {
       selectedLabel = labelToShow(Arbitrum_Logo, "Arbitrum_logo");
     //} else if (chainId === 250 || chainId === 0xfa2) {
-    //  selectedLabel = labelToShow(Fantom_Logo, "Fantom_logo");
+      //selectedLabel = labelToShow(Fantom_Logo, "Fantom_logo");
     }
     // else if (chainId === 43114 || chainId === 43113) {
     //   selectedLabel = labelToShow(Avalanche_Logo, "Avalanche_logo");
@@ -81,6 +81,13 @@ const ChainSelector: FC = () => {
     setLabel(selectedLabel);
     setSelected(items.find((item) => item?.key === chainId.toString()));
   }, [chainId]);
+
+  //Made Arbitrum the default network
+  if (!isChainRecognized) {
+    switchChain(Number(chainIds.arbitrum)).catch((error) => {
+      console.error(`Failed to switch to default chain: ${error}`);
+    });
+  }
 
   const onClick: MenuProps["onClick"] = async ({ key }) => {
     await switchChain(Number(key)).catch((error) => {
