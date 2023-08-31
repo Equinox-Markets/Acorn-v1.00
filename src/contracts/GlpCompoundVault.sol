@@ -43,6 +43,7 @@ contract GlpCompoundVault is ERC20("aGLP", "aGLP"), ReentrancyGuard, Ownable {
     event Distribution(address indexed owner, uint256 amount);
     event RewardClaimed(address indexed user, uint256 amount);
     event RewardFunded(uint256 amount);
+    event RewardClaimedAndStaked(address indexed user, uint256 ethClaimed, uint256 glpStaked);
 
     constructor(address _stakedGlp, address payable _feeReceiver, address _rewardRouter) {
         require(_feeReceiver != address(0), "Fee receiver cannot be zero address");
@@ -56,13 +57,16 @@ contract GlpCompoundVault is ERC20("aGLP", "aGLP"), ReentrancyGuard, Ownable {
     }
 
     function claimAndCompound(uint256 _minUsdg, uint256 _minGlp) external nonReentrant onlyOwner {
-        // Claim rewards (should yield ETH)
+        // Claim ETH rewards
         IRewardRouterV2(rewardRouter).claim();
 
-        // Convert rewards to stakedGlp using mintAndStakeGlpETH()
+        // Check the available balance of ETH
         uint256 balance = address(this).balance;
+
+        // If balance is greater than zero, buy and stake GLP
         if (balance > 0) {
-            IRewardRouterV2(rewardRouter).mintAndStakeGlpETH{value: balance}(_minUsdg, _minGlp);
+            uint256 glpStaked = IRewardRouterV2(rewardRouter).mintAndStakeGlpETH{value: balance}(_minUsdg, _minGlp);
+            emit RewardClaimedAndStaked(msg.sender, balance, glpStaked);
         }
     }
 

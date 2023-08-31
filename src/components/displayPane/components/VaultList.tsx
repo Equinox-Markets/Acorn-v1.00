@@ -21,6 +21,7 @@ import ConnectAccount from "components/Account/ConnectAccountButton";
 //import WFTMvault from 'data/abi/vaults/WFTMvault.json';
 import GLP from 'data/abi/tokens/GLP.json';
 import aGLP from 'data/abi/vaults/aGLP.json';
+//import aGLP2 from 'data/abi/vaults/aGLP2.json';
 
 import Vault from './Vault';
 
@@ -44,15 +45,15 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
-    name: 'GLP Vault',
-    address: '0xef224301008B6d39F2b9e86e826c16309b611f09',
+    name: 'GLP Vault 2',
+    address: '0x8fDeD5bD136C8e848312F12329afDe03De5D5c88',
     abi: aGLP,
     chainId: 42161, // Arbitrum mainnet
     logo: glpLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 37.22,
-    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out USDC, opens a borrow position in USDC, then deposits the USDC in a stablecoin farm. It then claims the reward tokens from both platforms and converts the tokens into more USDC.",
+    strategy: "This is an auto-compounding vault integrated with GMX.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: GLP, // Set ABI here
