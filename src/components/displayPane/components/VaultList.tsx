@@ -7,7 +7,8 @@ import arbLogo from 'assets/images/arbitrum_logo.svg';
 //import AXLUSDC from 'assets/images/AXLUSDC.png';
 //import ftmLogo from 'assets/images/fantom_logo.png';
 //import wFTM from 'assets/images/FTM.svg';
-import glpLogo from 'assets/images/glp_logo.png';
+import glpLogo from 'assets/images/glp_logo.svg';
+import plvGLPLogo from 'assets/images/plvGLP_logo.svg';
 //import lzUSDT from 'assets/images/lzUSDT.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
 //import USDCLODE from 'assets/images/USDC_LODE.svg';
@@ -20,6 +21,8 @@ import ConnectAccount from "components/Account/ConnectAccountButton";
 //import lzUSDTvault from 'data/abi/vaults/lzUSDTvault.json';
 //import WFTMvault from 'data/abi/vaults/WFTMvault.json';
 import GLP from 'data/abi/tokens/GLP.json';
+import plvGLP from 'data/abi/tokens/plvGLP.json';
+import AcornRewardVault from 'data/abi/vaults/AcornRewardVault.json';
 import aGLP from 'data/abi/vaults/aGLP.json';
 //import aGLP2 from 'data/abi/vaults/aGLP2.json';
 
@@ -45,7 +48,7 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
-    name: 'GLP Vault 2',
+    name: 'GLP Vault',
     address: '0x8fDeD5bD136C8e848312F12329afDe03De5D5c88',
     abi: aGLP,
     chainId: 42161, // Arbitrum mainnet
@@ -57,6 +60,23 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: GLP, // Set ABI here
+    textAboveTitle: "", // New property
+    textBelowDescription: "Note: Withdraw fees are 0.1%", // New property
+
+  },
+  {
+    name: 'plvGLP Vault',
+    address: '0x1c40bf6508D29852a8d31aa30b214737fAEe1622',
+    abi: AcornRewardVault,
+    chainId: 42161, // Arbitrum mainnet
+    logo: plvGLPLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 37.22,
+    strategy: "This is an auto-compounding vault integrated with Lodestar Finance.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
+    depositTokenAbi: plvGLP, // Set ABI here
     textAboveTitle: "", // New property
     textBelowDescription: "Note: Withdraw fees are 0.1%", // New property
 
