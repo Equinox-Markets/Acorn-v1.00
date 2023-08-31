@@ -45,7 +45,7 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
-    name: 'GLP Vault 2',
+    name: 'GLP Vault',
     address: '0x8fDeD5bD136C8e848312F12329afDe03De5D5c88',
     abi: aGLP,
     chainId: 42161, // Arbitrum mainnet
