@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract lzUSDTVault is ERC20("alzUSDT", "alzUSDT"), ReentrancyGuard, Ownable {
+contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable {
   using SafeERC20 for IERC20;
   using EnumerableSet for EnumerableSet.AddressSet;
   using SafeMath for uint256;
@@ -19,23 +19,22 @@ contract lzUSDTVault is ERC20("alzUSDT", "alzUSDT"), ReentrancyGuard, Ownable {
   uint256 public depositFee = 1; // 0.1%
   uint256 public withdrawFee = 1; // 0.1%
   address payable public feeReceiver;
-  IERC20 public rewardToken;  // ACORN token
-  uint256 public rewardRate;  // e.g., 10 means 10 ACORN per 1 glpAmount per block
-  bool public rewardsEnabled = true;
+  IERC20 public rewardToken;  // ETH or ACORN tokens
+  uint256 public rewardRate;
+  bool public rewardsEnabled = false;
 
   mapping(address => uint256) public lastRewardBlock;
   mapping(address => uint256) public rewards;
 
   EnumerableSet.AddressSet private holders;
 
-  constructor(IERC20 _stakedGlp, address payable _feeReceiver, IERC20 _rewardToken) {
+  constructor(IERC20 _stakedGlp, address payable _feeReceiver) {
     require(_feeReceiver != address(0), "Fee receiver cannot be zero address");
     stakedGlp = _stakedGlp;
     feeReceiver = _feeReceiver;
-    require(_rewardToken != IERC20(address(0)), "Reward token cannot be the zero address");
   }
 
-  // Treasury can fund the reward pool with ACORN tokens
+  // Treasury can fund the reward pool with ETH or ACORN tokens
   function fundRewardPool(uint256 amount) external onlyOwner {
       require(rewardToken.transferFrom(msg.sender, address(this), amount), "Funding failed");
       emit RewardFunded(amount);
@@ -51,6 +50,11 @@ contract lzUSDTVault is ERC20("alzUSDT", "alzUSDT"), ReentrancyGuard, Ownable {
       rewardsEnabled = enabled;
   }
 
+  // New internal function
+  function _toggleRewards(bool enabled) internal {
+      rewardsEnabled = enabled;
+  }
+
   // Treasury can set the reward token, initially set it to ACORN address
   function setRewardToken(address newRewardToken) external onlyOwner {
       rewardToken = IERC20(newRewardToken);
@@ -61,9 +65,23 @@ contract lzUSDTVault is ERC20("alzUSDT", "alzUSDT"), ReentrancyGuard, Ownable {
     if (rewardsEnabled && lastRewardBlock[user] > 0) {
       uint256 blockDelta = block.number - lastRewardBlock[user];
       
-      // Here we multiply the balanceOf(user) by 1e12 (10^12) to convert it to the same base unit as ACORN.
-      // This makes it compatible with the rewardRate, which is based on ACORN's 18 decimals.
-      rewards[user] += (balanceOf(user) * 1e12) * rewardRate * blockDelta / 1e18;  // Adjusted for 6 decimal places in Vault and 18 in ACORN
+      // Adjust balance of user to have 18 decimals
+      uint256 adjustedUserBalance = balanceOf(user).mul(1e18);
+      
+      // The reward rate is already scaled by 1e18.
+      uint256 acornNeeded = adjustedUserBalance
+                              .mul(rewardRate)
+                              .mul(blockDelta)
+                              .div(1e18);  // Adjusted for 18 decimal places
+      
+      // Check if there is enough ACORN in the contract to distribute rewards
+      if (rewardToken.balanceOf(address(this)) < acornNeeded) {
+        // Disable rewards if not enough ACORN
+        _toggleRewards(false);
+        return;
+      }
+
+      rewards[user] = rewards[user].add(acornNeeded);
     }
     lastRewardBlock[user] = block.number;
   }
@@ -92,7 +110,9 @@ contract lzUSDTVault is ERC20("alzUSDT", "alzUSDT"), ReentrancyGuard, Ownable {
     uint256 amountAfterFee = glpAmount.sub(fee);
 
     stakedGlp.safeTransferFrom(msg.sender, address(this), glpAmount);
+    if (fee > 0) {
     stakedGlp.safeTransfer(feeReceiver, fee);
+}
 
     _mint(msg.sender, amountAfterFee);
     holders.add(msg.sender);
@@ -109,28 +129,38 @@ contract lzUSDTVault is ERC20("alzUSDT", "alzUSDT"), ReentrancyGuard, Ownable {
 
   // Allow holders to withdraw their tokens and yield
   function withdraw(uint256 aGlpAmount) public nonReentrant {
-    require(balanceOf(msg.sender) >= aGlpAmount, "Not enough aGLP balance");
+      require(balanceOf(msg.sender) >= aGlpAmount, "Not enough aGLP balance");
 
-    // Update the rewards before proceeding with the withdrawal
-    updateRewards(msg.sender);
-
-    uint256 glpToReturn = aGlpAmount
+      //Calculate glpToReturn
+      uint256 glpToReturn = aGlpAmount
                                 .mul(stakedGlp.balanceOf(address(this)))
                                 .div(totalSupply());
-    uint256 fee = glpToReturn.mul(withdrawFee).div(1000);
-    uint256 amountAfterFee = glpToReturn.sub(fee);
 
-    _burn(msg.sender, aGlpAmount);
-    require(stakedGlp.balanceOf(address(this)) >= amountAfterFee, "Not enough GLP in contract");
-    
-    stakedGlp.transfer(msg.sender, amountAfterFee);
-    stakedGlp.transfer(feeReceiver, fee);
+      //1:1 Redeemability check
+      require(glpToReturn == aGlpAmount, "Cannot redeem 1:1 due to lack of liquidity");
 
-    if (balanceOf(msg.sender) == 0) {
-        holders.remove(msg.sender);
-    }
+      // Step 3: Update the rewards before proceeding with the withdrawal
+      updateRewards(msg.sender);
 
-    emit Withdraw(msg.sender, aGlpAmount);
+      //Burn tokens
+      _burn(msg.sender, aGlpAmount);
+
+      uint256 fee = glpToReturn.mul(withdrawFee).div(1000);
+      uint256 amountAfterFee = glpToReturn.sub(fee);
+
+      //Transfer funds
+      require(stakedGlp.balanceOf(address(this)) >= amountAfterFee, "Not enough GLP in contract");
+      stakedGlp.transfer(msg.sender, amountAfterFee);
+
+      if (fee > 0) {
+        stakedGlp.transfer(feeReceiver, fee);
+      }
+
+      if (balanceOf(msg.sender) == 0) {
+          holders.remove(msg.sender);
+      }
+
+      emit Withdraw(msg.sender, aGlpAmount);
   }
 
    // Allow the treasury to withdraw tokens for yield strategies
@@ -179,7 +209,7 @@ contract lzUSDTVault is ERC20("alzUSDT", "alzUSDT"), ReentrancyGuard, Ownable {
   }
 
   function decimals() public view virtual override returns (uint8) {
-    return 6; // Replace with the correct number of decimals for the underlying token
+    return 18; // Replace with the correct number of decimals for the underlying token
   }
 
   event Deposit(address indexed user, uint256 amount);
