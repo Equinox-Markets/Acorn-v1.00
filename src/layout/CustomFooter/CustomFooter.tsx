@@ -1,26 +1,39 @@
-import { FC } from "react";
+import  { FC } from "react";
 
-import { GithubOutlined, TwitterOutlined, MediumOutlined } from '@ant-design/icons';
 import { Layout } from "antd";
-
+import DiscordIcon from 'assets/images/discord.svg';
+import GitbookIcon from 'assets/images/gitbook.svg';
+import TwitterIcon from 'assets/images/twitter.svg';
 
 const { Footer } = Layout;
 
-
 const CustomFooter: FC = () => {
-
   return (
     <Footer style={styles.footer}>
 
-      <a href="https://docs.com" style={docsLinkStyles}>
-        Docs
+      <a
+        href="https://acorn-finance.gitbook.io/acorn-docs/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src={GitbookIcon} alt="Docs" style={iconStyles} />
       </a>
 
-      <TwitterOutlined style={iconStyles}/>
+      <a
+        href="/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src={TwitterIcon} alt="Twitter" style={iconStyles} />
+      </a>
 
-      <GithubOutlined style={iconStyles} />
-
-      <MediumOutlined style={iconStyles}/>
+      <a
+        href="https://discord.gg/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src={DiscordIcon} alt="Discord" style={iconStyles} /> {/* Use the imported Discord SVG as an image */}
+      </a>
 
     </Footer>
   );
@@ -34,24 +47,20 @@ const styles = {
     color: '#ffffff',
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",  // Centers the items horizontally
+    justifyContent: "center",
     bottom: "0",
     width: "100%",
     backgroundColor: "#000509",
     padding: "10px 20px",
-    paddingBottom: "15px",  // Adds some padding at the bottom
-    zIndex: 1
+    paddingBottom: "15px",
   }
 } as const;
 
 const iconStyles = {
-  fontSize: '1.4em',
-  margin: '0 10px'
-}
-
-const docsLinkStyles = {
-  color: '#ffffff',
-  margin: '0 10px'
-}
+  fontSize: '1.6em',
+  margin: '0 10px',
+  width: '26px',
+  height: '26px'
+};
 
 export default CustomFooter;

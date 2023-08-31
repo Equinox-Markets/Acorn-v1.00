@@ -55,7 +55,7 @@ const vaults: VaultType[] = [
     logo: glpLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 37.22,
+    apr: 30.63,
     strategy: "This is an auto-compounding vault integrated with GMX.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
@@ -72,7 +72,7 @@ const vaults: VaultType[] = [
     logo: plvGLPLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 37.22,
+    apr: 36.27,
     strategy: "This is an auto-compounding vault integrated with Lodestar Finance.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
