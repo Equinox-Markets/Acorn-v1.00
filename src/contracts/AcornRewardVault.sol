@@ -9,7 +9,8 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract AcornRewardVault is ERC20("awstETH", "awstETH"), ReentrancyGuard, Ownable {
+
+contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable {
   using SafeERC20 for IERC20;
   using EnumerableSet for EnumerableSet.AddressSet;
   using SafeMath for uint256;
