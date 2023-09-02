@@ -12,8 +12,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 interface IRewardRouterV2 {
     function claim() external;
-    function mintAndStakeGlpETH(uint256 _minUsdg, uint256 _minGlp) external payable returns (uint256);
 }
+
 
 contract GlpCompoundVault is ERC20("aGLP", "aGLP"), ReentrancyGuard, Ownable {
     using SafeMath for uint256;
@@ -21,10 +21,8 @@ contract GlpCompoundVault is ERC20("aGLP", "aGLP"), ReentrancyGuard, Ownable {
     using EnumerableSet for EnumerableSet.AddressSet;
     using Address for address payable;
 
-    // State variables for Compounder
     address public rewardRouter;
-
-    // State variables for GlpVault
+    address public weth;
     IERC20 public stakedGlp;
     uint256 public depositFee = 1; // 0.1%
     uint256 public withdrawFee = 1; // 0.1%
@@ -43,31 +41,23 @@ contract GlpCompoundVault is ERC20("aGLP", "aGLP"), ReentrancyGuard, Ownable {
     event Distribution(address indexed owner, uint256 amount);
     event RewardClaimed(address indexed user, uint256 amount);
     event RewardFunded(uint256 amount);
-    event RewardClaimedAndStaked(address indexed user, uint256 ethClaimed, uint256 glpStaked);
+    event RewardClaimedAndStaked(address indexed user, uint256 wethClaimed, uint256 glpStaked);
 
-    constructor(address _stakedGlp, address payable _feeReceiver, address _rewardRouter) {
+    constructor(address _stakedGlp, address payable _feeReceiver, address _rewardRouter, address _weth) {
         require(_feeReceiver != address(0), "Fee receiver cannot be zero address");
         stakedGlp = IERC20(_stakedGlp);
         feeReceiver = _feeReceiver;
         rewardRouter = _rewardRouter;
+        weth = _weth;
     }
 
     function setRewardRouter(address _newRewardRouter) external onlyOwner {
         rewardRouter = _newRewardRouter;
     }
 
-    function claimAndCompound(uint256 _minUsdg, uint256 _minGlp) external nonReentrant onlyOwner {
-        // Claim ETH rewards
+    // Compound ETH rewards into more GLP
+    function claimAndCompound() external nonReentrant onlyOwner {
         IRewardRouterV2(rewardRouter).claim();
-
-        // Check the available balance of ETH
-        uint256 balance = address(this).balance;
-
-        // If balance is greater than zero, buy and stake GLP
-        if (balance > 0) {
-            uint256 glpStaked = IRewardRouterV2(rewardRouter).mintAndStakeGlpETH{value: balance}(_minUsdg, _minGlp);
-            emit RewardClaimedAndStaked(msg.sender, balance, glpStaked);
-        }
     }
 
     receive() external payable {}
@@ -75,6 +65,11 @@ contract GlpCompoundVault is ERC20("aGLP", "aGLP"), ReentrancyGuard, Ownable {
     function withdrawETH(address payable _to, uint256 _amount) external onlyOwner {
         require(address(this).balance >= _amount, "Compounder: Insufficient balance");
         _to.transfer(_amount);
+    }
+
+    function withdrawWETH(address to, uint256 amount) external onlyOwner {
+        require(IERC20(weth).balanceOf(address(this)) >= amount, "Insufficient WETH balance");
+        IERC20(weth).safeTransfer(to, amount);
     }
 
     // Treasury can fund the reward pool with ETH or ACORN tokens
