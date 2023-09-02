@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+
 contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable {
   using SafeERC20 for IERC20;
   using EnumerableSet for EnumerableSet.AddressSet;
@@ -16,8 +17,8 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
   using Address for address payable;
 
   IERC20 public stakedGlp;
-  uint256 public depositFee = 1; // 0.1%
-  uint256 public withdrawFee = 1; // 0.1%
+  uint256 public depositFee = 0; // 0.1%
+  uint256 public withdrawFee = 5; // 0.1%
   address payable public feeReceiver;
   IERC20 public rewardToken;  // ETH or ACORN tokens
   uint256 public rewardRate;

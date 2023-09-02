@@ -63,7 +63,7 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenAbi: wstETH, // Set ABI here
     textAboveTitle: "", // New property
-    textBelowDescription: "Note: Deposit and withdraw fees are 0.5%", // New property
+    textBelowDescription: "Note: Withdraw fees are 0.5%", // New property
 
   },
   {
