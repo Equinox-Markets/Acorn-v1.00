@@ -8,6 +8,7 @@ import arbLogo from 'assets/images/arbitrum_logo.svg';
 //import ftmLogo from 'assets/images/fantom_logo.png';
 //import wFTM from 'assets/images/FTM.svg';
 import glpLogo from 'assets/images/glp_logo.svg';
+import wstETHLogo from 'assets/images/wstETH_logo.svg';
 import plvGLPLogo from 'assets/images/plvGLP_logo.svg';
 //import lzUSDT from 'assets/images/lzUSDT.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
@@ -22,6 +23,7 @@ import ConnectAccount from "components/Account/ConnectAccountButton";
 //import WFTMvault from 'data/abi/vaults/WFTMvault.json';
 import GLP from 'data/abi/tokens/GLP.json';
 import plvGLP from 'data/abi/tokens/plvGLP.json';
+import wstETH from 'data/abi/tokens/wstETH.json';
 import AcornRewardVault from 'data/abi/vaults/AcornRewardVault.json';
 import aGLP from 'data/abi/vaults/aGLP.json';
 //import aGLP2 from 'data/abi/vaults/aGLP2.json';
@@ -48,8 +50,25 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
+    name: 'wstETH Vault',
+    address: '0x811fb486851B0b1162021b3834CFb7aA8568d2A7',
+    abi: AcornRewardVault,
+    chainId: 42161, // Arbitrum mainnet
+    logo: wstETHLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 30.91,
+    strategy: "This is an auto-compounding vault integrated with Lodestar Finance.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
+    depositTokenAbi: wstETH, // Set ABI here
+    textAboveTitle: "", // New property
+    textBelowDescription: "Note: Deposit and withdraw fees are 0.5%", // New property
+
+  },
+  {
     name: 'GLP Vault',
-    address: '0x8fDeD5bD136C8e848312F12329afDe03De5D5c88',
+    address: '0xA45B443B4562A7F2FDcB78F449814601c287c991',
     abi: aGLP,
     chainId: 42161, // Arbitrum mainnet
     logo: glpLogo, // add logo path
@@ -61,43 +80,27 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: GLP, // Set ABI here
     textAboveTitle: "", // New property
-    textBelowDescription: "Note: Withdraw fees are 0.1%", // New property
+    textBelowDescription: "Note: Withdraw fees are 0.5%", // New property
 
   },
   {
     name: 'plvGLP Vault',
-    address: '0x1c40bf6508D29852a8d31aa30b214737fAEe1622',
+    address: '0xF0086020b5E70a10f4CebF843D13c60cea58fAcc',
     abi: AcornRewardVault,
     chainId: 42161, // Arbitrum mainnet
     logo: plvGLPLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 36.27,
+    apr: 31.27,
     strategy: "This is an auto-compounding vault integrated with Lodestar Finance.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
     depositTokenAbi: plvGLP, // Set ABI here
     textAboveTitle: "", // New property
-    textBelowDescription: "Note: Withdraw fees are 0.1%", // New property
+    textBelowDescription: "Note: Withdraw fees are 0.5%", // New property
 
   },
-  /*{
-    name: 'wstETH Vault',
-    address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
-    abi: aArbGLP,
-    chainId: 42161, // Arbitrum mainnet
-    logo: WSTETHLODE, // add logo path
-    networkName: 'ARB',
-    networkLogo: arbLogo,
-    apr: 38.91,
-    strategy: "This vault generates yield by participating in Lodestar Finance, it lends out wstETH, opens a borrow position in wstETH, then deposits the wstETH in a (Redacted) farm. It then claims the reward tokens from both platforms and converts the tokens into more wstETH.",
-    description: 'Deposit GLP and Earn',
-    depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
-    depositTokenAbi: ARBGLPERC20ABI, // Set ABI here
-    textAboveTitle: "", // New property
-    textBelowDescription: "Note: Deposit and withdraw fees are 0.1%", // New property
-
-  },
+/*
   {
     name: 'WETH Vault',
     address: '0xEAa69FFDF61262d82b1155A68727101ca6cC704c',
