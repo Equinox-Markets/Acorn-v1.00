@@ -57,7 +57,7 @@ const vaults: VaultType[] = [
     logo: wstETHLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 30.91,
+    apr: 27.82,
     strategy: "This is an auto-compounding vault integrated with Lodestar Finance.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
