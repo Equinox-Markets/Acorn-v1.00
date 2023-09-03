@@ -5,10 +5,7 @@ import './AcornInfo.css';
 const AcornInfo: React.FC = () => {
   return (
     <Card className="acorn-card-info" bordered={false}>
-      <h1 className="welcome-text-info animated-text">Welcome to Acorn Finance</h1>
-      <p className="slogan-text-info neon-text">
-        An advanced, decentralized protocol optimized for cross-chain governance and liquidity.
-      </p>
+      <h1 className="welcome-text-info animated-text">Optimizing Liquidity & Maximizing Rewards Across Chains</h1>
 
       <div className="features-info">
   {/* Each feature has its own animation and visual effects */}
