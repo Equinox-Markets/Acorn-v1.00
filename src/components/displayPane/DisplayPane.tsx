@@ -5,7 +5,7 @@ import { useWindowWidthAndHeight } from "hooks";
 
 import { VaultList } from "./components";
 import AcornCard from "./components/AcornCard";
-import AcornStats from "./components/AcornStats";
+//import AcornStats from "./components/AcornStats";
 import AcornInfo from "./components/AcornInfo";
 
 const styles = {
@@ -32,7 +32,7 @@ const styles = {
     width: "87%",
     margin: "auto",
     fontSize: "17px",
-    marginTop: "0px",
+    marginTop: "10px",
     color: "#ffffff"
   },
   vaultcontent: {
@@ -64,7 +64,6 @@ const DisplayPane: React.FC = () => {
         {!isActive && (
           <>
             <AcornInfo />
-            <AcornStats />
           </>
         )}
         <div style={styles.vaultcontent}>
