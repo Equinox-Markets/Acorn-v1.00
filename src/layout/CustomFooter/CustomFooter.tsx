@@ -20,7 +20,7 @@ const CustomFooter: FC = () => {
       </a>
 
       <a
-        href="/"
+        href="https://twitter.com/AcornFinanceio"
         target="_blank"
         rel="noopener noreferrer"
       >
