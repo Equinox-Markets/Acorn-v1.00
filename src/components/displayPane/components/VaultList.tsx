@@ -91,7 +91,7 @@ const vaults: VaultType[] = [
     logo: glpLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 30.63,
+    apr: 34.63,
     strategy: "This is an auto-compounding vault integrated with GMX and Equalizer. 50% of the GLP in the vault is compounded from the standard ETH rewards from GMX. The other 50% is converted into Equity from Equalizer, the EQUAL rewards are sold from Equity and converted into more GLP in the vault.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
