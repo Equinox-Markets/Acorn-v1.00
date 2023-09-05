@@ -24,6 +24,7 @@ type VaultProps = {
     depositTokenAbi: any[]
     textAboveTitle: string; // New property
     textBelowDescription: string; // New property
+    depositTokenName: string;
 
   };
 };
@@ -368,7 +369,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ width: '48%' }}>
       <Input
-        placeholder={`Balance: ${userBalance}`}
+        placeholder={`${vault.depositTokenName} Balance: ${userBalance}`}
         value={depositAmount}
         onChange={(e) => setDepositAmount(e.target.value)}
         onClick={(e) => e.stopPropagation()}

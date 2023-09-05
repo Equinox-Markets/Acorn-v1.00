@@ -82,7 +82,7 @@ const ConnectAccountButton: React.FC<WantedChain> = () => {
       {account === undefined ? (
         <div>
           <Button shape="round" type="primary" style={styles.button} onClick={() => setIsAuthModalOpen(true)}>
-            Connect Wallet
+            Explore Vaults
           </Button>
           <ConnectModal isModalOpen={isAuthModalOpen} setIsModalOpen={setIsAuthModalOpen} />
           <br />
