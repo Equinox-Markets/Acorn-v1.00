@@ -3,6 +3,7 @@ import { Divider } from "antd";
 import { useWindowWidthAndHeight } from "hooks";
 import { VaultList } from "./components";
 import AcornInfo from "./components/AcornInfo";
+import AcornCard from "./components/AcornCard";
 
 const styles = {
   container: {
@@ -69,7 +70,7 @@ const DisplayPane: React.FC = () => {
           </>
         )}
         <div style={vaultStyle}>
-        {isActive}
+        {isActive && <AcornCard />}
         <VaultList key={chainId} />
         </div>
         {isActive && (
