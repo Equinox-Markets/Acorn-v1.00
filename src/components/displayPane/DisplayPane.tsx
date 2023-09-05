@@ -6,7 +6,7 @@ import AcornInfo from "./components/AcornInfo";
 
 const styles = {
   container: {
-    background: "#000509",
+    background: "transparent",
     width: "100%",
     minWidth: "330px",
     maxWidth: "1000px",
