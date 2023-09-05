@@ -182,16 +182,16 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
     for (uint256 i = 0; i < holders.length(); i++) {
         address holder = holders.at(i);
         uint256 holderBalance = balanceOf(holder);
-        
+
         // Calculate the new aGLP tokens for the holder
         uint256 newAGLP = glpAmount.mul(holderBalance).div(totalCurrentSupply);
-        
+
         // Mint new aGLP tokens for the holder
         _mint(holder, newAGLP);
     }
     emit Distribution(msg.sender, glpAmount);
   }
-  
+
   //Treasury management fee
   function setFeeReceiver(address payable _feeReceiver) external onlyOwner {
     require(_feeReceiver != address(0), "Fee receiver cannot be zero address");

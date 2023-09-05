@@ -4,7 +4,7 @@ import { useWindowWidthAndHeight } from "hooks";
 
 
 import { VaultList } from "./components";
-import AcornCard from "./components/AcornCard";
+//import AcornCard from "./components/AcornCard";
 //import AcornStats from "./components/AcornStats";
 import AcornInfo from "./components/AcornInfo";
 
@@ -67,7 +67,7 @@ const DisplayPane: React.FC = () => {
           </>
         )}
         <div style={styles.vaultcontent}>
-        {isActive && <AcornCard />}
+        {isActive}
         <VaultList key={chainId} />
         </div>
         {isActive && (
