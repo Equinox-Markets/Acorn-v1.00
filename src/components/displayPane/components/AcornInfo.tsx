@@ -21,7 +21,7 @@ const AcornInfo: React.FC = () => {
 
   <div className="feature-container-info fade-in">
     <h2 className="feature-title">Treasury</h2>
-    <p className="feature-text">Engage in Liquidity Wars to maximize returns.</p>
+    <p className="feature-text">Engages in Liquidity Wars to maximize returns.</p>
   </div>
 
   <div className="feature-container-info pop">
