@@ -335,7 +335,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '45px' : '60px'} />
-        <h2 style={{ marginLeft: '20px' }}>{vault.name}</h2>
+        <h2 className="vault-name" style={{ marginLeft: '20px' }}>{vault.name}</h2>
       </div>
       <Button
         onClick={(e) => {
