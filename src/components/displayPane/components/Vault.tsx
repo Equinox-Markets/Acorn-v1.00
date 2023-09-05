@@ -23,7 +23,7 @@ type VaultProps = {
     depositTokenAddress: string;
     depositTokenAbi: any[]
     textAboveTitle: string | JSX.Element;
-    textBelowDescription: string; // New property
+    textBelowDescription: string;
     depositTokenName: string;
 
   };

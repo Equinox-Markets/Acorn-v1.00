@@ -37,9 +37,9 @@ type VaultType = {
   abi: any[]
   chainId: number;
   logo: string;
-  description: string; // add a description for each vault
-  networkName: string;  // Add networkName
-  networkLogo: string;  // Add networkLogo
+  description: string;
+  networkName: string;
+  networkLogo: string;
   apr: number;
   depositTokenAddress: string;
   strategy: string | JSX.Element;
