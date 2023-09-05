@@ -15,13 +15,13 @@ const AcornInfo: React.FC = () => {
   </div>
 
   <div className="feature-container-info slide-in">
-    <h2 className="feature-title">veTokens</h2>
-    <p className="feature-text">Strategic veToken allocation for yield and voting.</p>
+    <h2 className="feature-title">aTokens</h2>
+    <p className="feature-text">aTokens offer interest accrual directly on your balance.</p>
   </div>
 
   <div className="feature-container-info fade-in">
     <h2 className="feature-title">Treasury</h2>
-    <p className="feature-text">Focused governance for strategy and security.</p>
+    <p className="feature-text">Engage in Liquidity Wars to maximize returns.</p>
   </div>
 
   <div className="feature-container-info pop">

@@ -1,16 +1,12 @@
 import { useWeb3React } from "@web3-react/core";
 import { Divider } from "antd";
 import { useWindowWidthAndHeight } from "hooks";
-
-
 import { VaultList } from "./components";
-//import AcornCard from "./components/AcornCard";
-//import AcornStats from "./components/AcornStats";
 import AcornInfo from "./components/AcornInfo";
 
 const styles = {
   container: {
-    background: "##000509)",
+    background: "#000509",
     width: "100%",
     minWidth: "330px",
     maxWidth: "1000px",
@@ -36,13 +32,17 @@ const styles = {
     color: "#ffffff"
   },
   vaultcontent: {
-    width: "95%",
+    width: "80%",
     margin: "auto",
     fontSize: "18px",
     color: "#ffffff"
   },
+  vaultcontentSmall: {
+    width: "100%",  // Increase width for smaller devices
+    fontSize: "16px"  // Reduce font size for smaller devices
+  },
   action: {
-    background: "##000509)",
+    background: "#000509",
     width: "100%",
     minWidth: "330px",
     maxWidth: "900px",
@@ -58,6 +58,8 @@ const DisplayPane: React.FC = () => {
   const { isActive, chainId } = useWeb3React();
   const { isMobile } = useWindowWidthAndHeight();
 
+  const vaultStyle = isMobile ? { ...styles.vaultcontent, ...styles.vaultcontentSmall } : styles.vaultcontent;
+
   return (
     <div style={styles.container}>
       <div style={styles.content}>
@@ -66,7 +68,7 @@ const DisplayPane: React.FC = () => {
             <AcornInfo />
           </>
         )}
-        <div style={styles.vaultcontent}>
+        <div style={vaultStyle}>
         {isActive}
         <VaultList key={chainId} />
         </div>
@@ -82,6 +84,5 @@ const DisplayPane: React.FC = () => {
     </div>
   );
 };
-
 
 export default DisplayPane;

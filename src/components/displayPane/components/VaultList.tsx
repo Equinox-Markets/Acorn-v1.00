@@ -63,7 +63,7 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenAbi: wstETH, // Set ABI here
     textAboveTitle: "", // New property
-    textBelowDescription: "Note: Withdraw fees are 0.5%", // New property
+    textBelowDescription: "Note: Redeem fees are 0.5%", // New property
 
   },
   {
@@ -80,7 +80,7 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: GLP, // Set ABI here
     textAboveTitle: "", // New property
-    textBelowDescription: "Note: Withdraw fees are 0.5%", // New property
+    textBelowDescription: "Note: Redeem fees are 0.5%", // New property
 
   },
   {
@@ -97,7 +97,7 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
     depositTokenAbi: plvGLP, // Set ABI here
     textAboveTitle: "", // New property
-    textBelowDescription: "Note: Withdraw fees are 0.5%", // New property
+    textBelowDescription: "Note: Redeem fees are 0.5%", // New property
 
   },
 /*

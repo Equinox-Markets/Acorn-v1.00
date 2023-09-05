@@ -138,7 +138,7 @@ body {
 
 /* Default size for larger screens */
 .vault-name {
-  font-size: 2em; /* Or whatever size it currently is */
+  font-size: 1.5em; /* Or whatever size it currently is */
 }
 
 /* Smaller size for smaller screens */
