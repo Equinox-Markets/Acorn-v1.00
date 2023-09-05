@@ -64,7 +64,7 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenName: "wstETH",
     depositTokenAbi: wstETH, // Set ABI here
-    textAboveTitle: "Stake wstETH and receive awstETH, a liquid staked token version of wstETH that earns yield from Lodestar Finance.", // New property
+    textAboveTitle: "Stake wstETH and receive awstETH, a liquid staked version of wstETH that earns yield from Lodestar Finance.", // New property
     textBelowDescription: "Your balance of awstETH will grow over time and is redeemable 1:1 for wstETH. Note: Redeem fees are 0.5%", // New property
 
   },
@@ -82,7 +82,7 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
     depositTokenName: "plvGLP",
     depositTokenAbi: plvGLP, // Set ABI here
-    textAboveTitle: "Stake plvGLP and receive aplvGLP, a liquid staked token version of plvGLP that earns yield Lodestar Finance.", // New property
+    textAboveTitle: "Stake plvGLP and receive aplvGLP, a liquid staked version of plvGLP that earns yield Lodestar Finance.", // New property
     textBelowDescription: "Your balance of aplvGLP will grow over time and is redeemable 1:1 for plvGLP. Note: Redeem fees are 0.5%", // New property
 
   },
@@ -100,7 +100,7 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenName: "GLP",
     depositTokenAbi: GLP, // Set ABI here
-    textAboveTitle: "Stake GLP and receive aGLP, a liquid staked token version of aGLP that earns yield from GMX and Equalizer.", // New property
+    textAboveTitle: "Stake GLP and receive aGLP, a liquid staked version of aGLP that earns yield from GMX and Equalizer.", // New property
     textBelowDescription: "Your balance of aGLP will grow over time and is redeemable 1:1 for GLP. Note: Redeem fees are 0.5%", // New property
 
   },
