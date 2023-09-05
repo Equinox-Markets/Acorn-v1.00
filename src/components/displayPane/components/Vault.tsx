@@ -19,10 +19,10 @@ type VaultProps = {
     networkName: string;
     networkLogo: string;
     apr: number;
-    strategy: string;
+    strategy: string | JSX.Element;
     depositTokenAddress: string;
     depositTokenAbi: any[]
-    textAboveTitle: string; // New property
+    textAboveTitle: string | JSX.Element;
     textBelowDescription: string; // New property
     depositTokenName: string;
 

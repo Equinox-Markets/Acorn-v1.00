@@ -36,16 +36,16 @@ type VaultType = {
   address: string;
   abi: any[]
   chainId: number;
-  logo: string; // add this line
+  logo: string;
   description: string; // add a description for each vault
   networkName: string;  // Add networkName
   networkLogo: string;  // Add networkLogo
   apr: number;
-  depositTokenAddress: string; // Add this line
-  strategy: string;
-  depositTokenAbi: any[] // Add this line
-  textAboveTitle: string; // New property
-  textBelowDescription: string; // New property
+  depositTokenAddress: string;
+  strategy: string | JSX.Element;
+  depositTokenAbi: any[]
+  textAboveTitle: string | JSX.Element;
+  textBelowDescription: string;
   depositTokenName: string;
 };
 
@@ -64,8 +64,13 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenName: "wstETH",
     depositTokenAbi: wstETH, // Set ABI here
-    textAboveTitle: "Stake wstETH and receive awstETH, a liquid staked version of wstETH that earns yield from Lodestar Finance.", // New property
-    textBelowDescription: "Your balance of awstETH will grow over time and is redeemable 1:1 for wstETH. Note: Redeem fees are 0.5%", // New property
+    textAboveTitle: (
+      <>
+        Stake wstETH and receive awstETH, a liquid staked version of wstETH that earns yield from {" "}
+        <a href="https://www.lodestarfinance.io/" target="_blank" rel="noopener noreferrer">Lodestar Finance</a>.
+      </>
+    ),
+    textBelowDescription: "Your balance of awstETH will grow over time and is redeemable 1:1 for wstETH. Note: Redeem fees are 0.5%",
 
   },
   {
@@ -82,8 +87,13 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
     depositTokenName: "plvGLP",
     depositTokenAbi: plvGLP, // Set ABI here
-    textAboveTitle: "Stake plvGLP and receive aplvGLP, a liquid staked version of plvGLP that earns yield Lodestar Finance.", // New property
-    textBelowDescription: "Your balance of aplvGLP will grow over time and is redeemable 1:1 for plvGLP. Note: Redeem fees are 0.5%", // New property
+    textAboveTitle: (
+      <>
+        Stake plvGLP and receive aplvGLP, a liquid staked version of plvGLP that earns yield from {" "}
+        <a href="https://www.lodestarfinance.io/" target="_blank" rel="noopener noreferrer">Lodestar Finance</a>.
+      </>
+    ),
+    textBelowDescription: "Your balance of aplvGLP will grow over time and is redeemable 1:1 for plvGLP. Note: Redeem fees are 0.5%",
 
   },
   {
@@ -100,8 +110,15 @@ const vaults: VaultType[] = [
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenName: "GLP",
     depositTokenAbi: GLP, // Set ABI here
-    textAboveTitle: "Stake GLP and receive aGLP, a liquid staked version of aGLP that earns yield from GMX and Equalizer.", // New property
-    textBelowDescription: "Your balance of aGLP will grow over time and is redeemable 1:1 for GLP. Note: Redeem fees are 0.5%", // New property
+    textAboveTitle: (
+      <>
+        Stake GLP and receive aGLP, a liquid staked version of GLP that earns yield from {" "}
+        <a href="https://gmx.io/" target="_blank" rel="noopener noreferrer">GMX</a> {" "}
+        and {" "}
+        <a href="https://v2.equity.equalizer.exchange/dashboard" target="_blank" rel="noopener noreferrer">Equalizer</a>.
+      </>
+    ),
+    textBelowDescription: "Your balance of aGLP will grow over time and is redeemable 1:1 for GLP. Note: Redeem fees are 0.5%",
 
   },
 /*
