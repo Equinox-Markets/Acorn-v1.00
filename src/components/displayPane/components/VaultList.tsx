@@ -58,7 +58,7 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 27.82,
-    strategy: "This is an auto-compounding vault integrated with Lodestar Finance.",
+    strategy: "This is an auto-compounding vault integrated with Lido and Lodestar Finance. Stake wstETH and receive awstETH, a liquid staked token version of wstETH that earns yield from Lido and Lodestar. Your balance of awstETH will grow over time and is redeemable 1:1 for wstETH.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenAbi: wstETH, // Set ABI here
@@ -75,7 +75,7 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 30.63,
-    strategy: "This is an auto-compounding vault integrated with GMX.",
+    strategy: "This is an auto-compounding vault integrated with GMX and Equalizer. Stake GLP and receive aGLP, a liquid staked token version of GLP that earns yield from GMX and Equity. Your balance of aGLP will grow over time and is redeemable 1:1 for GLP.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: GLP, // Set ABI here
@@ -92,7 +92,7 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 31.27,
-    strategy: "This is an auto-compounding vault integrated with Lodestar Finance.",
+    strategy: "This is an auto-compounding vault integrated with PlutusDAO and Lodestar Finance. Stake plvGLP and receive aplvGLP, a liquid staked token version of plvGLP that earns yield from PlutusDAO and Lodestar. Your balance of aplvGLP will grow over time and is redeemable 1:1 for plvGLP.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
     depositTokenAbi: plvGLP, // Set ABI here
