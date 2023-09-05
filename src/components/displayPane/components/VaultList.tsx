@@ -57,13 +57,30 @@ const vaults: VaultType[] = [
     logo: wstETHLogo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 27.82,
-    strategy: "This is an auto-compounding vault integrated with Lido and Lodestar Finance. Stake wstETH and receive awstETH, a liquid staked token version of wstETH that earns yield from Lido and Lodestar. Your balance of awstETH will grow over time and is redeemable 1:1 for wstETH.",
+    apr: 17.62,
+    strategy: "This vault strategy loops wstETH and then max-locks LODE rewards for 6 months. The ETH rewards from staking LODE is then used to compound the wstETH in the vault.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenAbi: wstETH, // Set ABI here
-    textAboveTitle: "", // New property
-    textBelowDescription: "Note: Redeem fees are 0.5%", // New property
+    textAboveTitle: "Stake wstETH and receive awstETH, a liquid staked token version of wstETH that earns yield from Lodestar Finance.", // New property
+    textBelowDescription: "Your balance of awstETH will grow over time and is redeemable 1:1 for wstETH. Note: Redeem fees are 0.5%", // New property
+
+  },
+  {
+    name: 'plvGLP Vault',
+    address: '0xF0086020b5E70a10f4CebF843D13c60cea58fAcc',
+    abi: AcornRewardVault,
+    chainId: 42161, // Arbitrum mainnet
+    logo: plvGLPLogo, // add logo path
+    networkName: 'ARB',
+    networkLogo: arbLogo,
+    apr: 56.37,
+    strategy: "This vault strategy loops plvGLP and then max-locks LODE rewards for 6 months. The ETH rewards from staking LODE is then used to compound the plvGLP in the vault.",
+    description: 'Deposit GLP and Earn',
+    depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
+    depositTokenAbi: plvGLP, // Set ABI here
+    textAboveTitle: "Stake plvGLP and receive aplvGLP, a liquid staked token version of plvGLP that earns yield Lodestar Finance.", // New property
+    textBelowDescription: "Your balance of aplvGLP will grow over time and is redeemable 1:1 for plvGLP. Note: Redeem fees are 0.5%", // New property
 
   },
   {
@@ -75,29 +92,12 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 30.63,
-    strategy: "This is an auto-compounding vault integrated with GMX and Equalizer. Stake GLP and receive aGLP, a liquid staked token version of GLP that earns yield from GMX and Equity. Your balance of aGLP will grow over time and is redeemable 1:1 for GLP.",
+    strategy: "This is an auto-compounding vault integrated with GMX and Equalizer. 50% of the GLP in the vault is compounded from the standard ETH rewards from GMX. The other 50% is converted into Equity from Equalizer, the EQUAL rewards are sold from Equity and converted into more GLP in the vault.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenAbi: GLP, // Set ABI here
-    textAboveTitle: "", // New property
-    textBelowDescription: "Note: Redeem fees are 0.5%", // New property
-
-  },
-  {
-    name: 'plvGLP Vault',
-    address: '0xF0086020b5E70a10f4CebF843D13c60cea58fAcc',
-    abi: AcornRewardVault,
-    chainId: 42161, // Arbitrum mainnet
-    logo: plvGLPLogo, // add logo path
-    networkName: 'ARB',
-    networkLogo: arbLogo,
-    apr: 31.27,
-    strategy: "This is an auto-compounding vault integrated with PlutusDAO and Lodestar Finance. Stake plvGLP and receive aplvGLP, a liquid staked token version of plvGLP that earns yield from PlutusDAO and Lodestar. Your balance of aplvGLP will grow over time and is redeemable 1:1 for plvGLP.",
-    description: 'Deposit GLP and Earn',
-    depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
-    depositTokenAbi: plvGLP, // Set ABI here
-    textAboveTitle: "", // New property
-    textBelowDescription: "Note: Redeem fees are 0.5%", // New property
+    textAboveTitle: "Stake GLP and receive aGLP, a liquid staked token version of aGLP that earns yield from GMX and Equalizer.", // New property
+    textBelowDescription: "Your balance of aGLP will grow over time and is redeemable 1:1 for GLP. Note: Redeem fees are 0.5%", // New property
 
   },
 /*
