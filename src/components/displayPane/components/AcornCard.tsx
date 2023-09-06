@@ -9,7 +9,7 @@ import web3Boilerplate_logo from 'assets/images/Acorn_Token.svg';
 const AcornCard: React.FC = () => {
   return (
     <Card className="acorn-card" bordered={false}>
-      <h1 className="welcome-text">Earn Increased Yields with Acorn's Dynamic Vaults</h1>
+      <h1 className="welcome-text"></h1>
       <p className="slogan-text">
 
       </p>
