@@ -1,6 +1,10 @@
 import React from 'react';
 import { Card } from 'antd';
 import './AcornInfo.css';
+import ConnectAccount from "components/Account/ConnectAccountButton";
+
+const connectAccountButtonStyle = { fontSize: '24px', padding: '0px 0px' }; // Adjust as needed
+const marginStyle = { color: 'white', marginTop: '10px', marginBottom: '90px' };
 
 const AcornInfo: React.FC = () => {
   return (
@@ -29,6 +33,11 @@ const AcornInfo: React.FC = () => {
     <p className="feature-text">Cross-chain governance and liquidity.</p>
   </div>
 </div>
+<div style={marginStyle}>
+        <div style={connectAccountButtonStyle}>
+          <ConnectAccount />
+        </div>
+      </div>
 
     </Card>
   );

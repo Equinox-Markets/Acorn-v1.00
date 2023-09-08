@@ -55,7 +55,7 @@ const styles = {
   }
 } as const;
 
-const DisplayPane: React.FC<{ activeLink: string }> = ({ activeLink }) => {
+const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) => {
   const { isActive, chainId } = useWeb3React();
   const { isMobile } = useWindowWidthAndHeight();
 
@@ -64,15 +64,16 @@ const DisplayPane: React.FC<{ activeLink: string }> = ({ activeLink }) => {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-        {!isActive && (
-          <>
-            <AcornInfo />
-          </>
-        )}
+        {!isActive ? <AcornInfo /> : null}
         <div style={vaultStyle}>
-        {activeLink === 'Vaults' && isActive && <AcornCard />}
-        {activeLink === 'Vaults' && <VaultList key={chainId} />}
-        {/* Add more conditions here for other activeLinks like 'Convert' */}
+          {isActive && (
+            <>
+              {currentDisplay === 'Vaults' ? <VaultList key={chainId} /> : null}
+              {currentDisplay === 'AcornCard' ? <AcornCard /> : null}
+              {currentDisplay === '' && <AcornCard />}
+              {currentDisplay === '' && <VaultList key={chainId} />}
+            </>
+          )}
         </div>
         {isActive && (
           <>
