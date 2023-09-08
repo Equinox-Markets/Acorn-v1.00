@@ -78,6 +78,7 @@ const ConnectAccount: React.FC<WantedChain> = () => {
       // @ts-expect-error close can be returned by wallet
       await connector.close();
     }
+    window.history.replaceState({}, document.title, "/");
   }, []);
 
   return (

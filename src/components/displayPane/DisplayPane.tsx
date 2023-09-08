@@ -55,7 +55,7 @@ const styles = {
   }
 } as const;
 
-const DisplayPane: React.FC = () => {
+const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) => {
   const { isActive, chainId } = useWeb3React();
   const { isMobile } = useWindowWidthAndHeight();
 
@@ -64,14 +64,16 @@ const DisplayPane: React.FC = () => {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-        {!isActive && (
-          <>
-            <AcornInfo />
-          </>
-        )}
+        {!isActive ? <AcornInfo /> : null}
         <div style={vaultStyle}>
-        {isActive && <AcornCard />}
-        <VaultList key={chainId} />
+          {isActive && (
+            <>
+              {currentDisplay === 'Vaults' ? <VaultList key={chainId} /> : null}
+              {currentDisplay === 'AcornCard' ? <AcornCard /> : null}
+              {currentDisplay === '' && <AcornCard />}
+              {currentDisplay === '' && <VaultList key={chainId} />}
+            </>
+          )}
         </div>
         {isActive && (
           <>

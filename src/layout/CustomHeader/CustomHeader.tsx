@@ -1,6 +1,8 @@
 import { FC, CSSProperties } from "react";
-import { Layout } from "antd";
 
+import { MenuOutlined } from '@ant-design/icons';
+import { useWeb3React } from '@web3-react/core';
+import { Layout, Menu, Dropdown, Button } from "antd";
 import web3Boilerplate_logo from "assets/images/web3Boilerplate_logo.svg";
 import ConnectAccount from "components/Account/ConnectAccount";
 import ChainSelector from "components/ChainSelector";
@@ -21,8 +23,13 @@ const styles = {
   }
 } as const;
 
-const CustomHeader: FC = () => {
+interface CustomHeaderProps {
+  setCurrentDisplay: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
   const { isMobile } = useWindowWidthAndHeight();
+  const { isActive } = useWeb3React();
 
   const headerRightStyle: CSSProperties = {
     display: "flex",
@@ -41,10 +48,60 @@ const CustomHeader: FC = () => {
     paddingRight: isMobile ? "0px" : "90px",  // Conditionally set right margin
   };
 
+  const menuLinkStyle: CSSProperties = {
+    marginRight: '20px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: "white"
+  };
+
+  const menuButtonStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    height: "42px",
+    border: "0",
+    borderRadius: "10px",
+    backgroundColor: "#011F37",
+    color: "white"
+  };
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+      <a href="/">Home</a>
+      </Menu.Item>
+      <Menu.Item>
+      <a href="#" onClick={() => { handleLinkClick('vaults'); setCurrentDisplay('Vaults'); }}>Vaults</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a>
+      </Menu.Item>
+    </Menu>
+  );
+
+  const handleLinkClick = (path: string) => {
+    window.history.pushState({}, '', path);
+  }
+
   return (
-    <Header style={{ ...styles.header, paddingTop: isMobile ? "10px" : "30px" }}>
+    <Header style={{ ...styles.header, paddingTop: isMobile ? '10px' : '30px' }}>
       <Logo style={logoStyle} />
       <div style={headerRightStyle}>
+      {isActive && (
+          isMobile ? (
+            <Dropdown overlay={menu}>
+              <Button style={menuButtonStyle}>
+                <MenuOutlined />
+              </Button>
+            </Dropdown>
+          ) : (
+            <div style={{ flex: 1, textAlign: 'center' }}>
+              <a href="/" style={menuLinkStyle}>Home</a>
+              <a href="#" style={menuLinkStyle} onClick={() => { handleLinkClick('vaults'); setCurrentDisplay('Vaults'); }}>Vaults</a>
+              <a href="https://acorn-finance.gitbook.io/acorn-docs/" style={menuLinkStyle} target="_blank" rel="noopener noreferrer">Docs</a>
+            </div>
+          )
+        )}
         <ChainSelector />
         <ConnectAccount />
       </div>
@@ -59,9 +116,8 @@ export const Logo: React.FC<{ style: CSSProperties }> = ({ style }) => {
 
   return (
     <div style={style}>
-      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "140px" : "190px"} />
+      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "160px" : "190px"} />
     </div>
   );
 };
-
 

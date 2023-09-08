@@ -3,7 +3,7 @@ export const theme = {
     primary: "",
     secondary: "",
     background: "#D9D9D9", // light grey
-    text: "#545454", // dark grey
+    text: "#ffffff", // dark grey
     white: "#ffffff",
     black: "#000000",
     link: "#004AAD", // blue

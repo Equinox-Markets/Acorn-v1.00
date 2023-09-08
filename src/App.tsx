@@ -45,6 +45,7 @@ function App() {
   const { isActive } = useWeb3React();
   const [isLoading, setIsLoading] = useState(false);
   const [spinnerSrc, setSpinnerSrc] = useState(loadingSpinner); // New state to hold src
+  const [currentDisplay, setCurrentDisplay] = useState<string>('');
 
   useLayoutEffect(() => {
     setIsLoading(true);
@@ -72,9 +73,9 @@ function App() {
         </div>
       )}
       <Layout style={{ ...styles.layout, ...backgroundStyle }}>
-        <CustomHeader />
+      <CustomHeader setCurrentDisplay={setCurrentDisplay} />
         <MainContent>
-          <DisplayPane />
+        <DisplayPane currentDisplay={currentDisplay} />
         </MainContent>
         <CustomFooter />
       </Layout>
