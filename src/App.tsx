@@ -45,6 +45,11 @@ function App() {
   const { isActive } = useWeb3React();
   const [isLoading, setIsLoading] = useState(false);
   const [spinnerSrc, setSpinnerSrc] = useState(loadingSpinner); // New state to hold src
+  const [activeLink, setActiveLink] = useState<string>("");
+
+  const handleMenuClick = (key: string) => {
+    setActiveLink(key);
+  };
 
   useLayoutEffect(() => {
     setIsLoading(true);
@@ -72,9 +77,9 @@ function App() {
         </div>
       )}
       <Layout style={{ ...styles.layout, ...backgroundStyle }}>
-        <CustomHeader />
+      <CustomHeader onMenuClick={handleMenuClick} />
         <MainContent>
-          <DisplayPane />
+        <DisplayPane activeLink={activeLink} />
         </MainContent>
         <CustomFooter />
       </Layout>
