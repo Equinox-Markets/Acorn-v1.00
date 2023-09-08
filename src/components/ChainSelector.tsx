@@ -101,13 +101,17 @@ const ChainSelector: FC = () => {
     <div>
       <Dropdown menu={{ items, onClick }}>
         <Button style={{ ...styles.button, ...styles.item }}>
-          {isChainRecognized ? (
-            <div style={{ display: "flex", alignItems: "center", minWidth: isMobile ? "25px" : "100px" }}>
+          {!selected && <span style={{ marginLeft: "5px" }}>Select Chain</span>}
+          {selected && isMobile ? (
+            <div style={{ display: "flex", alignItems: "center", minWidth: "25px" }}>
               <span style={{ paddingTop: "5px" }}>{label}</span>
-              <span style={{ marginRight: "10px" }}>{(selected as any)?.label}</span>
             </div>
           ) : (
-            <span style={{ color: 'red' }}>Wrong Network!</span>
+            <div style={{ display: "flex", alignItems: "center", minWidth: "100px" }}>
+              <span style={{ paddingTop: "5px" }}>{label}</span>
+              {/* @ts-expect-error title is a valid object*/}
+              <span style={{ marginRight: "10px" }}>{selected?.label}</span>
+            </div>
           )}
           <DownOutlined />
         </Button>

@@ -162,6 +162,11 @@ body {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .account-container p {
+    display: none;
+  }
+}
 
 
 .ant-modal-close-x {
