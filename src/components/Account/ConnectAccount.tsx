@@ -40,6 +40,9 @@ const styles = {
   text: {
     color: theme.colors.white
   },
+  textHidden: {
+    display: 'none'
+  },
   modalTitle: {
     marginBottom: "20px",
     padding: "10px",
@@ -89,7 +92,7 @@ const ConnectAccount: React.FC<WantedChain> = () => {
         </div>
       ) : (
         <>
-          <div style={styles.account} onClick={() => setIsModalVisible(true)}>
+          <div style={styles.account} className="account-container" onClick={() => setIsModalVisible(true)}>
             {account && typeof account === "string" && (
               <p style={{ marginRight: "5px", ...styles.text }}>{getEllipsisTxt(account, 6)}</p>
             )}
