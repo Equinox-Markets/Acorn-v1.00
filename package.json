@@ -13,6 +13,7 @@
   "dependencies": {
     "@ant-design/icons": "5.1.4",
     "@coinbase/wallet-sdk": "3.7.1",
+    "@lifi/widget": "^2.3.0",
     "@react-three/fiber": "^8.13.5",
     "@types/react-modal": "^3.16.0",
     "@walletconnect/ethereum-provider": "2.8.6",

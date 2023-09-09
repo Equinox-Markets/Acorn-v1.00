@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 
 import { Modal, Divider, message } from "antd";
-
 import coinbase_Logo from "assets/images/coinbase_Logo.png";
 import metamask_Logo from "assets/svg/metamask_Logo.svg";
 import walletconnect_Logo from "assets/svg/walletconnect_Logo.svg";

@@ -4,6 +4,7 @@ import { useWindowWidthAndHeight } from "hooks";
 import { VaultList } from "./components";
 import AcornInfo from "./components/AcornInfo";
 import AcornCard from "./components/AcornCard";
+import WidgetPage from "./components/WidgetPage";
 
 const styles = {
   container: {
@@ -70,6 +71,7 @@ const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) =
             <>
               {currentDisplay === 'Vaults' ? <VaultList key={chainId} /> : null}
               {currentDisplay === 'AcornCard' ? <AcornCard /> : null}
+              {currentDisplay === 'Swap' ? <WidgetPage /> : null}
               {currentDisplay === '' && <AcornCard />}
               {currentDisplay === '' && <VaultList key={chainId} />}
             </>
