@@ -19,12 +19,6 @@ export function useSwitchChain() {
         }
         await connector.activate(chainParameters);
       }
-      try {
-        await connector.activate(desiredChain);
-      } catch (error) {
-         // retry
-         await connector.activate(desiredChain);
-      }
     } catch (error) {
       console.error('Failed to switch chain:', error);
       throw error;
