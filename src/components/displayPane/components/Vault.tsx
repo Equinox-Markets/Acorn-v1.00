@@ -345,7 +345,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         }}
         style={{
           color: 'white',
-          backgroundColor: '#011F37',
+          backgroundColor: '#064576',
           border: '1px solid #011F37',
           borderRadius: '12px',
         }}
@@ -387,7 +387,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         }}
         style={{
           color: 'white',
-          backgroundColor: '#011F37',
+          backgroundColor: '#064576',
           border: '1px solid #011F37',
           borderRadius: '12px',
           marginTop: '10px',
@@ -404,7 +404,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         }}
         style={{
           color: 'white',
-          backgroundColor: '#011F37',  // Add this line
+          backgroundColor: '#064576',  // Add this line
           border: '1px solid #011F37',  // Change this line
           borderRadius: '12px',
           marginTop: '10px',
@@ -435,7 +435,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         }}
         style={{
           color: 'white',
-          backgroundColor: '#011F37',
+          backgroundColor: '#064576',
           border: '1px solid #011F37',
           borderRadius: '12px',
           marginTop: '10px',
@@ -451,7 +451,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         }}
         style={{
           color: 'white',
-          backgroundColor: '#011F37',
+          backgroundColor: '#064576',
           border: '1px solid #011F37',
           borderRadius: '12px',
           marginTop: '10px',

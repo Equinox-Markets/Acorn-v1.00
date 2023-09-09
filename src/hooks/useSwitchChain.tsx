@@ -8,10 +8,26 @@ export function useSwitchChain() {
   const { connector } = useWeb3React();
 
   const switchChain = async (desiredChain: number) => {
-    if (connector instanceof WalletConnect || connector instanceof Network) {
-      await connector.activate(desiredChain === -1 ? undefined : desiredChain);
-    } else {
-      await connector.activate(desiredChain === -1 ? undefined : getAddChainParameters(desiredChain));
+    console.log('Attempting to switch to chain:', desiredChain)
+    try {
+      if (connector instanceof WalletConnect || connector instanceof Network) {
+        await connector.activate(desiredChain === -1 ? undefined : desiredChain);
+      } else {
+        const chainParameters = getAddChainParameters(desiredChain);
+        if (!chainParameters) {
+          throw new Error(`No chain parameters found for chain ID ${desiredChain}`);
+        }
+        await connector.activate(chainParameters);
+      }
+      try {
+        await connector.activate(desiredChain);
+      } catch (error) {
+         // retry
+         await connector.activate(desiredChain);
+      }
+    } catch (error) {
+      console.error('Failed to switch chain:', error);
+      throw error;
     }
   };
 
