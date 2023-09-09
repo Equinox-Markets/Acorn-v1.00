@@ -25,6 +25,7 @@ type VaultProps = {
     textAboveTitle: string | JSX.Element;
     textBelowDescription: string;
     depositTokenName: string;
+    TokenName: string;
 
   };
 };
@@ -417,7 +418,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
 
       <div style={{ width: '48%' }}>
       <Input
-        placeholder={`Vault balance: ${vaultBalanceFormatted}`}
+        placeholder={`${vault.TokenName} balance: ${vaultBalanceFormatted}`}
         value={withdrawAmount}
         onChange={(e) => setWithdrawAmount(e.target.value)}
         onClick={(e) => e.stopPropagation()}
