@@ -7,7 +7,9 @@ import type { MenuProps } from "antd";
 import Arbitrum_Logo from "assets/images/arbitrum_logo.svg";
 //import Avalanche_Logo from "assets/images/avalanche_logo.png";
 //import ethereum_Logo from "assets/images/ethereum_Logo.png";
+import base_Logo from "assets/images/base_logo.svg";
 import Fantom_Logo from "assets/images/fantom_logo.svg";
+import zksync_Logo from "assets/images/zksync_Logo.png";
 import { chainIds } from "data/chainIds";
 import { useSwitchChain, useWindowWidthAndHeight } from "hooks";
 
@@ -49,8 +51,10 @@ const ChainSelector: FC = () => {
   const items: MenuProps["items"] = useMemo(
     () => [
       //{ label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "ethereum_logo") },
+      { label: "zkSync Era", key: chainIds.zkSync, icon: labelToShow(zksync_Logo, "zksync_Logo") },
       { label: "Arbitrum", key: chainIds.arbitrum, icon: labelToShow(Arbitrum_Logo, "Arbitrum_logo") },
       { label: "Fantom", key: chainIds.fantom, icon: labelToShow(Fantom_Logo, "Fantom_logo") },
+      { label: "Base", key: chainIds.base, icon: labelToShow(base_Logo, "base_Logo") },
       //{ label: "Avalanche", key: chainIds.avalanche, icon: labelToShow(Avalanche_Logo, "Avalanche_logo") },
     ],
     []
@@ -69,6 +73,12 @@ const ChainSelector: FC = () => {
       selectedLabel = labelToShow(Arbitrum_Logo, "Arbitrum_logo");
     } else if (chainId === 250 || chainId === 0xfa2) {
       selectedLabel = labelToShow(Fantom_Logo, "Fantom_logo");
+    }
+      else if (chainId === 280 || chainId === 324) {
+      selectedLabel = labelToShow(zksync_Logo, "zksync_Logo");
+    }
+    else if (chainId === 8453) {
+      selectedLabel = labelToShow(base_Logo, "base_Logo");
     }
      //else if (chainId === 43114 || chainId === 43113) {
        //selectedLabel = labelToShow(Avalanche_Logo, "Avalanche_logo");
