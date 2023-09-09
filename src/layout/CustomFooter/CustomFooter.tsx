@@ -28,7 +28,7 @@ const CustomFooter: FC = () => {
       </a>
 
       <a
-        href="https://discord.gg/F8AQJ35j"
+        href="https://discord.gg/Uv3F9Cw44"
         target="_blank"
         rel="noopener noreferrer"
       >
