@@ -47,6 +47,7 @@ type VaultType = {
   textAboveTitle: string | JSX.Element;
   textBelowDescription: string;
   depositTokenName: string;
+  TokenName: string;
 };
 
 const vaults: VaultType[] = [
@@ -63,6 +64,7 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenName: "wstETH",
+    TokenName: "awstETH",
     depositTokenAbi: wstETH, // Set ABI here
     textAboveTitle: (
       <>
@@ -86,6 +88,7 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
     depositTokenName: "plvGLP",
+    TokenName: "aplvGLP",
     depositTokenAbi: plvGLP, // Set ABI here
     textAboveTitle: (
       <>
@@ -109,6 +112,7 @@ const vaults: VaultType[] = [
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenName: "GLP",
+    TokenName: "aGLP",
     depositTokenAbi: GLP, // Set ABI here
     textAboveTitle: (
       <>
