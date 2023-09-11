@@ -26,15 +26,15 @@ const styles = {
     cursor: "pointer"
   },
   button: {
-    height: "40px",
-    padding: "0 20px",
+    height: "50px",
+    padding: "0 30px",
     textAlign: "center",
     fontWeight: "600",
     letterSpacing: "0.2px",
-    fontSize: "15px",
+    fontSize: "18px",
     margin: "20px 20px",
     border: "none",
-    background: "#011F37",
+    background: "#064576",
     color: theme.colors.white
   },
   text: {
@@ -86,7 +86,7 @@ const ConnectAccount: React.FC<WantedChain> = () => {
       {account === undefined ? (
         <div>
           <Button shape="round" type="primary" style={styles.button} onClick={() => setIsAuthModalOpen(true)}>
-            Connect Wallet
+            Open App
           </Button>
           <ConnectModal isModalOpen={isAuthModalOpen} setIsModalOpen={setIsAuthModalOpen} />
           <br />

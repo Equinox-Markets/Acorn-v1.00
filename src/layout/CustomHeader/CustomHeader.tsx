@@ -120,7 +120,7 @@ export const Logo: React.FC<{ style: CSSProperties }> = ({ style }) => {
 
   return (
     <div style={style}>
-      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "160px" : "190px"} />
+      <img src={web3Boilerplate_logo} alt="web3Boilerplate_logo" width={isMobile ? "190px" : "190px"} />
     </div>
   );
 };

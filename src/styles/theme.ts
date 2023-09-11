@@ -1,14 +1,14 @@
 export const theme = {
   colors: {
-    primary: "",
-    secondary: "",
-    background: "#D9D9D9", // light grey
-    text: "#ffffff", // dark grey
+    primary: "#064576",
+    secondary: "#064576",
+    background: "#D9D9D9",
+    text: "#ffffff",
     white: "#ffffff",
     black: "#000000",
-    link: "#004AAD", // blue
-    darkblue: "#000D17",
-    verydarkblue: "#000509"
+    link: "#064576",
+    darkblue: "#064576",
+    verydarkblue: "#064576"
   },
   breakpoints: {
     small: 480,

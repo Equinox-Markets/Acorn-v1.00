@@ -22,13 +22,13 @@ body {
 }
 
 .App-link {
-  color: #011F37;
+  color: #064576;
 }
 
 /* ANTD OVERRIDE */
 
 .ant-btn-primary {
-  background-color: #011F37 !important;
+  background-color: #064576!important;
   border: none !important;
   box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.4);
   -webkit-transition: all 0.3s ease;
@@ -38,8 +38,9 @@ body {
   transition: all 0.3s ease;
 }
 
+
 .ant-btn:hover {
-  transform: scale(1.02) !important;
+  transform: scale(1.02)!important;
   box-shadow: 0px 0px 1px 1px #011F37;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -79,7 +80,7 @@ body {
   font-size: 16px;
   font-weight: 500;
   color: white;
-  background: #011F37;
+  background-color: #064576;
   transition: box-shadow 0.3s ease;
 }
 

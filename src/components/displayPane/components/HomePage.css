@@ -1,0 +1,191 @@
+.acorn-landing {
+    padding: 2rem;  /* Reduced padding */
+    margin-top: -50px !important;  /* Negative margin to move up */
+    background-color: #000509;
+    color: #ffffff;
+  }
+
+  .header-section {
+    display: flex;
+    align-items: center;
+    background: #000509;
+    color: #ffffff;
+    padding: 0rem;  /* Reduced padding */
+    margin-bottom: 100px !important;  /* Reduced margin-bottom */
+    margin-top: -0px !important;  /* Negative margin to move up */
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+  }
+  .header-image img {
+    max-width: 80%;
+  }
+
+  .header-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .header-text {
+    flex-grow: 10;
+  }
+
+  .header-image {
+    flex-grow: 0;
+    margin-left: 0rem;
+  }
+
+  @media (max-width: 768px) {
+    .header-content-wrapper {
+      flex-direction: column-reverse; /* Stack them vertically */
+      align-items: center; /* Center the items */
+    }
+
+    .header-text {
+      margin-top: -1.6rem;
+      margin-bottom: -5rem;
+    }
+
+    .header-image {
+      margin-top: -1rem;
+      margin-bottom: -5rem;
+    }
+  }
+
+
+  .main-title {
+    font-size: 2.7rem!important;  /* Adjusted font size */
+    color: #ffffff;
+  }
+  .small-title {
+    font-size: 1.3rem!important;
+    color: #ffffff;
+  }
+
+  .main-description {
+    font-size: 1.2rem;
+  }
+
+  .section-overview,
+  .section-vault-system,
+  .section-strategy-rotation,
+  .section-community {
+    margin-bottom: 50px;  /* Updated margin-bottom */
+    padding: 20px;
+    background-color: #000509;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px #011F37;
+  }
+
+  /* Added bottom margin for the last section */
+  .section-community {
+    margin-top: 100px !important;
+    margin-bottom: 100px !important;
+  }
+
+  .cta-button {
+    margin-top: 10px;
+    background-color: #064576;
+    border: 1px solid #011F37;
+    font-size: 1.3rem;
+    color: #ffffff;
+    width: 250px;  /* Set the width */
+    height: 60px;  /* Adjust padding to make sure text fits */
+    line-height: normal;  /* Reset line-height to ensure text is vertically centered */
+    vertical-align: middle;  /* Vertically align text */
+    text-align: center;  /* Horizontally align text */
+  }
+
+  .cta-button:hover {
+    background-color: #083a6b!important;  /* Darker shade of the original background color */
+    border: 1px solid #011F37!important;  /* You can change this if you want */
+    color: #ffffff!important;  /* Text color, if it needs to be different on hover */
+  }
+
+  .acorn-cards,
+  .acorn-testimonials {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .acorn-card {
+    height: 100%;
+    background-color: #000509;
+    border-radius: 10px;
+    border: 1px solid #064576;
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  .acorn-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px #011F37;
+  }
+
+  .acorn-card-title {
+    font-size: 2.7rem!important;
+  }
+  .acorn-card-description {
+    font-size: 1.2rem!important;
+  }
+
+  @media (max-width: 767px) {
+
+    .acorn-cards {
+      flex-direction: column;
+      align-items: center;  /* To center the cards */
+    }
+    .acorn-card {
+      margin-bottom: 20px;  /* Add some margin to the bottom of each card */
+      width: 100%;  /* Explicitly set the width */
+      height: auto;  /* Reset the height */
+    }
+    .acorn-card-title {
+        font-size: 2rem!important;
+        margin-top: 200px;
+      }
+
+  }
+
+
+  .white-text {
+    color: #ffffff !important;
+  }
+
+  .timeline-item-content {
+    color: #ffffff;
+  }
+
+  .panel-header {
+    color: #ffffff !important;
+  }
+
+  .ant-collapse-content {
+    background-color: #000000 !important;
+    border-color: #064576 !important;
+  }
+
+  .faq-collapse .ant-collapse-item, .faq-collapse .ant-collapse-header {
+    border-color: #064576 !important;
+  }
+
+  .faq-collapse .ant-collapse-content-box {
+    border-top: 1px solid #064576 !important;
+  }
+
+  /* New styles for making Titles and Paragraphs more engaging */
+  .section-overview Title,
+  .section-vault-system Title,
+  .section-strategy-rotation Title,
+  .section-community Title {
+    font-size: 2rem !important;
+  }
+
+  .section-overview Paragraph,
+  .section-vault-system Paragraph,
+  .section-strategy-rotation Paragraph,
+  .section-community Paragraph {
+    font-size: 1.5rem !important;
+    line-height: 1.7;
+  }
