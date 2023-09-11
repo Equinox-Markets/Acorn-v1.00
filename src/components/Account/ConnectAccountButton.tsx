@@ -32,9 +32,9 @@ const styles = {
     fontWeight: "600",
     letterSpacing: "0.2px",
     fontSize: "20px", // Increased font size
-    margin: "20px 20px",
+    margin: "20px 0px",
     border: "none",
-    background: "#011F37",
+    background: "#064576",
     color: theme.colors.white,
   },
   text: {
@@ -82,7 +82,7 @@ const ConnectAccountButton: React.FC<WantedChain> = () => {
       {account === undefined ? (
         <div>
           <Button shape="round" type="primary" style={styles.button} onClick={() => setIsAuthModalOpen(true)}>
-            Explore Vaults
+            Stake Now
           </Button>
           <ConnectModal isModalOpen={isAuthModalOpen} setIsModalOpen={setIsAuthModalOpen} />
           <br />

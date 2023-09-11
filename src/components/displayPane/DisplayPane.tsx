@@ -2,8 +2,9 @@ import { useWeb3React } from "@web3-react/core";
 import { Divider } from "antd";
 import { useWindowWidthAndHeight } from "hooks";
 import { VaultList } from "./components";
-import AcornInfo from "./components/AcornInfo";
-import AcornCard from "./components/AcornCard";
+//import AcornInfo from "./components/AcornInfo";
+//import AcornCard from "./components/AcornCard";
+import HomePage from "./components/HomePage";
 import WidgetPage from "./components/WidgetPage";
 
 const styles = {
@@ -53,7 +54,14 @@ const styles = {
     padding: "30px 0",
     borderRadius: "10px",
     boxShadow: "0px 12px 18px -6px rgba(0, 0, 0, 0.3)"
-  }
+  },
+  homePageStyles: {
+    background: "transparent",
+    width: "90%",
+    minWidth: "330px",
+    maxWidth: "1500px",
+    // Add other styles as needed
+  },
 } as const;
 
 const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) => {
@@ -63,16 +71,14 @@ const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) =
   const vaultStyle = isMobile ? { ...styles.vaultcontent, ...styles.vaultcontentSmall } : styles.vaultcontent;
 
   return (
-    <div style={styles.container}>
+    <div style={isActive ? styles.container : styles.homePageStyles}>
+      {!isActive ? <HomePage /> : null}
       <div style={styles.content}>
-        {!isActive ? <AcornInfo /> : null}
         <div style={vaultStyle}>
           {isActive && (
             <>
               {currentDisplay === 'Vaults' ? <VaultList key={chainId} /> : null}
-              {currentDisplay === 'AcornCard' ? <AcornCard /> : null}
               {currentDisplay === 'Swap' ? <WidgetPage /> : null}
-              {currentDisplay === '' && <AcornCard />}
               {currentDisplay === '' && <VaultList key={chainId} />}
             </>
           )}

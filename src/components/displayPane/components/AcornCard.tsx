@@ -8,7 +8,7 @@ import web3Boilerplate_logo from 'assets/images/Acorn_Token.svg';
 
 const AcornCard: React.FC = () => {
   return (
-    <Card className="acorn-card" bordered={false}>
+    <Card className="acorn-card-1" bordered={false}>
       <h1 className="welcome-text"></h1>
       <p className="slogan-text">
 
@@ -18,7 +18,7 @@ const AcornCard: React.FC = () => {
         <div className="airdrop-text">
           <h2>Explore Acorn!</h2>
           <p className="slogan-text">
-          Want to learn more? Check out our <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a> for all the details. Make sure to click on the Vault Info button on each vault before depositing!
+          Want to learn more? Check out our <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a> for all the details. Make sure to click on the Vault Info button on each vault before staking!
           </p>
         </div>
       </div>
