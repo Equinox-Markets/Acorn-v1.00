@@ -1,55 +1,56 @@
 .acorn-stats-container {
-    display: flex;
-    justify-content: space-between;
-  }
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
 
-  .card-wrapper {
-    flex: 1;
-    margin: 25px 10px 5px 10px;
-    border: 2px solid #064576;
-    box-shadow: 0 0 15px #064576;
-    border-radius: 0;  /* No rounded corners */
-  }
+.card-wrapper {
+  flex: 1;
+  margin: 25px 10px 5px 10px;
+  border: 0px solid #064576;
+  box-shadow: 0 0 0px #064576;
+  border-radius: 0;  /* No rounded corners */
+}
 
+.stat-card {
+  background-color: #000509 !important;
+  border: none; /* No border here */
+  padding: 10px;
+  height: 100px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0;  /* No rounded corners */
+}
+
+.stat-title, .stat-value {
+  margin: 0 10px;
+  color: #ffffff;
+  text-align: center;  /* Added this line to center the text */
+}
+
+.stat-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Media query for screens smaller than 768 pixels */
+@media (max-width: 767px) {
   .stat-card {
-    background-color: #000509 !important;
-    border: none; /* No border here */
-    padding: 10px;
+    width: 100%;
     height: 100px;
-    box-sizing: border-box;
-    display: flex;
+    margin: 5px auto;
+  }
+
+  .acorn-stats-container {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0;  /* No rounded corners */
   }
-
-  .stat-title, .stat-value {
-    margin: 0 10px;
-    color: #ffffff;
-  }
-
-  .stat-title {
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .stat-value {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  /* Media query for screens smaller than 768 pixels */
-  @media (max-width: 767px) {
-    .stat-card {
-      width: 100%;
-      height: 100px;
-      margin: 5px auto;
-    }
-
-    .acorn-stats-container {
-      flex-direction: column;
-    }
-  }
-
-
+}

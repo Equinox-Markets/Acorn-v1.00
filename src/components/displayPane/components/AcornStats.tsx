@@ -11,7 +11,7 @@ const AcornStats: React.FC = () => {
     <div className="acorn-stats-container">
       <div className="card-wrapper">
         <Card className="stat-card" bodyStyle={cardStyle} bordered={false}>
-          <h2 className="stat-title">Total Value Locked</h2>
+          <h2 className="stat-title">Total Staked Tokens</h2>
           <p className="stat-value">$237,392</p>
         </Card>
       </div>
@@ -19,12 +19,6 @@ const AcornStats: React.FC = () => {
         <Card className="stat-card" bodyStyle={cardStyle} bordered={false}>
           <h2 className="stat-title">Vaults Operated</h2>
           <p className="stat-value">3</p>
-        </Card>
-      </div>
-      <div className="card-wrapper">
-        <Card className="stat-card" bodyStyle={cardStyle} bordered={false}>
-          <h2 className="stat-title">Treasury Value</h2>
-          <p className="stat-value">$118,743</p>
         </Card>
       </div>
     </div>

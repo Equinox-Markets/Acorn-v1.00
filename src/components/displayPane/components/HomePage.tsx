@@ -3,6 +3,8 @@ import { Card, Col, Row, Typography, Button } from 'antd';
 import ConnectAccount from "components/Account/ConnectAccountButton";
 
 import './HomePage.css';
+//import AcornStats from './AcornStats';
+//import './AcornStats.css';
 import chainLogo1 from 'assets/images/arbitrum_logo.svg';
 import chainLogo2 from 'assets/images/optimistim_Logo.svg';
 import chainLogo3 from 'assets/images/zksync_logo.svg';
