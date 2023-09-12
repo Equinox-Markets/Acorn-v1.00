@@ -114,6 +114,7 @@ const HomePage: React.FC = () => {
           Why Acorn?
         </Title>
         <Row gutter={16} className="acorn-cards">
+
           {/* Liquidity Management */}
           <Col xs={24} sm={24} md={8}>
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Optimized Liquidity Management</Text>} bordered={false} className="why-acorn-card">
@@ -135,6 +136,37 @@ const HomePage: React.FC = () => {
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Governance Influence</Text>} bordered={false} className="why-acorn-card">
               <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
                 Participate in Liquidity Wars to extend Acorn's yield-generating capacity.
+              </Text>
+            </Card>
+          </Col>
+        </Row>
+      </section>
+
+
+      {/* Why Acorn Section */}
+      <section className="section-why-acorn-2">
+      <Row gutter={16} className="acorn-cards">
+        {/* Vault System Overview */}
+        <Col xs={24} sm={24} md={8}>
+            <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Vault System Overview</Text>} bordered={false} className="why-acorn-card">
+              <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
+                Acorn's specialized vaults optimize liquidity and maximize yield within specific DeFi protocols, tailored for each token.
+              </Text>
+            </Card>
+          </Col>
+          {/* Strategy Rotation */}
+          <Col xs={24} sm={24} md={8}>
+            <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Strategy Rotation</Text>} bordered={false} className="why-acorn-card">
+              <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
+                Adapting yield-optimizing strategies to market conditions, ranging from staking to providing liquidity in decentralized exchanges.
+              </Text>
+            </Card>
+          </Col>
+          {/* aTokens */}
+          <Col xs={24} sm={24} md={8}>
+            <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>aTokens</Text>} bordered={false} className="why-acorn-card">
+              <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
+                Receive aTokens when you stake assets, serving as a claim on a share of the vault's total assets and unlocking yield-generating opportunities.
               </Text>
             </Card>
           </Col>
