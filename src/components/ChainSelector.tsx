@@ -10,6 +10,7 @@ import Arbitrum_Logo from "assets/images/arbitrum_logo.svg";
 import base_Logo from "assets/images/base_logo.svg";
 import Fantom_Logo from "assets/images/fantom_logo.svg";
 import zksync_Logo from "assets/images/zksync_Logo.png";
+import optimistim_Logo from "assets/images/optimistim_Logo.svg";
 import { chainIds } from "data/chainIds";
 import { useSwitchChain, useWindowWidthAndHeight } from "hooks";
 
@@ -53,6 +54,7 @@ const ChainSelector: FC = () => {
       //{ label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "ethereum_logo") },
       { label: "zkSync Era", key: chainIds.zkSync, icon: labelToShow(zksync_Logo, "zksync_Logo") },
       { label: "Arbitrum", key: chainIds.arbitrum, icon: labelToShow(Arbitrum_Logo, "Arbitrum_logo") },
+      { label: "Optimism", key: chainIds.optimism, icon: labelToShow(optimistim_Logo, "Optimistim_Logo") },
       { label: "Fantom", key: chainIds.fantom, icon: labelToShow(Fantom_Logo, "Fantom_logo") },
       { label: "Base", key: chainIds.base, icon: labelToShow(base_Logo, "base_Logo") },
       //{ label: "Avalanche", key: chainIds.avalanche, icon: labelToShow(Avalanche_Logo, "Avalanche_logo") },
@@ -80,6 +82,9 @@ const ChainSelector: FC = () => {
     else if (chainId === 8453) {
       selectedLabel = labelToShow(base_Logo, "base_Logo");
     }
+   else if (chainId === 10 || chainId === 420) {
+    selectedLabel = labelToShow(optimistim_Logo, "Optimistim_Logo");
+  }
      //else if (chainId === 43114 || chainId === 43113) {
        //selectedLabel = labelToShow(Avalanche_Logo, "Avalanche_logo");
      //}

@@ -3,6 +3,7 @@ export const chainIds = {
   fantom: "250",
   avalanche: "43114",
   zkSync: "324",
+  optimism: "10",
   ethereum: "1",
   goerli: "5",
   bsc: "56",

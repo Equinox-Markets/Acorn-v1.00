@@ -52,7 +52,7 @@ type VaultType = {
 
 const vaults: VaultType[] = [
   {
-    name: 'wstETH Vault',
+    name: 'wstETH → astETH',
     address: '0x811fb486851B0b1162021b3834CFb7aA8568d2A7',
     abi: AcornRewardVault,
     chainId: 42161, // Arbitrum mainnet
@@ -60,23 +60,23 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 17.62,
-    strategy: "This vault strategy loops wstETH and then max-locks LODE rewards for 6 months. The ETH rewards from staking LODE is then used to compound the wstETH in the vault.",
+    strategy: "This yield strategy loops wstETH and then max-locks LODE rewards for 6 months. The ETH rewards from staking LODE is then converted into more wstETH.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
     depositTokenName: "wstETH",
-    TokenName: "awstETH",
+    TokenName: "astETH",
     depositTokenAbi: wstETH, // Set ABI here
     textAboveTitle: (
       <>
-        Stake wstETH and receive awstETH, a liquid staked version of wstETH that earns yield from {" "}
+        Stake wstETH and receive astETH, a liquid staked version of wstETH that earns yield from {" "}
         <a href="https://www.lodestarfinance.io/" target="_blank" rel="noopener noreferrer">Lodestar Finance</a>.
       </>
     ),
-    textBelowDescription: "Your balance of awstETH will grow over time and is redeemable 1:1 for wstETH. Note: Redeem fees are 0.5%",
+    textBelowDescription: "Your balance of astETH will grow over time and is redeemable 1:1 for wstETH. Note: Redeem fees are 0.5%",
 
   },
   {
-    name: 'plvGLP Vault',
+    name: 'plvGLP → alGLP',
     address: '0xF0086020b5E70a10f4CebF843D13c60cea58fAcc',
     abi: AcornRewardVault,
     chainId: 42161, // Arbitrum mainnet
@@ -84,23 +84,23 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 56.37,
-    strategy: "This vault strategy loops plvGLP and then max-locks LODE rewards for 6 months. The ETH rewards from staking LODE is then used to compound the plvGLP in the vault.",
+    strategy: "This yield strategy loops plvGLP and then max-locks LODE rewards for 6 months. The ETH rewards from staking LODE is then converted into more plvGLP.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5326E71Ff593Ecc2CF7AcaE5Fe57582D6e74CFF1', // add the deposit token address here
     depositTokenName: "plvGLP",
-    TokenName: "aplvGLP",
+    TokenName: "alGLP",
     depositTokenAbi: plvGLP, // Set ABI here
     textAboveTitle: (
       <>
-        Stake plvGLP and receive aplvGLP, a liquid staked version of plvGLP that earns yield from {" "}
+        Stake plvGLP and receive alGLP, a liquid staked version of plvGLP that earns yield from {" "}
         <a href="https://www.lodestarfinance.io/" target="_blank" rel="noopener noreferrer">Lodestar Finance</a>.
       </>
     ),
-    textBelowDescription: "Your balance of aplvGLP will grow over time and is redeemable 1:1 for plvGLP. Note: Redeem fees are 0.5%",
+    textBelowDescription: "Your balance of alGLP will grow over time and is redeemable 1:1 for plvGLP. Note: Redeem fees are 0.5%",
 
   },
   {
-    name: 'GLP Vault',
+    name: 'GLP → aGLP',
     address: '0xA45B443B4562A7F2FDcB78F449814601c287c991',
     abi: aGLP,
     chainId: 42161, // Arbitrum mainnet
@@ -108,7 +108,7 @@ const vaults: VaultType[] = [
     networkName: 'ARB',
     networkLogo: arbLogo,
     apr: 34.63,
-    strategy: "This is an auto-compounding vault integrated with GMX and Equalizer. 50% of the GLP in the vault is compounded from the standard ETH rewards from GMX. The other 50% is converted into Equity from Equalizer, the EQUAL rewards are sold from Equity and converted into more GLP in the vault.",
+    strategy: "This is an auto-compounding yield strategy integrated with GMX and Equalizer. 50% of your GLP balance is compounded from the standard ETH rewards from GMX. The other 50% is converted into Equity from Equalizer, the EQUAL rewards are sold from Equity and converted into more GLP.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x5402B5F40310bDED796c7D0F3FF6683f5C0cFfdf', // add the deposit token address here
     depositTokenName: "GLP",
