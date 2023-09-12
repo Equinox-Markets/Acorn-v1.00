@@ -130,6 +130,38 @@
     font-size: 1.2rem!important;
   }
 
+  .section-why-acorn {
+    background-color: #000000; /* Dark background to make text stand out */
+    padding: 50px 0;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .why-acorn-card {
+    height: 100%;
+    background-color: #000509;
+    border-radius: 10px;
+    border: 1px solid #064576;
+    color: #ffffff;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .why-acorn-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px #011F37;
+  }
+  
+  .acorn-card-description {
+    font-size: 16px;
+  }
+
+  @media (max-width: 767px) {
+    .section-why-acorn {
+      margin-top: -110px !important;  /* Reduced bottom margin for small screens */
+    }
+  }
+
   @media (max-width: 767px) {
 
     .acorn-cards {
@@ -142,7 +174,7 @@
       height: auto;  /* Reset the height */
     }
     .acorn-card-title {
-        font-size: 2rem!important;
+        font-size: 2.7rem!important;
         margin-top: 200px;
       }
 
@@ -180,6 +212,12 @@
     display: flex;
     justify-content: center;
     align-items: center; /* Center the logo within each column */
+  }
+
+  @media (max-width: 767px) {
+    .chain-logo {
+      margin-bottom: 0px !important;  /* Reduced bottom margin for small screens */
+    }
   }
 
 

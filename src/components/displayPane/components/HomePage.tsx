@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
       </Row>
 
 
-                  {/* Supported Chains */}
+      {/* Supported Chains */}
       <section className="section-supported-chains">
         <Title className="chains-title" style={{ color: '#ffffff' }}>Supported Chains</Title>
         <Row gutter={16} className="chain-logos">
@@ -101,6 +101,40 @@ const HomePage: React.FC = () => {
             <a href="https://base.org/" target="_blank" rel="noopener noreferrer">
               <img src={chainLogo5} alt="Chain 5" className="chain-logo" />
             </a>
+          </Col>
+        </Row>
+      </section>
+
+
+            {/* Why Acorn Section */}
+            <section className="section-why-acorn">
+        <Title className="acorn-card-title" style={{ color: '#ffffff' }}>
+          Why Acorn?
+        </Title>
+        <Row gutter={16} className="acorn-cards">
+          {/* Liquidity Management */}
+          <Col xs={24} sm={24} md={8}>
+            <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Optimized Liquidity Management</Text>} bordered={false} className="why-acorn-card">
+              <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
+                Specialized vaults designed for efficient liquidity management and maximized yields.
+              </Text>
+            </Card>
+          </Col>
+          {/* Automated Operations */}
+          <Col xs={24} sm={24} md={8}>
+            <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Automated Operations</Text>} bordered={false} className="why-acorn-card">
+              <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
+                Once tokens are staked, all activities are automated to maximize your yield.
+              </Text>
+            </Card>
+          </Col>
+          {/* Governance Influence */}
+          <Col xs={24} sm={24} md={8}>
+            <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Governance Influence</Text>} bordered={false} className="why-acorn-card">
+              <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
+                Participate in Liquidity Wars to extend Acorn's yield-generating capacity.
+              </Text>
+            </Card>
           </Col>
         </Row>
       </section>
