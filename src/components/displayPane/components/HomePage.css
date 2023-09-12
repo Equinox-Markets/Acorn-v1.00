@@ -223,7 +223,8 @@
 
   .section-partnership {
     text-align: center;
-    margin-top: 120px;
+    margin-top: 90px;
+    margin-bottom: 0px!important;
   }
 
   .partnership-title {
