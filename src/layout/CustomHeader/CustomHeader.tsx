@@ -74,7 +74,7 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
       <a href="#" onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>Stake</a>
       </Menu.Item>
       <Menu.Item>
-      <a href="#" onClick={() => { handleLinkClick('swap'); setCurrentDisplay('Swap'); }}>Swap</a>
+      <a href="#" onClick={() => { handleLinkClick('exchange'); setCurrentDisplay('Exchange'); }}>Exchange</a>
       </Menu.Item>
       <Menu.Item>
         <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a>
@@ -101,7 +101,7 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
             <div style={{ flex: 1, textAlign: 'center' }}>
               <a href="/" style={menuLinkStyle}>Home</a>
               <a href="#" style={menuLinkStyle} onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>Stake</a>
-              <a href="#" style={menuLinkStyle} onClick={() => { handleLinkClick('swap'); setCurrentDisplay('Swap'); }}>Swap</a>
+              <a href="#" style={menuLinkStyle} onClick={() => { handleLinkClick('exchange'); setCurrentDisplay('Exchange'); }}>Exchange</a>
               <a href="https://acorn-finance.gitbook.io/acorn-docs/" style={menuLinkStyle} target="_blank" rel="noopener noreferrer">Docs</a>
             </div>
           )

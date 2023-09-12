@@ -42,7 +42,7 @@ const WidgetPage = () => {
     integrator: 'Acorn Finance',
     variant: 'expandable',
     chains: {
-      allow: [8453, 250, 324, 42161]
+      allow: [8453, 250, 324, 42161, 10]
     },
     tokens: {
       featured: [

@@ -78,7 +78,7 @@ const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) =
           {isActive && (
             <>
               {currentDisplay === 'Stake' ? <VaultList key={chainId} /> : null}
-              {currentDisplay === 'Swap' ? <WidgetPage /> : null}
+              {currentDisplay === 'Exchange' ? <WidgetPage /> : null}
               {currentDisplay === '' && <VaultList key={chainId} />}
             </>
           )}

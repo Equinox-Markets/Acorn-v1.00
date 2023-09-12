@@ -148,6 +148,63 @@
 
   }
 
+  .section-supported-chains {
+    text-align: center;
+    margin-top: 120px;
+  }
+
+  .chains-title {
+    font-size: 2.7rem !important;
+    margin-bottom: 60px!important;
+  }
+
+  .chain-logo {
+    width: 120px;  /* Change to your desired width */
+    height: 80px; /* Change to your desired height */
+    object-fit: contain; /* This ensures that the image retains its aspect ratio */
+  }
+
+  .chain-logos {
+    justify-content: space-around; /* Distribute columns evenly */
+  }
+
+  .chain-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: no-wrap;
+  }
+
+  .chain-logos .ant-col {
+    flex: 1;  /* Each column will grow to fill available space */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the logo within each column */
+  }
+
+
+  .section-partnership {
+    text-align: center;
+    margin-top: 120px;
+  }
+
+  .partnership-title {
+    font-size: 2.7rem!important;
+    margin-bottom: 60px!important;  /* Added this line */
+  }
+
+  .partner-logo {
+    max-width: 70%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .partnership-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 
   .white-text {
     color: #ffffff !important;
