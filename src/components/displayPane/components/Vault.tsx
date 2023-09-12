@@ -351,7 +351,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
           borderRadius: '12px',
         }}
       >
-        Vault Info
+        Stake Info
       </Button>
       </div>
       <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
@@ -497,7 +497,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         >
           <p style={{ fontSize: "15px" }}>{vault.textAboveTitle}</p>
           <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
-          <h2 style={{ fontSize: "17px" }}>Vault Strategy</h2>
+          <h2 style={{ fontSize: "17px" }}>Yield Strategy</h2>
           <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
           <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: "15px" }}>
