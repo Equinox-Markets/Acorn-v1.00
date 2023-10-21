@@ -8,17 +8,17 @@ import web3Boilerplate_logo from 'assets/images/Acorn_Token.svg';
 
 const AcornCard: React.FC = () => {
   return (
-    <Card className="acorn-card-1" bordered={false}>
+    <Card className="acorn-card-2" bordered={false}>
       <h1 className="welcome-text"></h1>
       <p className="slogan-text">
 
       </p>
-      <div className="airdrop-container">
-        <img src={web3Boilerplate_logo} alt="Acorn Logo" className="acorn-logo" />
+      <div className="airdrop-container-2">
+        <img src={web3Boilerplate_logo} alt="Acorn Logo" className="acorn-logo-2" />
         <div className="airdrop-text">
-          <h2>Explore Acorn!</h2>
+          <h2>Explore Acorn Vaults</h2>
           <p className="slogan-text">
-          Want to learn more? Check out our <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a> for all the details. Make sure to click on the Vault Info button on each vault before staking!
+          Want to learn more? Check out our <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a> for all the details. Make sure to click on the Stake Info button on each vault before staking!
           </p>
         </div>
       </div>

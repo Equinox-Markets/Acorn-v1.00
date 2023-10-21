@@ -6,3 +6,4 @@ export { default as AnimatedBackground } from "./AnimatedBackground";
 export { default as Vault } from "./Vault";
 export { default as VaultList } from "./VaultList";
 export { default as WidgetPage } from "./WidgetPage";
+export { default as AcornStake } from "./StakeAcorn";

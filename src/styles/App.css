@@ -145,7 +145,7 @@ body {
 /* Smaller size for smaller screens */
 @media (max-width: 768px) {
   .vault-name {
-    font-size: 1.2em; /* Adjust as needed */
+    font-size: 1.4em; /* Adjust as needed */
   }
 }
 

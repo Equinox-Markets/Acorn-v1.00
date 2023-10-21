@@ -3,9 +3,16 @@ import { Divider } from "antd";
 import { useWindowWidthAndHeight } from "hooks";
 import { VaultList } from "./components";
 //import AcornInfo from "./components/AcornInfo";
-//import AcornCard from "./components/AcornCard";
+import AcornCard from "./components/AcornCard";
+import AcornCardWidget from "./components/AcornCardWidget";
+import FAQ from "./components/FAQ";
 import HomePage from "./components/HomePage";
 import WidgetPage from "./components/WidgetPage";
+import MintNFT from "./components/MintNFT";
+import StakingNFT from "./components/StakingNFT";
+import StakeList from "./components/StakeList";
+import AcornStakeInfo from "./components/AcornStakeInfo";
+import AcornNFTInfo from "./components/AcornNFTInfo";
 
 const styles = {
   container: {
@@ -77,9 +84,19 @@ const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) =
         <div style={vaultStyle}>
           {isActive && (
             <>
-              {currentDisplay === 'Stake' ? <VaultList key={chainId} /> : null}
-              {currentDisplay === 'Exchange' ? <WidgetPage /> : null}
+              {currentDisplay === 'Vaults' ? <AcornCard /> : null}
+              {currentDisplay === 'Vaults' ? <VaultList key={chainId} /> : null}
+              {currentDisplay === 'Vaults' ? <FAQ /> : null}
+              {currentDisplay === 'Bridge' ? <AcornCardWidget /> : null}
+              {currentDisplay === 'Bridge' ? <WidgetPage /> : null}
+              {currentDisplay === 'Mint' ? <MintNFT /> : null}
+              {currentDisplay === 'Stake' ? <AcornStakeInfo /> : null}
+              {currentDisplay === 'Stake' ? <StakeList /> : null}
+              {currentDisplay === 'Stake' ? <AcornNFTInfo /> : null}
+              {currentDisplay === 'Stake' ? <StakingNFT /> : null}
+              {currentDisplay === '' && <AcornCard/>}
               {currentDisplay === '' && <VaultList key={chainId} />}
+              {currentDisplay === '' && <FAQ/>}
             </>
           )}
         </div>

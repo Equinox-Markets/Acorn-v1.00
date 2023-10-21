@@ -1,4 +1,4 @@
-import { FC, CSSProperties } from "react";
+import { FC, CSSProperties, useState } from "react";
 
 import { MenuOutlined } from '@ant-design/icons';
 import { useWeb3React } from '@web3-react/core';
@@ -30,6 +30,16 @@ interface CustomHeaderProps {
 const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
   const { isMobile } = useWindowWidthAndHeight();
   const { isActive } = useWeb3React();
+  const [glow, setGlow] = useState<string | null>(null);  // State to keep track of which item is glowing
+
+
+ const glowStyle: CSSProperties = {
+    textDecoration: 'underline',
+    textShadow: `0 0 10px #064576, 0 0 20px #064576, 0 0 30px #064576`,
+  };
+
+  const handleMouseOver = (item: string) => setGlow(item);
+  const handleMouseOut = () => setGlow(null);
 
   const headerRightStyle: CSSProperties = {
     display: "flex",
@@ -65,19 +75,62 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
     color: "white"
   };
 
+  // Dropdown menu
   const menu = (
     <Menu>
       <Menu.Item>
-      <a href="/">Home</a>
+        <a href="/"
+           style={glow === 'Home' ? glowStyle : {}}
+           onMouseOver={() => handleMouseOver('Home')}
+           onMouseOut={handleMouseOut}>
+           Home
+        </a>
       </Menu.Item>
       <Menu.Item>
-      <a href="#" onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>Stake</a>
+        <a href="#"
+           style={glow === 'Vaults' ? glowStyle : {}}
+           onMouseOver={() => handleMouseOver('Vaults')}
+           onMouseOut={handleMouseOut}
+           onClick={() => { handleLinkClick('vaults'); setCurrentDisplay('Vaults'); }}>
+           Vaults
+        </a>
       </Menu.Item>
       <Menu.Item>
-      <a href="#" onClick={() => { handleLinkClick('exchange'); setCurrentDisplay('Exchange'); }}>Exchange</a>
+        <a href="#"
+           style={glow === 'Bridge' ? glowStyle : {}}
+           onMouseOver={() => handleMouseOver('Bridge')}
+           onMouseOut={handleMouseOut}
+           onClick={() => { handleLinkClick('bridge'); setCurrentDisplay('Bridge'); }}>
+           Bridge
+        </a>
+      </Menu.Item>
+      { /*
+      <Menu.Item>
+        <a href="#"
+           style={glow === 'Mint' ? glowStyle : {}}
+           onMouseOver={() => handleMouseOver('Mint')}
+           onMouseOut={handleMouseOut}
+           onClick={() => { handleLinkClick('mint'); setCurrentDisplay('Mint'); }}>
+           Mint
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a href="#"
+           style={glow === 'Stake' ? glowStyle : {}}
+           onMouseOver={() => handleMouseOver('Stake')}
+           onMouseOut={handleMouseOut}
+           onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>
+            Stake
+          </a>
+      </Menu.Item>
+      */}
+      <Menu.Item>
+        <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer"
+           style={glow === 'Docs' ? glowStyle : {}}
+           onMouseOver={() => handleMouseOver('Docs')}
+           onMouseOut={handleMouseOut}>
+           Docs
+        </a>
       </Menu.Item>
     </Menu>
   );
@@ -90,7 +143,7 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
     <Header style={{ ...styles.header, paddingTop: isMobile ? '10px' : '30px' }}>
       <Logo style={logoStyle} />
       <div style={headerRightStyle}>
-      {isActive && (
+        {isActive && (
           isMobile ? (
             <Dropdown overlay={menu}>
               <Button style={menuButtonStyle}>
@@ -99,10 +152,31 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
             </Dropdown>
           ) : (
             <div style={{ flex: 1, textAlign: 'center' }}>
-              <a href="/" style={menuLinkStyle}>Home</a>
-              <a href="#" style={menuLinkStyle} onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>Stake</a>
-              <a href="#" style={menuLinkStyle} onClick={() => { handleLinkClick('exchange'); setCurrentDisplay('Exchange'); }}>Exchange</a>
-              <a href="https://acorn-finance.gitbook.io/acorn-docs/" style={menuLinkStyle} target="_blank" rel="noopener noreferrer">Docs</a>
+              <a href="/" style={glow === 'Home' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
+                 onMouseOver={() => handleMouseOver('Home')}
+                 onMouseOut={handleMouseOut}>Home</a>
+              <a href="#" style={glow === 'Vaults' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
+                 onMouseOver={() => handleMouseOver('Vaults')}
+                 onMouseOut={handleMouseOut}
+                 onClick={() => { handleLinkClick('vaults'); setCurrentDisplay('Vaults'); }}>Vaults</a>
+              <a href="#" style={glow === 'Bridge' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
+                 onMouseOver={() => handleMouseOver('Bridge')}
+                 onMouseOut={handleMouseOut}
+                 onClick={() => { handleLinkClick('bridge'); setCurrentDisplay('Bridge'); }}>Bridge</a>
+                  { /*
+              <a href="#" style={glow === 'Mint' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
+                 onMouseOver={() => handleMouseOver('Mint')}
+                 onMouseOut={handleMouseOut}
+              </div>   onClick={() => { handleLinkClick('mint'); setCurrentDisplay('Mint'); }}>Mint</a>
+              <a href="#" style={glow === 'Stake' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
+                 onMouseOver={() => handleMouseOver('Stake')}
+                 onMouseOut={handleMouseOut}
+              </Header>   onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>Stake</a>
+              */}
+              <a href="https://acorn-finance.gitbook.io/acorn-docs/" style={glow === 'Docs' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
+                 onMouseOver={() => handleMouseOver('Docs')}
+                 onMouseOut={handleMouseOut}
+                 target="_blank" rel="noopener noreferrer">Docs</a>
             </div>
           )
         )}

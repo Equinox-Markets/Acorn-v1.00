@@ -1,0 +1,154 @@
+.app-container {
+    display: flex;
+    width: 100%;
+    border: 2px solid #064576;
+    border-radius: 12px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    color: white;
+    margin: 1rem 0;
+    text-align: left !important;
+    font-size: 1rem;  /* Making the title smaller */
+  }
+
+  .staking-container {
+    max-width: 768px;
+    width: 100%;
+    background-color: #000000;
+    color: white;
+    padding: 2rem;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .claim-rewards-flex-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .claim-rewards-wrapper {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    flex-grow: 1;
+  }
+
+  .eth-rewards {
+    color: #fff;
+    font-size: 1rem;
+
+  }
+
+  .fake-button {
+    display: inline-block;
+    padding: 5.5px 12px;
+    margin-bottom: 0;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: default;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    color: #fff;
+    background-color: #064576;
+    border-color: #064576;
+    pointer-events: none;
+  }
+
+  .select-all-checkbox label {
+    color: white;
+    margin-bottom: 50px;
+
+  }
+  .select-all-checkbox {
+    color: white;
+    margin-bottom: 15px;
+
+  }
+
+  .ant-checkbox-wrapper.select-all-checkbox span {
+    color: white !important;
+  }
+
+
+  .small-apr-info {
+    font-size: 1rem; /* Making the font smaller */
+    margin-top: 0.3rem; /* Optional: Add some margin between the button and the text */
+    color: white !important;
+  }
+
+  .top-info-wrapper {
+    text-align: left;
+  }
+  
+  .nft-checkbox {
+    margin-right: 10px;
+  }
+  
+  .action-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .action-section .custom-button {
+    margin-top: 5rem;  /* Adding some top margin to the stake buttons */
+  }
+  
+  .stake-section,
+  .unstake-section {
+    margin: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .custom-input-number {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+  
+  .custom-button {
+    border-radius: 12px;
+  }
+  
+  .nft-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nft-item {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+  
+  .nft-logo {
+    width: 45px;
+    height: 60px;
+    margin-right: 10px;
+  }
+  
+  .nft-status {
+    margin-left: auto;
+    font-size: 0.9rem;
+    color: #a8a8a8;
+  }
+  
+  .no-nfts-message {
+    color: white;
+  }

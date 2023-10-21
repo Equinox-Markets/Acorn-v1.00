@@ -1,0 +1,71 @@
+.acorn-card-3 {
+    width: 100% !important;
+    padding: 0px !important;
+    background: #000509 !important;
+    border: 0px solid #064576 !important;
+    color: white !important;
+    text-align: center !important;
+    margin-top: 60px !important;
+  }
+
+  .slogan-text-1 {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+    margin-top: -10px !important;
+    text-align: left !important;
+  }
+
+  .airdrop-text-1 {
+    margin-bottom: -10px !important;
+    text-align: left !important;
+  }
+
+  .airdrop-container-3 {
+    display: flex !important;
+    justify-content: flex-start !important; /* align items to the start */
+    align-items: center !important; /* center items vertically */
+    position: relative !important;
+  }
+
+  .acorn-logo-3 {
+    width: 80px !important;
+    height: 100px !important;  /* Increase height if desired */
+    margin-right: 0px !important;
+    left:-20px !important;
+    transform: rotate(0deg) !important;
+    position: relative !important; /* Changed from absolute to relative */
+  }
+
+
+  /* Media query for screens smaller than 768 pixels */
+  @media (max-width: 768px) {
+
+  .airdrop-text-1 {
+    text-align: left !important;
+    margin-left: 20px !important;  /* Increased from 40px to 50px */
+  }
+
+  .airdrop-text u, .slogan-text u {
+    text-decoration: underline !important;
+    text-decoration-color: #ffffff !important;
+  }
+  .acorn-logo-3 {
+    width: 80px !important;
+    height: 100px !important;
+    position: absolute !important;
+    left:-30px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    transform-origin: center !important;
+  }
+
+  .airdrop-text-1 {
+    text-align: left !important;
+    margin-left: 30px !important; /* Add enough margin to clear the logo */
+  }
+
+  .airdrop-container-3 {
+    position: relative !important;
+    padding-left: 30px !important; /* Add padding equivalent to the logo and margin */
+  }
+  }
