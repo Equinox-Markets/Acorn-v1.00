@@ -5,11 +5,11 @@ import ConnectAccount from "components/Account/ConnectAccountButton";
 import './HomePage.css';
 //import AcornStats from './AcornStats';
 //import './AcornStats.css';
-import chainLogo1 from 'assets/images/arbitrum_logo.svg';
-import chainLogo2 from 'assets/images/optimistim_Logo.svg';
-import chainLogo3 from 'assets/images/zksync_logo.svg';
-import chainLogo4 from 'assets/images/fantom_logo.svg';
-import chainLogo5 from 'assets/images/base_logo.svg';
+//import chainLogo1 from 'assets/images/arbitrum_logo.svg';
+//import chainLogo2 from 'assets/images/optimistim_Logo.svg';
+//import chainLogo3 from 'assets/images/zksync_logo.svg';
+//import chainLogo4 from 'assets/images/fantom_logo.svg';
+//import chainLogo5 from 'assets/images/base_logo.svg';
 import partnerLogo2 from 'assets/images/gelato_partner.svg';
 import logo from 'assets/images/header_logo.svg';
 import partnerLogo1 from 'assets/images/lifi_partner.svg';
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
         <Col xs={24} sm={24} md={8}>
           <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Earn Yield</Text>} bordered={false} className="acorn-card">
             <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
-              Our trustless algorithmic yield strategies ensure that you're always getting the best possible returns.
+              Our algorithmic yield strategies ensure that you're always getting the best possible returns.
             </Text>
           </Card>
         </Col>
@@ -74,8 +74,7 @@ const HomePage: React.FC = () => {
         </Col>
       </Row>
 
-
-      {/* Supported Chains */}
+    {/*Supported Chains/*}
       <section className="section-supported-chains">
         <Title className="chains-title" style={{ color: '#ffffff' }}>Supported Chains</Title>
         <Row gutter={16} className="chain-logos">
@@ -108,14 +107,14 @@ const HomePage: React.FC = () => {
       </section>
 
 
-            {/* Why Acorn Section */}
+            {/* Why Acorn Section /*}
             <section className="section-why-acorn">
         <Title className="acorn-card-title" style={{ color: '#ffffff' }}>
           Why Acorn?
         </Title>
         <Row gutter={16} className="acorn-cards">
 
-          {/* Liquidity Management */}
+          {/* Liquidity Management /*}
           <Col xs={24} sm={24} md={8}>
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Optimized Liquidity Management</Text>} bordered={false} className="why-acorn-card">
               <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
@@ -123,7 +122,7 @@ const HomePage: React.FC = () => {
               </Text>
             </Card>
           </Col>
-          {/* Automated Operations */}
+          {/* Automated Operations /*}
           <Col xs={24} sm={24} md={8}>
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Automated Operations</Text>} bordered={false} className="why-acorn-card">
               <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
@@ -131,7 +130,7 @@ const HomePage: React.FC = () => {
               </Text>
             </Card>
           </Col>
-          {/* Governance Influence */}
+          {/* Governance Influence /*}
           <Col xs={24} sm={24} md={8}>
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Governance Influence</Text>} bordered={false} className="why-acorn-card">
               <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
@@ -143,10 +142,10 @@ const HomePage: React.FC = () => {
       </section>
 
 
-      {/* Why Acorn Section */}
+      {/* Why Acorn Section /}
       <section className="section-why-acorn-2">
       <Row gutter={16} className="acorn-cards">
-        {/* Vault System Overview */}
+        {/* Vault System Overview /}
         <Col xs={24} sm={24} md={8}>
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Vault System Overview</Text>} bordered={false} className="why-acorn-card">
               <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
@@ -154,7 +153,7 @@ const HomePage: React.FC = () => {
               </Text>
             </Card>
           </Col>
-          {/* Strategy Rotation */}
+          {/* Strategy Rotation /}
           <Col xs={24} sm={24} md={8}>
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>Strategy Rotation</Text>} bordered={false} className="why-acorn-card">
               <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
@@ -162,7 +161,7 @@ const HomePage: React.FC = () => {
               </Text>
             </Card>
           </Col>
-          {/* aTokens */}
+          {/* aTokens /}
           <Col xs={24} sm={24} md={8}>
             <Card title={<Text className="acorn-card-description" style={{ color: '#ffffff' }}>aTokens</Text>} bordered={false} className="why-acorn-card">
               <Text className="acorn-card-description" style={{ color: '#ffffff' }} strong>
@@ -203,7 +202,7 @@ const HomePage: React.FC = () => {
         <Paragraph className="small-title" style={{ color: '#ffffff' }}>
           Get involved. Vote on governance proposals, discuss strategies, and grow with us.
         </Paragraph>
-        <a href="https://discord.gg/Uv3F9Cw44" target="_blank" rel="noopener noreferrer">
+        <a href="https://discord.gg/AJreE8wxY9" target="_blank" rel="noopener noreferrer">
           <Button className="cta-button">Join Now</Button>
         </a>
       </section>

@@ -5,8 +5,8 @@ import { useWeb3React } from "@web3-react/core";
 import { Dropdown, Button } from "antd";
 import type { MenuProps } from "antd";
 import Arbitrum_Logo from "assets/images/arbitrum_logo.svg";
-//import Avalanche_Logo from "assets/images/avalanche_logo.png";
-//import ethereum_Logo from "assets/images/ethereum_Logo.png";
+import Avalanche_Logo from "assets/images/avalanche_logo.png";
+import ethereum_Logo from "assets/images/ethereum_Logo.png";
 import base_Logo from "assets/images/base_logo.svg";
 import Fantom_Logo from "assets/images/fantom_logo.svg";
 import zksync_Logo from "assets/images/zksync_Logo.png";
@@ -51,13 +51,13 @@ const ChainSelector: FC = () => {
 
   const items: MenuProps["items"] = useMemo(
     () => [
-      //{ label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "ethereum_logo") },
+      { label: "Ethereum", key: chainIds.ethereum, icon: labelToShow(ethereum_Logo, "ethereum_logo") },
       { label: "zkSync Era", key: chainIds.zkSync, icon: labelToShow(zksync_Logo, "zksync_Logo") },
       { label: "Arbitrum", key: chainIds.arbitrum, icon: labelToShow(Arbitrum_Logo, "Arbitrum_logo") },
       { label: "Optimism", key: chainIds.optimism, icon: labelToShow(optimistim_Logo, "Optimistim_Logo") },
+      { label: "Avalanche", key: chainIds.avalanche, icon: labelToShow(Avalanche_Logo, "Avalanche_logo") },
       { label: "Fantom", key: chainIds.fantom, icon: labelToShow(Fantom_Logo, "Fantom_logo") },
       { label: "Base", key: chainIds.base, icon: labelToShow(base_Logo, "base_Logo") },
-      //{ label: "Avalanche", key: chainIds.avalanche, icon: labelToShow(Avalanche_Logo, "Avalanche_logo") },
     ],
     []
   );
@@ -68,9 +68,9 @@ const ChainSelector: FC = () => {
     let selectedLabel;
     let recognized = true;
 
-     //if (chainId === 1 || chainId === 5) {
-       //selectedLabel = labelToShow(ethereum_Logo, "Ethereum_logo");
-     //}
+     if (chainId === 1 || chainId === 5) {
+       selectedLabel = labelToShow(ethereum_Logo, "Ethereum_logo");
+     }
     if (chainId === 42161 || chainId === 421611) {
       selectedLabel = labelToShow(Arbitrum_Logo, "Arbitrum_logo");
     } else if (chainId === 250 || chainId === 0xfa2) {
@@ -85,9 +85,12 @@ const ChainSelector: FC = () => {
    else if (chainId === 10 || chainId === 420) {
     selectedLabel = labelToShow(optimistim_Logo, "Optimistim_Logo");
   }
-     //else if (chainId === 43114 || chainId === 43113) {
-       //selectedLabel = labelToShow(Avalanche_Logo, "Avalanche_logo");
-     //}
+  else if (chainId === 1 || chainId === 5) {
+    selectedLabel = labelToShow(ethereum_Logo, "Ethereum_logo");
+  }
+     else if (chainId === 43114 || chainId === 43113) {
+       selectedLabel = labelToShow(Avalanche_Logo, "Avalanche_logo");
+     }
     else {
       recognized = false;
     }

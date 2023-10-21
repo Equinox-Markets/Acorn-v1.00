@@ -25,6 +25,7 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
 
   mapping(address => uint256) public lastRewardBlock;
   mapping(address => uint256) public rewards;
+  mapping(address => bool) public whitelisted;
 
   EnumerableSet.AddressSet private holders;
 
@@ -35,18 +36,18 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
   }
 
   // Treasury can fund the reward pool with ETH or ACORN tokens
-  function fundRewardPool(uint256 amount) external onlyOwner {
+  function fundRewardPool(uint256 amount) external onlyOwner onlyWhitelisted {
       require(rewardToken.transferFrom(msg.sender, address(this), amount), "Funding failed");
       emit RewardFunded(amount);
   }
 
   // Treasury can set the reward rate
-  function setRewardRate(uint256 newRate) external onlyOwner {
+  function setRewardRate(uint256 newRate) external onlyOwner onlyWhitelisted {
       rewardRate = newRate;
   }
 
   // Treasury can enable or disable rewards
-  function toggleRewards(bool enabled) external onlyOwner {
+  function toggleRewards(bool enabled) external onlyOwner onlyWhitelisted {
       rewardsEnabled = enabled;
   }
 
@@ -56,7 +57,7 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
   }
 
   // Treasury can set the reward token, initially set it to ACORN address
-  function setRewardToken(address newRewardToken) external onlyOwner {
+  function setRewardToken(address newRewardToken) external onlyOwner onlyWhitelisted {
       rewardToken = IERC20(newRewardToken);
   }
 
@@ -121,7 +122,7 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
   }
 
   //Allow the treasury to deposit tokens into the vault for liquidity
-  function depositOwner(uint256 glpAmount) external onlyOwner {
+  function depositOwner(uint256 glpAmount) external onlyOwner onlyWhitelisted {
     require(glpAmount > 0, "Amount must be greater than 0");
     stakedGlp.safeTransferFrom(msg.sender, address(this), glpAmount);
     emit OwnerDeposit(msg.sender, glpAmount);
@@ -164,14 +165,14 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
   }
 
    // Allow the treasury to withdraw tokens for yield strategies
-  function withdrawOwner(uint256 percentage) external onlyOwner {
+  function withdrawOwner(uint256 percentage) external onlyOwner onlyWhitelisted {
     require(percentage > 0 && percentage <= 50, "Percentage must be between 1 and 50");
     uint256 amountToWithdraw = stakedGlp.balanceOf(address(this)).mul(percentage).div(100);
     stakedGlp.transfer(owner(), amountToWithdraw);
   }
 
   //Distribute yield to holders
-  function distributeAGLP(uint256 glpAmount) external onlyOwner {
+  function distributeAGLP(uint256 glpAmount) external onlyOwner onlyWhitelisted {
     require(glpAmount > 0, "Amount must be greater than 0");
 
     // Transfer the glpAmount from the Treasury to the contract
@@ -192,19 +193,19 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
   }
   
   //Treasury management fee
-  function setFeeReceiver(address payable _feeReceiver) external onlyOwner {
+  function setFeeReceiver(address payable _feeReceiver) external onlyOwner onlyWhitelisted {
     require(_feeReceiver != address(0), "Fee receiver cannot be zero address");
     feeReceiver = _feeReceiver;
     emit FeeReceiverUpdated(_feeReceiver);
   }
 
   // Allow the Treasury to set the deposit fee
-  function setDepositFee(uint256 _depositFee) external onlyOwner {
+  function setDepositFee(uint256 _depositFee) external onlyOwner onlyWhitelisted {
     depositFee = _depositFee;
   }
 
   // Allow the Treasury to set the withdrawal fee
-  function setWithdrawFee(uint256 _withdrawFee) external onlyOwner {
+  function setWithdrawFee(uint256 _withdrawFee) external onlyOwner onlyWhitelisted {
     withdrawFee = _withdrawFee;
   }
 
@@ -212,11 +213,28 @@ contract AcornRewardVault is ERC20("aToken", "aToken"), ReentrancyGuard, Ownable
     return 18; // Replace with the correct number of decimals for the underlying token
   }
 
+  modifier onlyWhitelisted() {
+    require(whitelisted[msg.sender], "Not whitelisted");
+    _;
+  }
+
+  function addWhitelist(address _address) external onlyOwner {
+    whitelisted[_address] = true;
+    emit WhitelistAdded(_address);
+  }
+
+  function removeWhitelist(address _address) external onlyOwner {
+    whitelisted[_address] = false;
+    emit WhitelistRemoved(_address);
+  }
+
   event Deposit(address indexed user, uint256 amount);
   event OwnerDeposit(address indexed owner, uint256 amount);
   event Withdraw(address indexed user, uint256 amount);
   event FeeReceiverUpdated(address newFeeReceiver);
   event Distribution(address indexed owner, uint256 amount);
+  event WhitelistAdded(address indexed _address);
+  event WhitelistRemoved(address indexed _address);
   event RewardClaimed(address indexed user, uint256 amount);
   event RewardFunded(uint256 amount);
 }

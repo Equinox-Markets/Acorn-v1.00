@@ -1,0 +1,72 @@
+.mint-container {
+    background-color: #000000; /* Change this to any background color you prefer */
+    border-radius: 12px;
+    padding: 2rem;
+    border: 2px solid #064576;
+    width: 100%;
+    align-content: center;
+    color: white!important; /* Text color set to white */
+  }
+  
+  .info-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #000000; /* Slightly darker background for the info section */
+    border-radius: 5px;
+    color: white!important; /* Text color set to white */
+    font-size: 18px;
+  }
+  
+  .quantity-section,
+  .price-section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: white!important; /* Text color set to white */
+  }
+  
+  .title {
+    text-align: left;
+    color: white!important; /* Text color set to white */
+  }
+  
+  .image-section img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .custom-input-number {
+    color: white !important;
+    background-color: #011F37 !important;
+    border-color: #011F37 !important;
+    font-size: 24px !important;
+    width: 80px !important;
+    height: 48px !important;
+    line-height: 48px !important;
+    text-align: center !important;
+  }
+  
+  .custom-input-number .ant-input-number-handler-wrap {
+    display: none !important;  /* Hide the default up and down arrows */
+  }
+  
+  .custom-button {
+    background-color: #064576 !important;
+    border-color: #064576 !important;
+    color: white !important;
+    margin-top: 9px;  /* Add this line */
+  }
+
+  .custom-input-number input {
+    color: white !important;
+    text-align: center !important;
+    background-color: #011F37 !important;
+    border-color: #064576 !important;
+    border: 2px solid;
+  }
+
+  .center-horizontally {
+    justify-content: center;
+    display: flex;
+  }

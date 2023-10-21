@@ -1,40 +1,43 @@
-import  { FC } from "react";
-
+import { FC } from "react";
 import { Layout } from "antd";
-import DiscordIcon from 'assets/images/discord.svg';
-import GitbookIcon from 'assets/images/gitbook.svg';
-import TwitterIcon from 'assets/images/twitter.svg';
+import DiscordIcon from 'assets/images/Discord-icon.svg';
+import GitbookIcon from 'assets/images/Docs-icon.svg';
+import TwitterIcon from 'assets/images/Twitter-ico.svg';
+import './Footer.css';
 
 const { Footer } = Layout;
 
 const CustomFooter: FC = () => {
   return (
     <Footer style={styles.footer}>
-
-      <a
-        href="https://acorn-finance.gitbook.io/acorn-docs/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img src={GitbookIcon} alt="Docs" style={iconStyles} />
-      </a>
-
-      <a
-        href="https://twitter.com/AcornFinanceio"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img src={TwitterIcon} alt="Twitter" style={iconStyles} />
-      </a>
-
-      <a
-        href="https://discord.gg/Uv3F9Cw44"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img src={DiscordIcon} alt="Discord" style={iconStyles} /> {/* Use the imported Discord SVG as an image */}
-      </a>
-
+      <div className="footer-grid">
+        <div className="footer-text">
+          &copy; Acorn Finance, All Rights Reserved.
+        </div>
+        <div className="icon-container">
+          <a
+            href="https://acorn-finance.gitbook.io/acorn-docs/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={GitbookIcon} alt="Docs" style={iconStyles} />
+          </a>
+          <a
+            href="https://twitter.com/AcornFinanceio"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={TwitterIcon} alt="Twitter" style={iconStyles} />
+          </a>
+          <a
+            href="https://discord.gg/AJreE8wxY9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={DiscordIcon} alt="Discord" style={iconStyles} />
+          </a>
+        </div>
+      </div>
     </Footer>
   );
 }
@@ -44,10 +47,7 @@ const CustomFooter: FC = () => {
 const styles = {
   footer: {
     position: "fixed",
-    color: '#ffffff',
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    color: '#636B8F',
     bottom: "0",
     width: "100%",
     backgroundColor: "#000509",
