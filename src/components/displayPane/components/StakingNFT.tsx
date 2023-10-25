@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Contract } from '@ethersproject/contracts';
 import { useWeb3React } from '@web3-react/core';
 import { Button, Typography, Card, Checkbox, Divider } from 'antd';
-//import { STAKING_ABI } from 'data/abi/tokens/wstETH.json';
-//import { NFT_ABI } from 'data/abi/tokens/wstETH.json';
 import NFTlogo from 'assets/images/Acorn_NFT.png';
+import STAKING_ABI  from 'data/abi/tokens/wstETH.json';
+import NFT_ABI  from 'data/abi/tokens/wstETH.json';
 import './StakingNFT.css';
 
 

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 import { Contract } from '@ethersproject/contracts';
-import { Button, InputNumber, Typography } from 'antd';
 import { useWeb3React } from '@web3-react/core';
+import { Button, InputNumber, Typography } from 'antd';
 import './MintNFT.css';
-import logo from 'assets/images/Acorn_NFT.png';
 import { Alert } from 'antd';
+import logo from 'assets/images/Acorn_NFT.png';
 
 const { Title, Paragraph } = Typography;
 
 const MintNFT: React.FC = () => {
     const [quantity, setQuantity] = useState<number>(1);
-    const [minted, setMinted] = useState<number>(0);
+    const [minted, /*setMinted*/] = useState<number>(0);
     const [chainId, setChainId] = useState<number | null>(null); // To hold the current chain ID
     const { account, provider, chainId: web3ChainId } = useWeb3React();
 
@@ -24,7 +24,7 @@ const MintNFT: React.FC = () => {
   const fetchMinted = async () => {
     // Fetch the current number of minted NFTs from the contract
     // Placeholder logic, replace with actual implementation
-     //setMinted(await contract.methods.currentMinted().call());
+    // setMinted(await contract.methods.currentMinted().call());
   };
 
   useEffect(() => {
