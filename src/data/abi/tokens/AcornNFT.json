@@ -1,0 +1,15 @@
+{
+  "name": "Acorn NFT",
+  "description": "Acorn NFTs are part of the Acorn Finance ecosystem that allow Acorn Users to earn 10% of Acorns revenue in ETH by staking their NFTs on the Acorn Finance website.",
+  "image": "https://github.com/Equinox-Markets/Equinox-Vaults/blob/8f95ed84864e1a75d1093f56f60368a0b0544f2f/src/assets/images/Acorn_NFT.png?raw=true",
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    }
+  ]
+}
