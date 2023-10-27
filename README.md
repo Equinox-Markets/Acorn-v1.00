@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1><strong> Equinox Vaults </strong></h1>
+<h1><strong> Equinox </strong></h1>
 
 <br></br>
 
