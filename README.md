@@ -24,12 +24,6 @@
 - [yarn](https://yarnpkg.com/) installed
 - [MetaMask](https://metamask.io/) (or any web3 compatible wallet) installed in your browser
 
-### Once your config is ready, create a new repo, open your favorite code editor, and clone the repo with the following cmd:
-
-```bash
-git clone https://github.com/Equinox-Markets/Equinox-Vaults.git .
-```
-
 ### Install all package dependancies by running:
 
 ```bash
