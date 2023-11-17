@@ -12,7 +12,7 @@ import arbLogo from 'assets/images/arbitrum_logo.svg';
 //import wstETHLogo from 'assets/images/wstETH_logo.svg';
 //import wstETHLogo from 'assets/images/WSTETH_LODE.svg';
 import wETH_ARB_Logo from 'assets/images/wETH_ARB.svg';
-//import USDC_ARB_Logo from 'assets/images/USDC_ARB.svg';
+import USDC_ARB_Logo from 'assets/images/USDC_ARB.svg';
 //import lzUSDT from 'assets/images/lzUSDT.svg';
 //import gmxLogo from 'assets/images/gmx_logo.png';
 //import USDCLODE from 'assets/images/USDC_LODE.svg';
@@ -27,6 +27,7 @@ import ConnectAccount from "components/Account/ConnectAccountButton";
 //import GLP from 'data/abi/tokens/GLP.json';
 //import plvGLP from 'data/abi/tokens/plvGLP.json';
 //import wstETH from 'data/abi/tokens/wstETH.json';
+import USDC from 'data/abi/tokens/USDC.json';
 import ETH from 'data/abi/tokens/wETH.json';
 import AcornRewardVault from 'data/abi/vaults/AcornRewardVault.json';
 //import aGLP from 'data/abi/vaults/aGLP.json';
@@ -78,29 +79,29 @@ const vaults: VaultType[] = [
     textBelowDescription: "Your balance of awETH will increase every wednesday and is redeemable 1:1 for wETH. Note: Redeem fees are .5%",
 
   },
-  /*{
+  {
     name: 'USDC → aUSDC',
-    address: '0x811fb486851B0b1162021b3834CFb7aA8568d2A7',
+    address: '0x59a11f630d1614148774f9329A4B6970fC298840',
     abi: AcornRewardVault,
     chainId: 42161, // Arbitrum mainnet
     logo: USDC_ARB_Logo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 20.6,
+    apr: 102.5,
     strategy: "This vault earns yield by utilizing a strategy router smart contract that routes users deposits to whitelisted yield strategies and adapts to market conditions based on the assigned risk-scores of each strategy.",
     description: 'Deposit GLP and Earn',
-    depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
+    depositTokenAddress: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831', // add the deposit token address here
     depositTokenName: "USDC",
     TokenName: "aUSDC",
-    depositTokenAbi: wstETH, // Set ABI here
+    depositTokenAbi: USDC, // Set ABI here
     textAboveTitle: (
       <>
         Stake USDC and receive aUSDC, a liquid staked version of USDC that earns yield from Acorn Finance.
       </>
     ),
-    textBelowDescription: "Your balance of aUSDC will grow over time and is redeemable 1:1 for USDC. Note: Redeem fees are .5%",
+    textBelowDescription: "Your balance of aUSDC will increase every wednesday and is redeemable 1:1 for USDC. Note: Redeem fees are .5%",
 
-  },
+  },/*
   {
     name: 'wstETH → asETH',
     address: '0x811fb486851B0b1162021b3834CFb7aA8568d2A7',
