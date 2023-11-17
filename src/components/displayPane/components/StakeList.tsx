@@ -5,7 +5,7 @@ import { useWeb3React } from '@web3-react/core';
 import arbLogo from 'assets/images/arbitrum_logo.svg';
 import wETH_ARB_Logo from 'assets/images/wETH_ARB.svg';
 import ConnectAccount from "components/Account/ConnectAccountButton";
-import wstETH from 'data/abi/tokens/wstETH.json';
+import ACORN from 'data/abi/tokens/ACORN.json';
 import AcornRewardVault from 'data/abi/vaults/AcornRewardVault.json';
 
 import AcornStake from './StakeAcorn';
@@ -33,26 +33,26 @@ type AcornStakeProps = {
 const vaults: AcornStakeProps[] = [
   {
     name: 'Stake Acorn',
-    address: '0x811fb486851B0b1162021b3834CFb7aA8568d2A7',
+    address: '0x8C9C7fA94FbBfEf16baaB4f7bFfAE136e2a8AeD6',
     abi: AcornRewardVault,
     chainId: 42161, // Arbitrum mainnet
     logo: wETH_ARB_Logo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 21.5,
-    strategy: "This yield strategy earns yield by adopting yield-optimizing strategies to market conditions, ranging from staking to providing liquidity in decentralized exchanges.",
+    apr: 13.4,
+    strategy: "20% of all revenue from fees and treasury yield will be distributed every 7 days in ETH to all ACORN stakers.",
     description: 'Deposit GLP and Earn',
-    depositTokenAddress: '0x5979D7b546E38E414F7E9822514be443A4800529', // add the deposit token address here
-    depositTokenName: "wETH",
-    TokenName: "awETH",
-    depositTokenAbi: wstETH, // Set ABI here
+    depositTokenAddress: '0x32C3d7DB51439d7e7B1E6039d1d0c08cCC4beC4A', // add the deposit token address here
+    depositTokenName: "ACORN",
+    TokenName: "stACORN:",
+    depositTokenAbi: ACORN, // Set ABI here
     textAboveTitle: (
       <>
-        Stake wETH and receive awETH, a liquid staked version of wETH that earns yield from {" "}
-        <a href="https://acornfinance.io/" target="_blank" rel="noopener noreferrer">Acorn Finance</a>.
+         {" "}
+        <a href="https://acornfinance.io/" target="_blank" rel="noopener noreferrer"></a>
       </>
     ),
-    textBelowDescription: "Your balance of awETH will grow over time and is redeemable 1:1 for wETH. Note: Redeem fees are .5%",
+    textBelowDescription: "",
 
   },
 

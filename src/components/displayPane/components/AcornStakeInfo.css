@@ -1,15 +1,14 @@
-.acorn-card-2 {
+.acorn-card-6 {
     width: 100% !important;
     padding: 0px !important;
     background: #000509 !important;
     border: 0px solid #064576 !important;
     color: white !important;
-    text-align: center !important;
-    margin-top: -30px !important;
-    margin-bottom: 20px !important;
+    text-align: left !important;
+    margin-top: -20px !important;
   }
 
-  .welcome-text {
+  .welcome-text-6 {
     font-size: 42px !important;
     font-weight: bold !important;
     margin-bottom: 10px !important;
@@ -18,64 +17,53 @@
 
   /* Media query for screens smaller than 768 pixels */
   @media (max-width: 768px) {
-    .welcome-text {
+    .welcome-text-6 {
       font-size: 28px !important;  /* Adjust as needed */
       margin-top: 0px !important;
     }
   }
 
-  .slogan-text {
+  .slogan-text-6 {
     font-size: 18px !important;
     margin-bottom: 20px !important;
     margin-top: -10px !important;
   }
 
-  .airdrop-container-2 {
+  .airdrop-container-6 {
     display: flex !important;
     justify-content: left !important;
     align-items: left !important;
-    position: absolute !important;
-    margin-bottom: 40x;
+    position: relative !important;
   }
 
-  .acorn-logo-2 {
+  .acorn-logo-6 {
     width: 80px !important;
     transform: rotate(-10deg) !important;
     position: absolute !important;
     left: -40px !important;
-    top: 20% !important;
+    top: 25% !important;
     transform-origin: center !important;
     animation: rotate 10s infinite linear !important;
   }
 
     /* Media query for screens smaller than 768 pixels */
     @media (max-width: 768px) {
-      .acorn-logo-2 {
+      .acorn-logo-6 {
         width: 80px !important;
         transform: rotate(-10deg) !important;
         position: absolute !important;
         left: -40px !important;
-        top: 32% !important;
+        top: 30% !important;
         transform-origin: center !important;
-      }
-      .acorn-card-2 {
-        width: 100% !important;
-        padding: 0px !important;
-        background: #000509 !important;
-        border: 0px solid #064576 !important;
-        color: white !important;
-        text-align: center !important;
-        margin-top: -60px !important;
-        margin-bottom: 20px !important;
       }
     }
 
-  .airdrop-text {
+  .airdrop-text-6 {
     text-align: left !important;
     margin-left: 40px !important;
   }
 
-  .airdrop-text u, .slogan-text u {
+  .airdrop-text-6 u, .slogan-text-6 u {
     text-decoration: underline !important;
     text-decoration-color: #ffffff !important;
   }

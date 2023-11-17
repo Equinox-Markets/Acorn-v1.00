@@ -16,9 +16,9 @@ const AcornCard: React.FC = () => {
       <div className="airdrop-container-2">
         <img src={web3Boilerplate_logo} alt="Acorn Logo" className="acorn-logo-2" />
         <div className="airdrop-text">
-          <h2>Explore Acorn Vaults</h2>
+          <h2>Available Vaults on Acorn</h2>
           <p className="slogan-text">
-          Want to learn more? Check out our <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a> for all the details. Make sure to click on the Stake Info button on each vault before staking!
+          {/* Want to learn more? Check out our <a style={{ color: '#008FFF'}} href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer">Docs</a> for all the details.*/} Enjoy increased yields through tailored DeFi strategies.
           </p>
         </div>
       </div>

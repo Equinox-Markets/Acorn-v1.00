@@ -13,6 +13,8 @@ import StakingNFT from "./components/StakingNFT";
 import StakeList from "./components/StakeList";
 import AcornStakeInfo from "./components/AcornStakeInfo";
 import AcornNFTInfo from "./components/AcornNFTInfo";
+import FilterChains from "./components/FilterChains";
+import Dashboard from "./components/Dashboard";
 
 const styles = {
   container: {
@@ -85,6 +87,7 @@ const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) =
           {isActive && (
             <>
               {currentDisplay === 'Vaults' ? <AcornCard /> : null}
+              {currentDisplay === 'Vaults' ? <FilterChains /> : null}
               {currentDisplay === 'Vaults' ? <VaultList key={chainId} /> : null}
               {currentDisplay === 'Vaults' ? <FAQ /> : null}
               {currentDisplay === 'Bridge' ? <AcornCardWidget /> : null}
@@ -94,7 +97,9 @@ const DisplayPane: React.FC<{ currentDisplay: string }> = ({ currentDisplay }) =
               {currentDisplay === 'Stake' ? <StakeList /> : null}
               {currentDisplay === 'Stake' ? <AcornNFTInfo /> : null}
               {currentDisplay === 'Stake' ? <StakingNFT /> : null}
+              {currentDisplay === 'Dashboard' ? <Dashboard /> : null}
               {currentDisplay === '' && <AcornCard/>}
+              {currentDisplay === '' && <FilterChains/>}
               {currentDisplay === '' && <VaultList key={chainId} />}
               {currentDisplay === '' && <FAQ/>}
             </>

@@ -1,14 +1,14 @@
 import { FC, useState, useEffect } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
-import { Button, Card, Divider, Input, Modal, Tooltip } from 'antd';
+import { Button, Card, Divider, Input, Modal } from 'antd';
 import { ethers } from 'ethers';
 import { useVault } from 'hooks';
 import { useDecimals } from 'hooks';
 import  useApproval from 'hooks/useApproval';
 import { useMediaQuery } from 'react-responsive';
 
-type AcornStakeProps = {
+type VaultProps = {
   vault: {
     name: string;
     address: string;
@@ -30,19 +30,22 @@ type AcornStakeProps = {
   };
 };
 
-const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
+
+const Vault: FC<VaultProps> = ({ vault }) => {
   const [depositAmount, setDepositAmount] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showStrategyInfo, setShowStrategyInfo] = useState(false);
+  const [showActions, setShowActions] = useState(false); // Add this line to manage visibility
   const [depositSuccessMessage, setDepositSuccessMessage] = useState<string | null>(null);
   const [withdrawSuccessMessage, setWithdrawSuccessMessage] = useState<string | null>(null);
   const { account: accountFromWeb3, provider: providerFromWeb3 } = useWeb3React();
-  const [pendingRewards, setPendingRewards] = useState('0');
   const provider = providerFromWeb3 || null;
   const account = accountFromWeb3 || null;
   const { vaultTokenBalance, updateVaultTokenBalance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
-  const [userBalance, setUserBalance] = useState('0');
+  const [userBalance, setUserBalance] = useState('0'); // new state variable for user's token balance
+  const [isCardOpen, setIsCardOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const decimals = useDecimals(vault.address, vault.abi);
   const { hasApproval, markApprovalDone } = useApproval({
@@ -80,25 +83,7 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
   }, [account, vault.depositTokenAddress, signer, vault.depositTokenAbi, vaultTokenBalance]);
 
 
-
   const contract = new ethers.Contract(vault.address, vault.abi, signer);
-
-  useEffect(() => {
-    const fetchPendingRewards = async () => {
-      try {
-        // 'rewards' is a public mapping so it's callable like a function
-        const rewards = await contract.rewards(account);
-        setPendingRewards(rewards);
-      } catch (error) {
-        console.error("Failed to fetch pending rewards:", error);
-      }
-    };
-
-    // Only fetch if account and contract are available
-    if (account && contract) {
-      fetchPendingRewards();
-    }
-  }, [account, contract]);
 
   const deposit = async () => {
     setDepositSuccessMessage(null);
@@ -117,11 +102,11 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
 
       if (!hasApproval) {
         console.log('Approving...');
-        const maxApprovalAmount = ethers.constants.MaxUint256;
+        const maxApprovalAmount = ethers.constants.MaxUint256; // Approving the maximum possible amount
         const approveResponse = await depositTokenContract.approve(vault.address, maxApprovalAmount);
         const approveReceipt = await approveResponse.wait();
         console.log('Approve Receipt:', approveReceipt);
-        markApprovalDone();
+        markApprovalDone(); // Mark the approval as done
 
       }
 
@@ -130,7 +115,7 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
       const transactionResult = await transactionResponse.wait();
       console.log('Deposit Transaction Result:', transactionResult);
       setDepositSuccessMessage('Deposit was successful!');
-      refreshBalances();
+      refreshBalances(); // Trigger the refresh
 
     } catch (error) {
       console.error('Deposit failed', error);
@@ -155,26 +140,13 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
       const transactionResult = await transactionResponse.wait();
       console.log(transactionResult);
       setWithdrawSuccessMessage('Withdrawal was successful!');
-      refreshBalances();
+      refreshBalances(); // Trigger the refresh
 
     } catch (error) {
       console.error('Withdraw failed', error);
       setErrorMessage(`The withdraw transaction failed with the following error: ${(error as Error).message}`);
     }
   };
-
-  const claimRewards = async () => {
-    try {
-      console.log('Claiming rewards...');
-      const transactionResponse = await contract.claimRewards();
-      const transactionResult = await transactionResponse.wait();
-      console.log('Claim Rewards Transaction Result:', transactionResult);
-    } catch (error) {
-      console.error('Claiming rewards failed', error);
-    }
-  };
-
-
 
   const refreshBalances = async () => {
     // Fetch decimals for deposit token
@@ -207,6 +179,7 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
 
   const handleModalOpen = () => {
     setIsModalVisible(true);
+    setShowStrategyInfo(true);
   };
 
   const handleModalClose = (e: React.MouseEvent) => {
@@ -214,16 +187,18 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
       e.stopPropagation();
     }
     setIsModalVisible(false);
+    setShowStrategyInfo(false);
   };
 
-  //const handleCardClick = () => {
-  //  setShowActions(!showActions);
-  //};
+  const handleCardClick = () => {
+    setShowActions(!showActions);
+    setIsCardOpen(!isCardOpen);
+  };
 
 
   return (
   <div
-    //onClick={handleCardClick}
+    onClick={handleCardClick}
     style={{
       width: "100%",
       marginBottom: "30px",
@@ -231,6 +206,18 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
       display: 'flex',
       justifyContent: 'center',
       transition: 'transform .2s, border-color .2s',
+    }}
+    onMouseOver={(e) => {
+      const target = e.currentTarget;
+      target.style.transform = 'scale(1.02)';
+      const card = target.querySelector('.ant-card') as HTMLElement;
+      if (card) card.style.borderColor = '#064576';
+    }}
+    onMouseOut={(e) => {
+      const target = e.currentTarget;
+      target.style.transform = 'scale(1)';
+      const card = target.querySelector('.ant-card') as HTMLElement;
+      if (card) card.style.borderColor = '#064576';
     }}
   >
     {depositSuccessMessage && (
@@ -243,7 +230,7 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
         visible={!!depositSuccessMessage}
         onCancel={() => {
           setDepositSuccessMessage(null);
-          //handleCardClick();
+          handleCardClick();
         }}
         footer={null}
         centered
@@ -278,7 +265,7 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
         visible={!!withdrawSuccessMessage}
         onCancel={() => {
           setWithdrawSuccessMessage(null);
-          //handleCardClick();
+          handleCardClick();
         }}
         footer={null}
         centered
@@ -313,7 +300,7 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
         visible={errorMessage ? true : false}
         onCancel={() => {
           setErrorMessage(null);
-          //handleCardClick();
+          handleCardClick();
         }}
         footer={null}
         centered
@@ -340,10 +327,10 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
     )}
     <Card
       style={{
-      background: 'linear-gradient(360deg, #030303, #022B45)',
+      backgroundColor: 'transparent',
       color: 'white',
       borderRadius: '12px',
-      border: '1px solid #050505',
+      border: '2px solid #064576',
       transition: 'border-color .2s',
       maxWidth: "100%",
       width: '100%',
@@ -351,66 +338,52 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
       >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-      <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '35px' : '65px'} />
-      <h2 className="smaller-h2" style={{ textAlign: 'left', marginLeft: '15px' }}>
-        ETH Rewards: {pendingRewards === '0' ? "0.0" : parseFloat(ethers.utils.formatUnits(pendingRewards, decimals)).toFixed(4)}
-      </h2>
-
+        <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '40px' : '45px'} />
+        <h2 className="vault-name" style={{ marginLeft: '15px' }}>{vault.name}</h2>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
       <Button
         onClick={(e) => {
           e.stopPropagation();
-          claimRewards();
+          handleModalOpen();
         }}
         style={{
           color: 'white',
           backgroundColor: '#064576',
           border: '1px solid #011F37',
           borderRadius: '12px',
-          marginRight: '10px',
-          marginLeft: '5px',
         }}
       >
-        Claim
+        Stake Info
       </Button>
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleModalOpen();
-          }}
-          style={{
-            color: 'white',
-            backgroundColor: '#064576',
-            border: '1px solid #011F37',
-            borderRadius: '12px',
-          }}
-        >
-          Stake Info
-        </Button>
       </div>
-      </div>
-      <Divider style={{ borderColor: '#064576', borderWidth: '1.5px', marginTop: '20px', marginBottom: '20px' }} />
+      <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-        <h3 className="smaller-h2">Your Balance: {vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h3>
+        <h3>Your Balance: {vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h3>
       </div>
       <div>
-      <Tooltip title={<div>Yield APR: 10.7%<br/>Fees APR: 2.7%</div>}>
-        <h3 className="smaller-h2" style={{ textDecoration: 'underline' }}>APR: {vault.apr}%</h3>
-      </Tooltip>
+        <h3>APR: {vault.apr}%</h3>
       </div>
       </div>
-      <Divider style={{ borderColor: '#064576', borderWidth: '1.5px', marginTop: '20px', marginBottom: '20px' }} />
-      
+      <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
+      {/* Add this div for the arrow */}
+      <div
+          className={`arrow ${isCardOpen ? 'open' : ''}`}
+          style={{
+            width: '0',
+            height: '0',
+            borderLeft: '10px solid transparent',
+            borderRight: '10px solid transparent',
+            borderTop: '15px solid #064576',
+            alignSelf: 'center',
+            transition: 'transform .3s',
+          }}
+        ></div>
+      {showActions && !showStrategyInfo && (
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-
-    {/* Deposit Section */}
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '48%' }}>
-      
-      <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+      <div style={{ display: 'flex', alignItems: 'center', width: '48%' }}>
         <Input
-          placeholder={`${vault.depositTokenName}: ${userBalance}`}
+          placeholder={`${vault.depositTokenName} Balance: ${userBalance}`}
           value={depositAmount}
           onChange={(e) => setDepositAmount(e.target.value)}
           onClick={(e) => e.stopPropagation()}
@@ -419,36 +392,35 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
             color: 'white',
             backgroundColor: '#011F37',
             borderColor: '#011F37',
-            width: '80%',
+            width: '80%', // set width to 80% to leave space for MAX button
           }}
         />
         <Button
-          className="max-button-deposit"
+          className="max-button-deposit" // custom class name
           onClick={(e) => {
             e.stopPropagation();
             setDepositAmount(userBalance);
           }}
           style={{
-            color: '#D9D9D9',
-            backgroundColor: '#011F37',
+            color: 'white',
+            backgroundColor: '#064576',
             border: '1px solid #011F37',
             borderRadius: '12px',
-            marginLeft: '10px',
+            marginLeft: '10px', // Add margin to separate from input
           }}
         >
           MAX
         </Button>
-      </div>
-      
+
       <Button
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation(); // Stop event from propagating to parent
           deposit();
         }}
         style={{
           color: 'white',
-          backgroundColor: '#064576',
-          border: '1px solid #011F37',
+          backgroundColor: '#064576',  // Add this line
+          border: '1px solid #011F37',  // Change this line
           borderRadius: '12px',
           marginTop: '10px',
           width: '100%',
@@ -456,47 +428,42 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
       >
         Stake
       </Button>
-      
-    </div>
-
-    {/* Withdraw Section */}
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '48%' }}>
-      
-      <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-        <Input
-          placeholder={`${vault.TokenName} ${vaultBalanceFormatted}`}
-          value={withdrawAmount}
-          onChange={(e) => setWithdrawAmount(e.target.value)}
-          onClick={(e) => e.stopPropagation()}
-          onMouseDown={(e) => e.stopPropagation()}
-          style={{
-            color: 'white',
-            backgroundColor: '#011F37',
-            borderColor: '#011F37',
-            width: '80%',
-          }}
-        />
-        <Button
-          className="max-button-withdraw"
-          onClick={(e) => {
-            e.stopPropagation();
-            setWithdrawAmount(ethers.utils.formatUnits(vaultTokenBalance, decimals));
-          }}
-          style={{
-            color: '#D9D9D9',
-            backgroundColor: '#011F37',
-            border: '1px solid #011F37',
-            borderRadius: '12px',
-            marginLeft: '10px',
-          }}
-        >
-          MAX
-        </Button>
       </div>
-      
+
+      <div style={{ display: 'flex', alignItems: 'center', width: '48%' }}>
+      <Input
+        placeholder={`${vault.TokenName} balance: ${vaultBalanceFormatted}`}
+        value={withdrawAmount}
+        onChange={(e) => setWithdrawAmount(e.target.value)}
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        style={{
+          color: 'white',
+          backgroundColor: '#011F37',
+          borderColor: '#011F37',
+          width: '80%', // set width to 80% to leave space for MAX button
+        }}
+      />
       <Button
+        className="max-button-withdraw" // custom class name
         onClick={(e) => {
           e.stopPropagation();
+          setWithdrawAmount(ethers.utils.formatUnits(vaultTokenBalance, decimals));
+        }}
+        style={{
+          color: 'white',
+          backgroundColor: '#064576',
+          border: '1px solid #011F37',
+          borderRadius: '12px',
+          marginLeft: '10px', // Add margin to separate from input
+        }}
+      >
+        MAX
+      </Button>
+
+      <Button
+        onClick={(e) => {
+          e.stopPropagation(); // Stop event from propagating to parent
           handleWithdraw();
         }}
         style={{
@@ -508,13 +475,12 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
           width: '100%',
         }}
       >
-        Unstake
+        Redeem
       </Button>
       </div>
       </div>
-    
+    )}
   </Card>
-
     {isModalVisible && (
       <Modal
       title={
@@ -546,7 +512,7 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
         >
           <p style={{ fontSize: "15px" }}>{vault.textAboveTitle}</p>
           <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
-          <h2 style={{ fontSize: "17px" }}>How it Works</h2>
+          <h2 style={{ fontSize: "17px" }}>Yield Strategy</h2>
           <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
           <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: "15px" }}>
@@ -559,4 +525,4 @@ const AcornStake: FC<AcornStakeProps> = ({ vault }) => {
   );
 };
 
-export default AcornStake;
+export default Vault;

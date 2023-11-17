@@ -22,7 +22,7 @@ body {
 }
 
 .App-link {
-  color: #064576;
+  color: #0B6FBD;
 }
 
 /* ANTD OVERRIDE */
@@ -119,9 +119,10 @@ body {
 }
 
 .custom-modal .ant-modal-content {
-  background-color: #000509 !important;
-  border: 2px solid #064576
+  background: #000509;
+  border: 1.5px solid #064576
 }
+
 
 /* For screens smaller than 768px */
 @media (max-width: 767px) {
@@ -139,13 +140,25 @@ body {
 
 /* Default size for larger screens */
 .vault-name {
-  font-size: 1.5em; /* Or whatever size it currently is */
+  font-size: 1.3em; /* Or whatever size it currently is */
 }
+
+.max-button-deposit,
+.max-button-withdraw {
+  /* Add custom styles here */
+  color: white;
+  background-color: #064576;
+  border: 1px solid #011F37;
+  border-radius: 12px;
+  margin-left: 10px; /* Position it beside the input button */
+  width: calc(50% - 10px);  /* This is just an example; adjust according to your needs */
+}
+
 
 /* Smaller size for smaller screens */
 @media (max-width: 768px) {
   .vault-name {
-    font-size: 1.4em; /* Adjust as needed */
+    font-size: 1.3em; /* Adjust as needed */
   }
 }
 
@@ -229,3 +242,17 @@ body {
   opacity: 1;
 }
 
+.arrow {
+  /* Initial styles for the arrow */
+  margin-top: 15px;  /* Add margin at the top to space it from other elements */
+  margin-bottom: 15px; /* Add margin at the bottom to space it from the card edge */
+  transition: transform 0.3s ease-in-out;  /* Smooth transition for rotating the arrow */
+  cursor: pointer;  /* Make it look clickable */
+  display: flex;  /* Use flex to center it horizontally */
+  justify-content: center;  /* Center horizontally */
+  align-items: center;  /* Center vertically */
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}

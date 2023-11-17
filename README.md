@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1><strong> Equinox Vaults </strong></h1>
+<h1><strong> Equinox </strong></h1>
 
 <br></br>
 
@@ -23,12 +23,6 @@
 - [typescript](https://www.typescriptlang.org/) installed (developped on v5.1.6)
 - [yarn](https://yarnpkg.com/) installed
 - [MetaMask](https://metamask.io/) (or any web3 compatible wallet) installed in your browser
-
-### Once your config is ready, create a new repo, open your favorite code editor, and clone the repo with the following cmd:
-
-```bash
-git clone https://github.com/Equinox-Markets/Equinox-Vaults.git .
-```
 
 ### Install all package dependancies by running:
 

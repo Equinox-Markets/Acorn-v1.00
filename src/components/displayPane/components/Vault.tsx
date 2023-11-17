@@ -45,6 +45,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const { vaultTokenBalance, updateVaultTokenBalance } = useVault(vault.address, vault.abi);
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
   const [userBalance, setUserBalance] = useState('0'); // new state variable for user's token balance
+  const [isCardOpen, setIsCardOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const decimals = useDecimals(vault.address, vault.abi);
   const { hasApproval, markApprovalDone } = useApproval({
@@ -191,6 +192,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
 
   const handleCardClick = () => {
     setShowActions(!showActions);
+    setIsCardOpen(!isCardOpen);
   };
 
 
@@ -203,19 +205,23 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       marginTop: "15px",
       display: 'flex',
       justifyContent: 'center',
-      transition: 'transform .2s, border-color .2s',
+      transition: 'transform .2s, border-color .2s, border-width .2s, box-shadow .2s',
     }}
     onMouseOver={(e) => {
       const target = e.currentTarget;
-      target.style.transform = 'scale(1.02)';
+      target.style.transform = 'scale(1.0)';
       const card = target.querySelector('.ant-card') as HTMLElement;
       if (card) card.style.borderColor = '#064576';
+      card.style.borderWidth = '1px';
+      card.style.boxShadow = '0 0 5px 1px #064576';
     }}
     onMouseOut={(e) => {
       const target = e.currentTarget;
       target.style.transform = 'scale(1)';
       const card = target.querySelector('.ant-card') as HTMLElement;
-      if (card) card.style.borderColor = '#064576';
+      if (card) card.style.borderColor = '#050505';
+      card.style.borderWidth = '1px';
+      card.style.boxShadow = 'none';
     }}
   >
     {depositSuccessMessage && (
@@ -325,10 +331,10 @@ const Vault: FC<VaultProps> = ({ vault }) => {
     )}
     <Card
       style={{
-      backgroundColor: 'transparent',
+      background: 'linear-gradient(360deg, #030303, #022B45)',
       color: 'white',
       borderRadius: '12px',
-      border: '2px solid #064576',
+      border: '1px solid #050505',
       transition: 'border-color .2s',
       maxWidth: "100%",
       width: '100%',
@@ -336,8 +342,8 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '45px' : '60px'} />
-        <h2 className="vault-name" style={{ marginLeft: '20px' }}>{vault.name}</h2>
+        <img src={vault.logo} alt={`${vault.name} Logo`} width={isMobile ? '40px' : '45px'} />
+        <h2 className="vault-name" style={{ marginLeft: '15px' }}>{vault.name}</h2>
       </div>
       <Button
         onClick={(e) => {
@@ -347,66 +353,83 @@ const Vault: FC<VaultProps> = ({ vault }) => {
         style={{
           color: 'white',
           backgroundColor: '#064576',
-          border: '1px solid #011F37',
+          border: '1px solid #064576',
           borderRadius: '12px',
         }}
       >
-        Stake Info
+        How it Works
       </Button>
       </div>
-      <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
+      <Divider style={{ borderColor: '#064576', borderWidth: '1.2px', marginTop: '20px', marginBottom: '20px' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-        <h3>Your Balance:</h3>
-        <h2>{vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h2>
+        <h3>Your Balance: {vaultTokenBalance.isZero() ? "0.0" : parseFloat(ethers.utils.formatUnits(vaultTokenBalance, decimals)).toFixed(2)}</h3>
       </div>
       <div>
-        <h3>APR:</h3>
-        <h2>{vault.apr}%</h2>
+        <h3>APR: {vault.apr}%</h3>
       </div>
       </div>
-      <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
+      <Divider style={{ borderColor: '#064576', borderWidth: '1.2px', marginTop: '20px', marginBottom: '20px' }} />
+      {/* Add this div for the arrow */}
+      <div
+          className={`arrow ${isCardOpen ? 'open' : ''}`}
+          style={{
+            width: '0',
+            height: '0',
+            borderLeft: '10px solid transparent',
+            borderRight: '10px solid transparent',
+            borderTop: '15px solid #064576',
+            alignSelf: 'center',
+            transition: 'transform .3s',
+          }}
+        ></div>
       {showActions && !showStrategyInfo && (
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div style={{ width: '48%' }}>
-      <Input
-        placeholder={`${vault.depositTokenName} Balance: ${userBalance}`}
-        value={depositAmount}
-        onChange={(e) => setDepositAmount(e.target.value)}
-        onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
-        style={{
-          color: 'white',
-          backgroundColor: '#011F37',
-          borderColor: '#011F37',
-        }}
-      />
-      <Button
-        onClick={(e) => {
-          e.stopPropagation(); // Stop event from propagating to parent
-          setDepositAmount(userBalance);
-        }}
-        style={{
-          color: 'white',
-          backgroundColor: '#064576',
-          border: '1px solid #011F37',
-          borderRadius: '12px',
-          marginTop: '10px',
-          width: '100%',  // Add this line
-        }}
-      >
-        MAX
-      </Button>
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
+    {/* Deposit Section */}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '48%' }}>
+      
+      <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+        <Input
+          placeholder={`${vault.depositTokenName}: ${userBalance}`}
+          value={depositAmount}
+          onChange={(e) => setDepositAmount(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          style={{
+            color: 'white',
+            backgroundColor: '#011F37',
+            borderColor: '#011F37',
+            width: '80%',
+          }}
+        />
+        <Button
+          className="max-button-deposit"
+          onClick={(e) => {
+            e.stopPropagation();
+            setDepositAmount(userBalance);
+          }}
+          style={{
+            color: '#D9D9D9',
+            backgroundColor: '#011F37',
+            border: '1px solid #011F37',
+            borderRadius: '12px',
+            marginLeft: '10px',
+          }}
+        >
+          MAX
+        </Button>
+      </div>
+      
       <Button
         onClick={(e) => {
-          e.stopPropagation(); // Stop event from propagating to parent
+          e.stopPropagation();
           deposit();
         }}
         style={{
           color: 'white',
-          backgroundColor: '#064576',  // Add this line
-          border: '1px solid #011F37',  // Change this line
+          backgroundColor: '#064576',
+          border: '1px solid #064576',
           borderRadius: '12px',
           marginTop: '10px',
           width: '100%',
@@ -414,46 +437,53 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       >
         Stake
       </Button>
-      </div>
+      
+    </div>
 
-      <div style={{ width: '48%' }}>
-      <Input
-        placeholder={`${vault.TokenName} balance: ${vaultBalanceFormatted}`}
-        value={withdrawAmount}
-        onChange={(e) => setWithdrawAmount(e.target.value)}
-        onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
-        style={{
-          color: 'white',
-          backgroundColor: '#011F37',
-          borderColor: '#011F37',
-        }}
-      />
+    {/* Withdraw Section */}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '48%' }}>
+      
+      <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+        <Input
+          placeholder={`${vault.TokenName}: ${vaultBalanceFormatted}`}
+          value={withdrawAmount}
+          onChange={(e) => setWithdrawAmount(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          style={{
+            color: 'white',
+            backgroundColor: '#011F37',
+            borderColor: '#011F37',
+            width: '80%',
+          }}
+        />
+        <Button
+          className="max-button-withdraw"
+          onClick={(e) => {
+            e.stopPropagation();
+            setWithdrawAmount(ethers.utils.formatUnits(vaultTokenBalance, decimals));
+          }}
+          style={{
+            color: '#D9D9D9',
+            backgroundColor: '#011F37',
+            border: '1px solid #011F37',
+            borderRadius: '12px',
+            marginLeft: '10px',
+          }}
+        >
+          MAX
+        </Button>
+      </div>
+      
       <Button
         onClick={(e) => {
-          e.stopPropagation(); // Stop event from propagating to parent
-          setWithdrawAmount(ethers.utils.formatUnits(vaultTokenBalance, decimals));
-        }}
-        style={{
-          color: 'white',
-          backgroundColor: '#064576',
-          border: '1px solid #011F37',
-          borderRadius: '12px',
-          marginTop: '10px',
-          width: '100%',
-        }}
-      >
-        MAX
-      </Button>
-      <Button
-        onClick={(e) => {
-          e.stopPropagation(); // Stop event from propagating to parent
+          e.stopPropagation();
           handleWithdraw();
         }}
         style={{
           color: 'white',
           backgroundColor: '#064576',
-          border: '1px solid #011F37',
+          border: '1px solid #064576',
           borderRadius: '12px',
           marginTop: '10px',
           width: '100%',
@@ -465,7 +495,6 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       </div>
     )}
   </Card>
-
     {isModalVisible && (
       <Modal
       title={
@@ -495,12 +524,12 @@ const Vault: FC<VaultProps> = ({ vault }) => {
             marginTop: "20px",
           }}
         >
-          <p style={{ fontSize: "15px" }}>{vault.textAboveTitle}</p>
-          <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
+          <p style={{ fontSize: "17px" }}>{vault.textAboveTitle}</p>
+          <Divider style={{ borderColor: '#064576', borderWidth: '1.5px', marginTop: '20px', marginBottom: '20px' }} />
           <h2 style={{ fontSize: "17px" }}>Yield Strategy</h2>
           <p style={{ fontSize: "17px" }}>{vault.strategy}</p>
-          <Divider style={{ borderColor: '#064576', borderWidth: '2px', marginTop: '20px', marginBottom: '20px' }} />
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: "15px" }}>
+          <Divider style={{ borderColor: '#064576', borderWidth: '1.5px', marginTop: '20px', marginBottom: '20px' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: "17px" }}>
             <p>{vault.textBelowDescription}</p>
           </div>
         </Card>
