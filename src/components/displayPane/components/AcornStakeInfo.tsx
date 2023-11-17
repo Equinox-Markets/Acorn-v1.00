@@ -1,24 +1,32 @@
 import React from 'react';
-import { Card } from 'antd';
-import './AcornNFTInfo.css'; // Import your CSS file to style this component
+import { Alert, Card } from 'antd';
+import './AcornStakeInfo.css'; // Import your CSS file to style this component
 import web3Boilerplate_logo from 'assets/images/Acorn_Token.svg';
 
 const AcornStakeInfo: React.FC = () => {
   return (
-    <Card className="acorn-card-2" bordered={false}>
-      <h1 className="welcome-text"></h1>
-      <p className="slogan-text"></p>
-      <div className="airdrop-container-2">
-        <img src={web3Boilerplate_logo} alt="Acorn Logo" className="acorn-logo-2" />
-        <div className="airdrop-text">
-          <h2>Stake More, Earn More</h2>
-          <p className="slogan-text">
-            Stake your Acorn tokens and earn ETH. Recieve 20%
-            of the total revenue that Acorn generates through fees and treasury yield.
-          </p>
+    <div>
+      <Alert
+        message="Staking is not live, we will release it after NFT minting is complete."
+        type="info"
+        showIcon
+        style={{ marginBottom: '20px' }}
+      />
+      <Card className="acorn-card-6" bordered={false}>
+        <h1 className="welcome-text-6"></h1>
+        <p className="slogan-text-6"></p>
+        <div className="airdrop-container-6">
+          <img src={web3Boilerplate_logo} alt="Acorn Logo" className="acorn-logo-6" />
+          <div className="airdrop-text-6">
+            <h2>Stake More, Earn More</h2>
+            <p className="slogan-text-6">
+              Stake your Acorn tokens and earn ETH.
+              {/* Recieve 20% of the total revenue that Acorn generates through fees and treasury yield. */}
+            </p>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
 

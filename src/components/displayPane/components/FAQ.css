@@ -1,5 +1,6 @@
 .faq-container {
-    margin: 2rem;
+    margin: 0rem;
+    width: 100% !important;
     color: white;
     margin-top: 60px !important;
     text-align: left;
@@ -8,7 +9,7 @@
 
   .faq-collapse {
     margin-top: 1rem;
-    border: 2px solid #064576;
+    border: 1.5px solid #022B45;
   }
 
   .faq-collapse .ant-collapse-item {
@@ -38,7 +39,7 @@
   .faq-collapse .ant-collapse-content {
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
     background: #064576;
-    border-top: 2px solid #064576;
+    border-top: 1.5px solid #064576;
   }
 
   .faq-collapse .ant-collapse-content-hidden {

@@ -1,0 +1,82 @@
+.acorn-card-5 {
+  width: 105% !important;
+  background: transparent !important;
+  color: white !important;
+  text-align: left !important;
+  margin-top: 60px !important;
+}
+
+.airdrop-container-5 {
+  display: flex !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+  margin-right: -40px !important;
+}
+
+.chain-icon {
+  width: 45px !important;
+  height: 45px !important;
+  cursor: pointer !important;
+}
+
+.chain-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 12px;
+  border: 2px solid rgb(63, 63, 63);
+  margin-right: 15px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.chain-card-1 {
+  border: 2px solid grey;
+  border-radius: 12px;
+  padding: 8px;
+  overflow: hidden;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.chain-card:hover {
+  border-color: #075189;
+}
+
+.chain-card.active {
+  border-color: #075189;
+}
+
+.chain-icons {
+  display: flex !important;
+  align-items: flex-start !important;
+}
+
+.airdrop-text-5 h2 {
+  display: inline !important;
+  margin-right: 15px !important;
+  text-align: left !important;
+}
+
+@media (max-width: 768px) {
+  .airdrop-container-5 {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: right !important;
+  }
+  .chain-icon {
+    width: 35px !important;
+    height: 35px !important;
+    cursor: pointer !important;
+  }
+  .acorn-card-5 {
+    width: 108% !important;
+    background: transparent !important;
+    color: white !important;
+    text-align: left !important;
+    margin-top: 60px !important;
+  }
+}
+

@@ -104,7 +104,6 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
            Bridge
         </a>
       </Menu.Item>
-      { /*
       <Menu.Item>
         <a href="#"
            style={glow === 'Mint' ? glowStyle : {}}
@@ -123,7 +122,15 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
             Stake
           </a>
       </Menu.Item>
-      */}
+      {/*<Menu.Item>
+        <a href="#"
+           style={glow === 'Dashboard' ? glowStyle : {}}
+           onMouseOver={() => handleMouseOver('Dashboard')}
+           onMouseOut={handleMouseOut}
+           onClick={() => { handleLinkClick('dashboard'); setCurrentDisplay('Dashboard'); }}>
+            Dashboard
+          </a>
+  </Menu.Item>*/}
       <Menu.Item>
         <a href="https://acorn-finance.gitbook.io/acorn-docs/" target="_blank" rel="noopener noreferrer"
            style={glow === 'Docs' ? glowStyle : {}}
@@ -163,16 +170,18 @@ const CustomHeader: FC<CustomHeaderProps> = ({ setCurrentDisplay }) => {
                  onMouseOver={() => handleMouseOver('Bridge')}
                  onMouseOut={handleMouseOut}
                  onClick={() => { handleLinkClick('bridge'); setCurrentDisplay('Bridge'); }}>Bridge</a>
-                  { /*
               <a href="#" style={glow === 'Mint' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
                  onMouseOver={() => handleMouseOver('Mint')}
                  onMouseOut={handleMouseOut}
-              </div>   onClick={() => { handleLinkClick('mint'); setCurrentDisplay('Mint'); }}>Mint</a>
+                onClick={() => { handleLinkClick('mint'); setCurrentDisplay('Mint'); }}>Mint</a>
               <a href="#" style={glow === 'Stake' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
                  onMouseOver={() => handleMouseOver('Stake')}
                  onMouseOut={handleMouseOut}
-              </Header>   onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>Stake</a>
-              */}
+                 onClick={() => { handleLinkClick('stake'); setCurrentDisplay('Stake'); }}>Stake</a>
+              {/*<a href="#" style={glow === 'Dashboard' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
+                 onMouseOver={() => handleMouseOver('Dashboard')}
+                 onMouseOut={handleMouseOut}
+          onClick={() => { handleLinkClick('dashboard'); setCurrentDisplay('Dashboard'); }}>Dashboard</a>*/}
               <a href="https://acorn-finance.gitbook.io/acorn-docs/" style={glow === 'Docs' ? { ...menuLinkStyle, ...glowStyle } : menuLinkStyle}
                  onMouseOver={() => handleMouseOver('Docs')}
                  onMouseOut={handleMouseOut}
