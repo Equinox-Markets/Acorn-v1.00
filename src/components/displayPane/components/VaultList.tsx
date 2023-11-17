@@ -64,7 +64,7 @@ const vaults: VaultType[] = [
     logo: wETH_ARB_Logo, // add logo path
     networkName: 'ARB',
     networkLogo: arbLogo,
-    apr: 21.5,
+    apr: 103.4,
     strategy: "This vault earns yield by utilizing a strategy router smart contract that routes users deposits to whitelisted yield strategies and adapts to market conditions based on the assigned risk-scores of each strategy.",
     description: 'Deposit GLP and Earn',
     depositTokenAddress: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // add the deposit token address here
