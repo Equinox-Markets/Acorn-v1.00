@@ -48,6 +48,7 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const decimals = useDecimals(vault.address, vault.abi);
+  const currentAddress = vault.address;
   const { hasApproval, markApprovalDone } = useApproval({
     provider,
     account,
@@ -196,6 +197,27 @@ const Vault: FC<VaultProps> = ({ vault }) => {
   };
 
 
+  interface AddressStyles {
+    [key: string]: {
+      background: string;
+      // include other style properties if needed
+    };
+  }
+
+  const addressBackgroundStyles: AddressStyles = {
+    '0xeCE034a5D33AacBbD723dD44fad4752cF02446d9': {
+      background: 'linear-gradient(360deg, #030303, #022B45)',
+    },
+    '0xAddress2': {
+      background: 'linear-gradient(360deg, #Color3, #Color4)',
+    },
+  };
+
+  const cardStyle = addressBackgroundStyles[currentAddress] || {
+    background: 'linear-gradient(360deg, #030303, #022B45)',
+  };
+
+
   return (
   <div
     onClick={handleCardClick}
@@ -330,15 +352,15 @@ const Vault: FC<VaultProps> = ({ vault }) => {
       </Modal>
     )}
     <Card
-      style={{
-      background: 'linear-gradient(360deg, #030303, #022B45)',
+    style={{
+      ...cardStyle,
       color: 'white',
       borderRadius: '12px',
       border: '1px solid #050505',
       transition: 'border-color .2s',
       maxWidth: "100%",
       width: '100%',
-      }}
+    }}
       >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
