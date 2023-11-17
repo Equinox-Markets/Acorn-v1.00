@@ -29,7 +29,6 @@ import ConnectAccount from "components/Account/ConnectAccountButton";
 //import wstETH from 'data/abi/tokens/wstETH.json';
 import ETH from 'data/abi/tokens/wETH.json';
 import AcornRewardVault from 'data/abi/vaults/AcornRewardVault.json';
-//import AcornEthRewardVault from 'data/abi/vaults/AcornEthRewardVault.json';
 //import aGLP from 'data/abi/vaults/aGLP.json';
 //import aGLP2 from 'data/abi/vaults/aGLP2.json';
 
